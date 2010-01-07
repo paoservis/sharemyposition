@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">share my position</string>
+	<string name="providers_needed">no ways to know your position seems to be
+		activated.\n\nWould you start one?
+		\n\nOtherwise, you can not share
+		your position.
+	</string>
+	<string name="progression_desc">acquiring the current position ...</string>
+	<string name="subject">my current position</string>
+	<string name="body">i am here, %s</string>
+</resources>
