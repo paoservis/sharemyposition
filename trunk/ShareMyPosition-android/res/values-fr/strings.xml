@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">partager ma position</string>
+	<string name="providers_needed">aucun des moyens permettant de connaitre votre
+		position semble être activé.\n\nSouhaitez-vous en activer un ?
+		\n\nDans le cas contraire, vous ne pourrez partager votre position.
+	</string>
+	<string name="progression_desc">acquisition de la position en cours ...</string>
+	<string name="subject">ma position actuelle</string>
+	<string name="body">Je suis à cet endroit, %s</string>
+</resources>
