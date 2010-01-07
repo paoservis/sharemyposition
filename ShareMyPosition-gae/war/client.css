@@ -1,0 +1,58 @@
+h1 {
+	background-image: url("icon.png");
+	background-repeat: no-repeat;
+	font-size: 2em;
+	font-weight: bold;
+	color: #777777;
+	text-align: center;
+	height: 48px;
+	padding-top:10px;
+}
+
+.button {
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	border: 1px solid #000; 
+	padding: 10px;
+	margin: 10px;
+}
+
+.tinylink {
+	font-weight: bold;
+	font-size: 120%;
+	text-align: center;
+}
+
+.error {
+	margin: 10px;
+	color: red;
+}
+
+.information {
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	border: 1px solid #000;
+	margin: 10px;
+	margin-top: 0px;
+	padding: 5px;
+	color: blue;
+	text-align: center;
+	background-color:#cce;
+}
+
+.information a {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+body {
+	font: normal .8em Arial, sans-serif;
+	color: #555;
+	margin:0px;
+	padding:0px;
+}
+
+body a {
+	text-decoration: none;
+	color: #006699;
+}
