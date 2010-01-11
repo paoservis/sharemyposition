@@ -78,7 +78,7 @@ public class Client implements EntryPoint {
         buttons.add(location);
 
         if (!Geolocation.isSupported()) {
-            RootPanel.get("error").add(new Label("Geolocation API is not supported."));
+            RootPanel.get("error").add(new Label("Geolocation API is not supported. You need to use a iPhone, Android Phone or Firefox browser (> 3.5)."));
         }
 
     }
