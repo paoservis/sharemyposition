@@ -59,7 +59,10 @@ var admob_vars = {
 };
 </script>
 <script type="text/javascript" src="http://mm.admob.com/static/iphone/iadmob.js"></script>
-<center><h1><a href="index.html">share my position</a></h1></center>
+<div class="title">
+<span>share my position</span><br/>
+<a href="index.html">click here to share your own position</a>
+</div>
 <p>
 <%
     if (geocode != null) {

@@ -1,13 +1,17 @@
-h1 {
-	background-image: url("icon.png");
-	background-repeat: no-repeat;
-	font-size: 2em;
-	font-weight: bold;
-	color: #4488ff;
+.title {
 	text-align: center;
-	height: 48px;
-	padding:0px;
-	magin:0px;
+	background-image: url("icon.png");
+	background-position: top left;
+	background-repeat: no-repeat;
+	color: #4488ff;
+}
+
+.title span {
+	font-size: 200%;
+}
+
+.title a {
+	font-weight: bold;
 }
 
 .button {
