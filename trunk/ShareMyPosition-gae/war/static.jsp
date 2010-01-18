@@ -34,22 +34,31 @@ function hideAddressBar() { window.scrollTo(0, 1); } //-->
 		geocode = new String(geocode.getBytes("8859_1"),"UTF8");
 	}
 %>
-<script type="text/javascript"><!--
-window.googleAfmcRequest = {
-  client: 'ca-mb-pub-7256263753683362',
-  ad_type: 'text_image',
-  output: 'html',
-  channel: '',
-  format: '320x50_mb',
-  oe: 'utf8',
-  color_border: '336699',
-  color_bg: 'FFFFFF',
-  color_link: '0000FF',
-  color_text: '000000',
-  color_url: '008000',
+<!--<script type="text/javascript">-->
+<!--window.googleAfmcRequest = {-->
+<!--  client: 'ca-mb-pub-7256263753683362',-->
+<!--  ad_type: 'text_image',-->
+<!--  output: 'html',-->
+<!--  channel: '',-->
+<!--  format: '320x50_mb',-->
+<!--  oe: 'utf8',-->
+<!--  color_border: '336699',-->
+<!--  color_bg: 'FFFFFF',-->
+<!--  color_link: '0000FF',-->
+<!--  color_text: '000000',-->
+<!--  color_url: '008000',-->
+<!--};-->
+<!--//</script> <script type="text/javascript"-->
+<!--	src="http://pagead2.googlesyndication.com/pagead/show_afmc_ads.js"></script>-->
+<script type="text/javascript">
+var admob_vars = {
+ pubid: 'a14b53a13a8079d', // publisher id
+ bgcolor: '356FA8', // background color (hex)
+ text: 'FFFFFF', // font-color (hex)
+ test: false // test mode, set to false if non-test mode
 };
-//--></script> <script type="text/javascript"
-	src="http://pagead2.googlesyndication.com/pagead/show_afmc_ads.js"></script>
+</script>
+<script type="text/javascript" src="http://mm.admob.com/static/iphone/iadmob.js"></script>
 <center><h1><a href="index.html">share my position</a></h1></center>
 <p>
 <%
