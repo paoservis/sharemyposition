@@ -3,18 +3,23 @@ h1 {
 	background-repeat: no-repeat;
 	font-size: 2em;
 	font-weight: bold;
-	color: #777777;
+	color: #4488ff;
 	text-align: center;
 	height: 48px;
-	padding-top:10px;
+	padding:0px;
+	magin:0px;
 }
 
 .button {
 	-moz-border-radius: 5px; 
 	-webkit-border-radius: 5px; 
 	border: 1px solid #000; 
-	padding: 10px;
+	padding: 5px;
 	margin: 10px;
+	text-align: center;
+	color: #8877ff;
+	font-weight: bold;
+	font-size: 110%;
 }
 
 .tinylink {
@@ -28,16 +33,21 @@ h1 {
 	color: red;
 }
 
+.gwt {
+	text-align: center;
+}
+
 .information {
+	background-image: url('android_market.png');
+	background-repeat: no-repeat;
 	-moz-border-radius: 5px; 
 	-webkit-border-radius: 5px; 
 	border: 1px solid #000;
 	margin: 10px;
 	margin-top: 0px;
 	padding: 5px;
-	color: blue;
 	text-align: center;
-	background-color:#cce;
+	background-color: #4488ff;
 }
 
 .information a {

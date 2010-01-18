@@ -40,16 +40,10 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Client implements EntryPoint {
-
-    final VerticalPanel main = new VerticalPanel();
-
-    final HorizontalPanel buttons = new HorizontalPanel();
 
     final Geolocation geo = Geolocation.getGeolocation();
 
@@ -57,13 +51,12 @@ public class Client implements EntryPoint {
 
     final static String URL_STATIC = HOST + "static.jsp";
 
+    private Button location;
+
     @Override
     public void onModuleLoad()
     {
-        RootPanel.get("geolocalisation").add(main);
-        main.add(buttons);
-
-        final Button location = new Button("find my location");
+        location = new Button("click here to find my location");
         location.setStylePrimaryName("button");
         location.setEnabled(Geolocation.isSupported());
         location.addClickHandler(new ClickHandler() {
@@ -72,13 +65,17 @@ public class Client implements EntryPoint {
             public void onClick(ClickEvent event)
             {
                 location.setEnabled(false);
+                location.setText("location is requested ...");
                 requestPosition();
             }
         });
-        buttons.add(location);
+        RootPanel.get("geolocalisation").add(location);
 
         if (!Geolocation.isSupported()) {
-            RootPanel.get("error").add(new Label("Geolocation API is not supported. You need to use a iPhone, Android Phone or Firefox browser (> 3.5)."));
+            RootPanel.get("error")
+                    .add(
+                            new Label(
+                                    "Geolocation API is not supported. You need to use a iPhone, Android Phone or Firefox browser (> 3.5)."));
         }
 
     }
@@ -161,14 +158,13 @@ public class Client implements EntryPoint {
 
     private void addLinks(String url)
     {
-        VerticalPanel links = new VerticalPanel();
-        buttons.add(links);
-        links.add(new HTML("<a class='tinylink' href='" + "mailto:?subject=my%20current%20position&body=i%20am%20here,%20" + url
-                + "'>share by mail</a>"));
-        links.add(new Label("copy this link and send it by sms"));
+        location.setVisible(false);
 
-        HTML urlLabel = new HTML("<a class='tinylink' href='" + url + "'>" + url + "</a>");
-        RootPanel.get("tinyurl").add(urlLabel);
+        RootPanel.get("links").add(
+                new HTML("<a class='tinylink' href='" + "mailto:?subject=my%20current%20position&body=i%20am%20here,%20" + url
+                        + "'>share my position by mail</a><br/>or copy this link and send it by sms"));
+
+        RootPanel.get("tinyurl").add(new HTML("<a class='tinylink' href='" + url + "'>" + url + "</a>"));
     }
 
     private String getUrlService()

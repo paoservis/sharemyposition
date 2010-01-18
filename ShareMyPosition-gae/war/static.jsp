@@ -9,7 +9,7 @@
 <link type="text/css" rel="stylesheet" href="client.css">
 <title>share my position</title>
 <script type="text/javascript"><!--
-addEventListener('load', function() { setTimeout(hideAddressBar, 0); }, false);
+addEventListener('load', function() { setTimeout(hideAddressBar, 5000); }, false);
 function hideAddressBar() { window.scrollTo(0, 1); } //-->
 </script>
 <script type="text/javascript">

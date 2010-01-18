@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link type="text/css" rel="stylesheet" href="client.css">
-    <title>share my position</title>
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-	<meta name="apple-mobile-web-app-capable" content="no" />
-	<link rel="icon" type="image/png" href="icon.png" />
-	<link rel="apple-touch-icon" href="icon.png"/>
-	<link rel="shortcut icon" href="icon.png">
-	<script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAAAEcqvI14a3gJGb3vVQgfdxQX01MF0MrseK3w-nIw2auEB9UHhBSSWixmPtdizdy6aL9TvAbmLmtuzw&amp;"></script>
-    <script type="text/javascript" language="javascript" src="client/client.nocache.js"></script>
-    <script type="text/javascript"><!--
-    addEventListener('load', function() { setTimeout(hideAddressBar, 0); }, false);
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link type="text/css" rel="stylesheet" href="client.css">
+<title>share my position</title>
+<meta name="viewport"
+	content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+<meta name="apple-mobile-web-app-capable" content="no" />
+<link rel="icon" type="image/png" href="icon.png" />
+<link rel="apple-touch-icon" href="icon.png" />
+<link rel="shortcut icon" href="icon.png">
+<script
+	src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAAAEcqvI14a3gJGb3vVQgfdxQX01MF0MrseK3w-nIw2auEB9UHhBSSWixmPtdizdy6aL9TvAbmLmtuzw&amp;"></script>
+<script type="text/javascript" language="javascript"
+	src="client/client.nocache.js"></script>
+<script type="text/javascript" language="javascript" src="mdetect.js"></script>
+<script type="text/javascript"><!--
+    addEventListener('load', function() { setTimeout(hideAddressBar, 5000); }, false);
 	function hideAddressBar() { window.scrollTo(0, 1); } //-->
 	</script>
-    <script type="text/javascript">
+<script type="text/javascript">
     
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-817536-13']);
@@ -28,14 +32,14 @@
 	  })();
 	
 	</script>
-	</head>
-	<body>
-    <noscript>
-      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-        Your web browser must have JavaScript enabled
-        in order for this application to display correctly.
-      </div>
-    </noscript>
+</head>
+<body>
+<noscript>
+<div
+	style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+Your web browser must have JavaScript enabled in order for this
+application to display correctly.</div>
+</noscript>
 <!--    <script type="text/javascript">-->
 <!--	window.googleAfmcRequest = {-->
 <!--	  client: 'ca-mb-pub-7256263753683362',-->
@@ -52,7 +56,7 @@
 <!--	};-->
 <!--	//</script> <script type="text/javascript"-->
 <!--		src="http://pagead2.googlesyndication.com/pagead/show_afmc_ads.js"></script>-->
-	<script type="text/javascript">
+<script type="text/javascript">
 	var admob_vars = {
 	 pubid: 'a14b53a13a8079d', // publisher id
 	 bgcolor: '356FA8', // background color (hex)
@@ -60,19 +64,21 @@
 	 test: false // test mode, set to false if non-test mode
 	};
 	</script>
-	<script type="text/javascript" src="http://mm.admob.com/static/iphone/iadmob.js"></script>
-    <center><h1>share my position</h1></center>
-	<div id="geolocalisation"></div>
-	<div id="tinyurl" class="tinylink"></div>
-	<div id="error" class="error"></div>
-	<div id="information" class="information">
-	This is a small service allowing you to share your current position by mail or sms with your friends.<br/>
-	No information from you are saved.<br/>
-	<br/>
-	<img src="android_market.png"/>
-	<a href='market://search?q=pname:net.sylvek.sharemyposition'>An Android application is available to share simpler and faster!</a><br/>
-	<br/>
-	<a href='mailto:smaucourt@gmail.com'>contact me for more information.</a>
-	</div>
-	</body>
+<script type="text/javascript"
+	src="http://mm.admob.com/static/iphone/iadmob.js"></script>
+<center>
+<h1>Share my position</h1>
+This service allows you to share your current position by mail or sms
+with your friends</center>
+<div id="geolocalisation" class="gwt"></div>
+<div id="links" class="tinylink"></div>
+<div id="tinyurl" class="tinylink"></div>
+<div id="error" class="error"></div>
+<div id="information" class="information">An Android application
+is available to share simpler and faster!<br />
+<a href='market://search?q=pname:net.sylvek.sharemyposition'>click
+here to download it</a> <br />
+<br />
+<a href='mailto:smaucourt@gmail.com'>any idea? contact me :-)</a></div>
+</body>
 </html>
