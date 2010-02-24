@@ -26,6 +26,7 @@ import com.google.code.gwt.geolocation.client.Geolocation;
 import com.google.code.gwt.geolocation.client.Position;
 import com.google.code.gwt.geolocation.client.PositionCallback;
 import com.google.code.gwt.geolocation.client.PositionError;
+import com.google.code.gwt.geolocation.client.PositionOptions;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -153,7 +154,7 @@ public class Client implements EntryPoint {
 
                 });
             }
-        });
+        }, PositionOptions.getPositionOptions(true /* GPS if possible */, 10000 /* timeout 10s */, 0 /* new position */));
     }
 
     private void addLinks(String url)
