@@ -154,7 +154,7 @@ public class Client implements EntryPoint {
 
                 });
             }
-        }, PositionOptions.getPositionOptions(true /* GPS if possible */, 10000 /* timeout 10s */, 0 /* new position */));
+        }, PositionOptions.getPositionOptions(true /* GPS if possible */, 60000 /* timeout 1min */, 0 /* new position */));
     }
 
     private void addLinks(String url)
