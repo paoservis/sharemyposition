@@ -8,5 +8,5 @@
 	</string>
 	<string name="progression_desc">acquiring the current position ...</string>
 	<string name="subject">my current position</string>
-	<string name="body">i am here, %s</string>
+	<string name="body">i am here, %s %s</string>
 </resources>
