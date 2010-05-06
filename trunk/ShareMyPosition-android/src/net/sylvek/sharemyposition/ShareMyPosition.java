@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 public class ShareMyPosition extends Activity implements LocationListener {
-    
+
     private static final String LOG = "ShareMyPosition";
 
     private static final String HOST = "http://sharemyposition.appspot.com/";
@@ -64,10 +64,14 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private ProgressDialog progressDialog;
 
+    private Geocoder gc;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        gc = new Geocoder(this);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -175,8 +179,9 @@ public class ShareMyPosition extends Activity implements LocationListener {
             @Override
             public void run()
             {
-                String uri = getLocationUrl(ShareMyPosition.this, location);
-                String msg = getString(R.string.body, uri);
+                String address = getAddress(location);
+                String uri = getLocationUrl(location);
+                String msg = getString(R.string.body, uri, address);
                 Intent t = new Intent(Intent.ACTION_SEND);
                 t.setType("text/plain");
                 t.addCategory(Intent.CATEGORY_DEFAULT);
@@ -196,35 +201,45 @@ public class ShareMyPosition extends Activity implements LocationListener {
         finish();
     }
 
-    public static String getLocationUrl(Context context, Location location)
+    public String getLocationUrl(Location location)
     {
-        String url = getCurrentStaticLocationUrl(context, location);
+        String url = getCurrentStaticLocationUrl(location);
         try {
             url = getTinyLink(url);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             Log.e(LOG, "tinyLink don't work: " + url);
         }
 
         return url;
     }
 
-    public static String getCurrentStaticLocationUrl(Context context, Location location)
+    public String getCurrentStaticLocationUrl(Location location)
     {
         Double latitude = location.getLatitude();
         Double longitude = location.getLongitude();
-        try {
-            return STATIC_WEB_MAP + "?pos=" + latitude + "," + longitude + "&geocode=" + getAddress(context, latitude, longitude);
-        } catch (Throwable e) {
-            Log.e(LOG, "unable to parse address");
-            return STATIC_WEB_MAP + "?pos=" + latitude + "," + longitude;
-        }
 
+        StringBuilder uri = new StringBuilder(STATIC_WEB_MAP).append("?pos=").append(latitude).append(",").append(longitude);
+        return uri.toString();
     }
 
-    public static String getAddress(Context context, double latitude, double longitude) throws IOException
+    public String getAddress(Location location)
     {
-        Geocoder gc = new Geocoder(context);
-        List<Address> address = gc.getFromLocation(latitude, longitude, 1);
+        Double latitude = location.getLatitude();
+        Double longitude = location.getLongitude();
+
+        List<Address> address = null;
+        try {
+            address = gc.getFromLocation(latitude, longitude, 1);
+        } catch (IOException e) {
+            Log.e(LOG, "unable to get address", e);
+            return "";
+        }
+
+        if (address == null || address.size() == 0) {
+            Log.w(LOG, "unable to parse address");
+            return "";
+        }
+
         Address a = address.get(0);
 
         StringBuilder b = new StringBuilder();
