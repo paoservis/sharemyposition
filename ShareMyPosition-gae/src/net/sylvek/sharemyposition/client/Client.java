@@ -112,41 +112,40 @@ public class Client implements EntryPoint {
                 Coordinates c = position.getCoords();
 
                 final LatLng point = LatLng.newInstance(c.getLatitude(), c.getLongitude());
+                final String url = URL_STATIC + "?pos=" + point.toUrlValue();
                 ReverseGeocoder.reverseGeocode(point, new ReverseGeocoderCallback() {
 
                     @Override
                     public void onFailure(LatLng point)
                     {
-                        String url = URL_STATIC + "?pos=" + point.toUrlValue();
                         getShortyUrl(url, new RequestCallback() {
                             public void onError(Request request, Throwable exception)
                             {
-                                Window.alert(exception.getMessage());
+                                addLinks(url, "");
                             }
 
                             public void onResponseReceived(Request request, Response response)
                             {
                                 if (200 == response.getStatusCode()) {
-                                    addLinks(response.getText());
+                                    addLinks(response.getText(), "");
                                 }
                             }
                         });
                     }
 
                     @Override
-                    public void onSuccess(ExtendedPlacemark placemark)
+                    public void onSuccess(final ExtendedPlacemark placemark)
                     {
-                        String url = URL_STATIC + "?pos=" + point.toUrlValue() + "geocode=" + placemark.getAddress();
                         getShortyUrl(url, new RequestCallback() {
                             public void onError(Request request, Throwable exception)
                             {
-                                Window.alert(exception.getMessage());
+                                addLinks(url, "");
                             }
 
                             public void onResponseReceived(Request request, Response response)
                             {
                                 if (200 == response.getStatusCode()) {
-                                    addLinks(response.getText());
+                                    addLinks(response.getText(), placemark.getAddress());
                                 }
                             }
                         });
@@ -157,13 +156,15 @@ public class Client implements EntryPoint {
         }, PositionOptions.getPositionOptions(true /* GPS if possible */, 60000 /* timeout 1min */, 0 /* new position */));
     }
 
-    private void addLinks(String url)
+    private void addLinks(String url, String address)
     {
         location.setVisible(false);
 
-        RootPanel.get("links").add(
-                new HTML("<a class='tinylink' href='" + "mailto:?subject=my%20current%20position&body=i%20am%20here,%20" + url
-                        + "'>share my position by mail</a><br/>or copy this link and send it by sms"));
+        RootPanel.get("links")
+                .add(
+                        new HTML("<a class='tinylink' href='" + "mailto:?subject=my%20current%20position&body=i%20am%20here,%20"
+                                + url + " " + URL.encode(address)
+                                + "'>share my position by mail</a><br/>or copy this link and send it by sms"));
 
         RootPanel.get("tinyurl").add(new HTML("<a class='tinylink' href='" + url + "'>" + url + "</a>"));
     }

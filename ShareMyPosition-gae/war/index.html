@@ -15,8 +15,10 @@
 <script type="text/javascript" language="javascript"
 	src="client/client.nocache.js"></script>
 <script type="text/javascript"><!--
-    addEventListener('load', function() { setTimeout(hideAddressBar, 5000); }, false);
-	function hideAddressBar() { window.scrollTo(0, 1); } //-->
+    addEventListener('load', function() { 
+    	var uagent = navigator.userAgent.toLowerCase();
+		document.getElementById("information").style.visibility = (uagent.search("android") > - 1) ? 'visible' : 'hidden';
+    }, false); //-->
 	</script>
 <script type="text/javascript">
     
