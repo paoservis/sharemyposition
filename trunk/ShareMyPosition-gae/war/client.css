@@ -1,8 +1,5 @@
 .title {
 	text-align: center;
-	background-image: url("icon.png");
-	background-position: top left;
-	background-repeat: no-repeat;
 	color: #4488ff;
 }
 
@@ -24,6 +21,11 @@
 	color: #8877ff;
 	font-weight: bold;
 	font-size: 110%;
+	background-image: url("icon.png");
+	background-position: top left;
+	background-repeat: no-repeat;
+	height:50px;
+	text-indent: 50px;
 }
 
 .tinylink {
