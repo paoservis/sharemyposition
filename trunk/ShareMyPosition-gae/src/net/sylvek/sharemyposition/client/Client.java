@@ -28,7 +28,6 @@ import com.google.code.gwt.geolocation.client.PositionCallback;
 import com.google.code.gwt.geolocation.client.PositionError;
 import com.google.code.gwt.geolocation.client.PositionOptions;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.http.client.Request;
@@ -52,12 +51,16 @@ public class Client implements EntryPoint {
 
     final static String URL_STATIC = HOST + "static.jsp";
 
+    final static String URL_CREATE = HOST + "service/create";
+
     private Button location;
 
     @Override
     public void onModuleLoad()
     {
-        location = new Button("click here to find my location");
+        location = new Button();
+        location.setEnabled(true);
+        location.setText("click here to find my location");
         location.setStylePrimaryName("button");
         location.setEnabled(Geolocation.isSupported());
         location.addClickHandler(new ClickHandler() {
@@ -129,6 +132,11 @@ public class Client implements EntryPoint {
                                 if (200 == response.getStatusCode()) {
                                     addLinks(response.getText(), "");
                                 }
+
+                                if (500 == response.getStatusCode()) {
+                                    addLinks(url, "");
+                                    RootPanel.get("error").add(new Label("an error occured during the shortening of the url."));
+                                }
                             }
                         });
                     }
@@ -139,13 +147,18 @@ public class Client implements EntryPoint {
                         getShortyUrl(url, new RequestCallback() {
                             public void onError(Request request, Throwable exception)
                             {
-                                addLinks(url, "");
+                                addLinks(url, placemark.getAddress());
                             }
 
                             public void onResponseReceived(Request request, Response response)
                             {
                                 if (200 == response.getStatusCode()) {
                                     addLinks(response.getText(), placemark.getAddress());
+                                }
+
+                                if (500 == response.getStatusCode()) {
+                                    addLinks(url, placemark.getAddress());
+                                    RootPanel.get("error").add(new Label("an error occured during the shortening of the url."));
                                 }
                             }
                         });
@@ -169,16 +182,9 @@ public class Client implements EntryPoint {
         RootPanel.get("tinyurl").add(new HTML("<a class='tinylink' href='" + url + "'>" + url + "</a>"));
     }
 
-    private String getUrlService()
-    {
-        StringBuffer url = new StringBuffer(GWT.getModuleBaseURL());
-        int pos = url.indexOf(GWT.getModuleName());
-        return url.subSequence(0, pos).toString();
-    }
-
     private void getShortyUrl(String url, RequestCallback requestCallback)
     {
-        String query = getUrlService() + "service/create?url=" + url;
+        String query = URL_CREATE + "?url=" + url;
         RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, URL.encode(query));
         try {
             builder.sendRequest(null, requestCallback);
