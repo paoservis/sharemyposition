@@ -24,14 +24,6 @@
 </script>
 </head>
 <body onload="window.scrollTo(0, 1)">
-<%
-    String pos = request.getParameter("pos");
-			String geocode = request.getParameter("geocode");
-			if (geocode != null
-					&& request.getHeader("user-agent").contains("Android")) {
-				geocode = new String(geocode.getBytes("8859_1"), "UTF8");
-			}
-%>
 <script type="text/javascript">
 window.googleAfmcRequest = {
   client: 'ca-mb-pub-7256263753683362',
@@ -62,6 +54,9 @@ window.googleAfmcRequest = {
 <button onclick="window.location='index.html'" class="button">click
 here to share your own position</button>
 </div>
+<%
+    String pos = request.getParameter("pos");
+%>
 <center><a
 	href="http://maps.google.com/maps?geocode=&q=<%=pos%>"> <img
 	src="http://maps.google.com/staticmap?markers=<%=pos%>,blue&amp;zoom=15&amp;size=320x240&amp;maptype=roadmap&amp;mobile=true&amp;key=ABQIAAAAAEcqvI14a3gJGb3vVQgfdxQX01MF0MrseK3w-nIw2auEB9UHhBSSWixmPtdizdy6aL9TvAbmLmtuzw&amp;sensor=true"
