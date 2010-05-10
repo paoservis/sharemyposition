@@ -21,25 +21,35 @@ package net.sylvek.sharemyposition;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnCancelListener;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.ToggleButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 
@@ -60,73 +70,76 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private final static int PROVIDERS_DLG = Menu.FIRST;
 
+    private final static int PROGRESS_DLG = PROVIDERS_DLG + 1;
+
     private LocationManager locationManager;
 
-    private ProgressDialog progressDialog;
-
     private Geocoder gc;
+
+    private HttpParams params = new BasicHttpParams();
+
+    private WakeLock lock;
+
+    private ToggleButton insideMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
+        HttpProtocolParams.setUserAgent(params, "Android/" + Build.DISPLAY);
+
         gc = new Geocoder(this);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        progressDialog = new ProgressDialog(this) {
-            {
-                this.setTitle(getText(R.string.app_name));
-                this.setMessage(getText(R.string.progression_desc));
-                this.setCancelable(true);
-                this.setOnCancelListener(new OnCancelListener() {
+        initWakeLock();
+    }
 
-                    @Override
-                    public void onCancel(DialogInterface dialog)
-                    {
-                        finish();
-                    }
-                });
+    private void initWakeLock()
+    {
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        lock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, "sharemyposition.lock");
+    }
+
+    private void performLocation(boolean forceNetwork)
+    {
+        List<String> providers = locationManager.getProviders(true);
+        if (providerAvailable(providers)) {
+            showDialog(PROGRESS_DLG);
+
+            boolean containsGPS = providers.contains(LocationManager.GPS_PROVIDER);
+            boolean containsNetwork = providers.contains(LocationManager.NETWORK_PROVIDER);
+
+            if ((containsGPS && !forceNetwork) || (containsGPS && !containsNetwork)) {
+                Log.d(LOG, "gps selected");
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 5, this);
+                insideMode.setEnabled(containsNetwork);
+            } else if (containsNetwork) {
+                Log.d(LOG, "network selected");
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 5, this);
+                insideMode.setEnabled(false);
+            } else {
+                Log.w(LOG, "no provided found (GPS or NETWORK)");
+                finish();
             }
-        };
+        }
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
-        List<String> providers = locationManager.getProviders(true);
-        if (providerAvailable(providers)) {
-            progressDialog.show();
-
-            if (providers.contains(LocationManager.GPS_PROVIDER)) {
-                Log.d(LOG, "gps selected");
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 5, this);
-            } else {
-                for (String provider : providers) {
-                    Log.d(LOG, provider + " selected");
-                    locationManager.requestLocationUpdates(provider, 0, 5, this);
-                }
-            }
-        }
+        lock.acquire();
+        performLocation(false);
     }
 
     @Override
     protected void onPause()
     {
         super.onPause();
+        lock.release();
         locationManager.removeUpdates(this);
-        if (progressDialog.isShowing()) {
-            progressDialog.hide();
-        }
-    }
-
-    @Override
-    protected void onStop()
-    {
-        super.onStop();
-        progressDialog.dismiss();
     }
 
     private boolean providerAvailable(List<String> providers)
@@ -145,6 +158,33 @@ public class ShareMyPosition extends Activity implements LocationListener {
         switch (id) {
         default:
             return super.onCreateDialog(id);
+        case PROGRESS_DLG:
+            final View progress = LayoutInflater.from(this).inflate(R.layout.progress, null);
+
+            insideMode = (ToggleButton) progress.findViewById(R.id.inside_mode);
+
+            insideMode.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+                {
+                    locationManager.removeUpdates(ShareMyPosition.this);
+                    performLocation(isChecked);
+                }
+            });
+
+            return new AlertDialog.Builder(this).setTitle(getText(R.string.app_name))
+                    .setView(progress)
+                    .setCancelable(true)
+                    .setOnCancelListener(new OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogInterface dialog)
+                        {
+                            finish();
+                        }
+                    })
+                    .create();
         case PROVIDERS_DLG:
             return new AlertDialog.Builder(this).setTitle(R.string.app_name).setCancelable(false).setIcon(
                     android.R.drawable.ic_menu_help).setMessage(R.string.providers_needed).setNegativeButton(android.R.string.no,
@@ -188,17 +228,12 @@ public class ShareMyPosition extends Activity implements LocationListener {
                 t.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject));
                 t.putExtra(Intent.EXTRA_TEXT, msg);
                 Intent share = Intent.createChooser(t, getString(R.string.app_name));
-                startActivityForResult(share, 0);
+                startActivity(share);
+                finish();
             }
 
         });
 
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        finish();
     }
 
     public String getLocationUrl(Location location)
@@ -251,9 +286,9 @@ public class ShareMyPosition extends Activity implements LocationListener {
         return b.toString();
     }
 
-    public static String getTinyLink(String url) throws ClientProtocolException, IOException, JSONException
+    public String getTinyLink(String url) throws ClientProtocolException, IOException, JSONException
     {
-        HttpClient client = new DefaultHttpClient();
+        HttpClient client = new DefaultHttpClient(params);
         HttpGet get = new HttpGet(SHORTY_URI + URLEncoder.encode(url));
         HttpResponse response = client.execute(get);
         if (response.getStatusLine().getStatusCode() == 200) {
@@ -276,15 +311,5 @@ public class ShareMyPosition extends Activity implements LocationListener {
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras)
     {
-        List<String> providers = locationManager.getProviders(true);
-        if (provider.equals(LocationManager.GPS_PROVIDER) && providers.contains(providers)) {
-            if (status == LocationProvider.TEMPORARILY_UNAVAILABLE || status == LocationProvider.OUT_OF_SERVICE) {
-                Log.d(LOG, "gps not yet available, changing the provider");
-                for (String p : providers) {
-                    Log.d(LOG, p + " selected");
-                    locationManager.requestLocationUpdates(p, 0, 5, this);
-                }
-            }
-        }
     }
 }

@@ -6,7 +6,9 @@
 		\n\nOtherwise, you can not share
 		your position.
 	</string>
-	<string name="progression_desc">acquiring the current position ...</string>
+	<string name="progression_desc">acquiring the current position</string>
 	<string name="subject">my current position</string>
 	<string name="body">i am here, %s %s</string>
+	<string name="inside_mode">mode inside</string>
+	<string name="outside_mode">activate the mode inside</string>
 </resources>
