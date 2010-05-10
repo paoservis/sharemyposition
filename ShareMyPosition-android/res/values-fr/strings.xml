@@ -5,7 +5,9 @@
 		position semble être activé.\n\nSouhaitez-vous en activer un ?
 		\n\nDans le cas contraire, vous ne pourrez partager votre position.
 	</string>
-	<string name="progression_desc">acquisition de la position en cours ...</string>
+	<string name="progression_desc">acquisition de la position</string>
 	<string name="subject">ma position actuelle</string>
 	<string name="body">Je suis à cet endroit, %s %s</string>
+	<string name="inside_mode">mode en interieur</string>
+	<string name="outside_mode">activer le mode en interieur</string>
 </resources>
