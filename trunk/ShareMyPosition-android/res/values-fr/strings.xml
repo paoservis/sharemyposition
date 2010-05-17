@@ -10,4 +10,5 @@
 	<string name="body">Je suis à cet endroit, %s %s</string>
 	<string name="inside_mode">mode en interieur</string>
 	<string name="outside_mode">activer le mode en interieur</string>
+	<string name="location_changed">position trouvée, récupération de l\'adresse et raccourcissement</string>
 </resources>
