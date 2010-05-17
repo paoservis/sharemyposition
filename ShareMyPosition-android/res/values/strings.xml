@@ -11,4 +11,5 @@
 	<string name="body">i am here, %s %s</string>
 	<string name="inside_mode">mode inside</string>
 	<string name="outside_mode">activate the mode inside</string>
+	<string name="location_changed">location found, catching of address and shortening</string>
 </resources>

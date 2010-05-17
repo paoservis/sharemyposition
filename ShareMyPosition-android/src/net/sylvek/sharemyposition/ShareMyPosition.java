@@ -39,6 +39,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
@@ -59,6 +60,8 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 public class ShareMyPosition extends Activity implements LocationListener {
+
+    private static final String VERSION = "1.0.4";
 
     private static final String LOG = "ShareMyPosition";
 
@@ -82,12 +85,14 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private ToggleButton insideMode;
 
+    private TextView progressText;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-        HttpProtocolParams.setUserAgent(params, "Android/" + Build.DISPLAY);
+        HttpProtocolParams.setUserAgent(params, "Android/" + Build.DISPLAY + "/version:" + VERSION);
 
         gc = new Geocoder(this);
 
@@ -104,6 +109,7 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private void performLocation(boolean forceNetwork)
     {
+        locationManager.removeUpdates(ShareMyPosition.this);
         List<String> providers = locationManager.getProviders(true);
         if (providerAvailable(providers)) {
             showDialog(PROGRESS_DLG);
@@ -161,6 +167,8 @@ public class ShareMyPosition extends Activity implements LocationListener {
         case PROGRESS_DLG:
             final View progress = LayoutInflater.from(this).inflate(R.layout.progress, null);
 
+            progressText = (TextView) progress.findViewById(R.id.progress);
+
             insideMode = (ToggleButton) progress.findViewById(R.id.inside_mode);
 
             insideMode.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -168,7 +176,6 @@ public class ShareMyPosition extends Activity implements LocationListener {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
                 {
-                    locationManager.removeUpdates(ShareMyPosition.this);
                     performLocation(isChecked);
                 }
             });
@@ -213,6 +220,8 @@ public class ShareMyPosition extends Activity implements LocationListener {
     {
         Log.d(LOG, "location changed: " + location.toString());
         locationManager.removeUpdates(this);
+
+        progressText.setText(R.string.location_changed);
 
         Executors.newCachedThreadPool().execute(new Runnable() {
 
@@ -301,15 +310,18 @@ public class ShareMyPosition extends Activity implements LocationListener {
     @Override
     public void onProviderDisabled(String provider)
     {
+        performLocation(false);
     }
 
     @Override
     public void onProviderEnabled(String provider)
     {
+        performLocation(false);
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras)
     {
+        performLocation(false);
     }
 }
