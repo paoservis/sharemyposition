@@ -11,4 +11,6 @@
 	<string name="inside_mode">mode en interieur</string>
 	<string name="outside_mode">activer le mode en interieur</string>
 	<string name="location_changed">position trouvée, récupération de l\'adresse et raccourcissement</string>
+		<string name="share_it">partager</string>
+	<string name="retry">recommencer</string>
 </resources>
