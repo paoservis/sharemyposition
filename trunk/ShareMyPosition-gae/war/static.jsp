@@ -60,7 +60,7 @@ here to share your own position</button>
 %>
 <center><a
 	href="http://maps.google.com/maps?geocode=&q=<%=pos%>"> <img
-	src="http://maps.google.com/staticmap?markers=<%=pos%>,blue&amp;zoom=15&amp;size=320x240&amp;maptype=roadmap&amp;mobile=true&amp;key=ABQIAAAAAEcqvI14a3gJGb3vVQgfdxQX01MF0MrseK3w-nIw2auEB9UHhBSSWixmPtdizdy6aL9TvAbmLmtuzw&amp;sensor=true"
+	src="http://maps.google.com/staticmap?markers=<%=pos%>,blue&amp;zoom=15&amp;mobile=true&amp;size=320x240&amp;maptype=roadmap&amp;mobile=true&amp;key=ABQIAAAAAEcqvI14a3gJGb3vVQgfdxQX01MF0MrseK3w-nIw2auEB9UHhBSSWixmPtdizdy6aL9TvAbmLmtuzw&amp;sensor=true"
 	alt="i am here" /> <br />
 click on the map to open Google Map</a></center>
 </body>
