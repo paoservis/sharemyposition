@@ -12,4 +12,6 @@
 	<string name="inside_mode">mode inside</string>
 	<string name="outside_mode">activate the mode inside</string>
 	<string name="location_changed">location found, catching of address and shortening</string>
+	<string name="share_it">share</string>
+	<string name="retry">retry</string>
 </resources>

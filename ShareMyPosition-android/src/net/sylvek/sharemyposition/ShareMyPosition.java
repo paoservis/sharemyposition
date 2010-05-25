@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnClickListener;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -38,6 +39,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -61,7 +63,7 @@ import java.util.concurrent.Executors;
 
 public class ShareMyPosition extends Activity implements LocationListener {
 
-    private static final String VERSION = "1.0.4";
+    private static final String VERSION = "1.0.5";
 
     private static final String LOG = "ShareMyPosition";
 
@@ -71,9 +73,13 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private static final String STATIC_WEB_MAP = HOST + "static.jsp";
 
+    private static final String SHARED_WEP_MAP = HOST + "sharedmap.jsp?pos=";
+
     private final static int PROVIDERS_DLG = Menu.FIRST;
 
     private final static int PROGRESS_DLG = PROVIDERS_DLG + 1;
+
+    private final static int MAP_DLG = PROGRESS_DLG + 1;
 
     private LocationManager locationManager;
 
@@ -86,6 +92,10 @@ public class ShareMyPosition extends Activity implements LocationListener {
     private ToggleButton insideMode;
 
     private TextView progressText;
+
+    private Location location;
+
+    private WebView sharedMap;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -113,6 +123,7 @@ public class ShareMyPosition extends Activity implements LocationListener {
         List<String> providers = locationManager.getProviders(true);
         if (providerAvailable(providers)) {
             showDialog(PROGRESS_DLG);
+            progressText.setText(R.string.progression_desc);
 
             boolean containsGPS = providers.contains(LocationManager.GPS_PROVIDER);
             boolean containsNetwork = providers.contains(LocationManager.NETWORK_PROVIDER);
@@ -159,11 +170,76 @@ public class ShareMyPosition extends Activity implements LocationListener {
     }
 
     @Override
+    protected void onPrepareDialog(int id, Dialog dialog)
+    {
+        switch (id) {
+        default:
+            super.onPrepareDialog(id, dialog);
+            break;
+        case MAP_DLG:
+            if (location != null) {
+                final StringBuilder pos = new StringBuilder().append(location.getLatitude()).append(",").append(
+                        location.getLongitude()).append("&size=300x250");
+                Log.d("preview.url", pos.toString());
+                sharedMap.loadUrl(SHARED_WEP_MAP + pos.toString());
+            } else {
+                Log.w("preview.url", "location is null");
+            }
+            break;
+        }
+    }
+
+    @Override
     protected Dialog onCreateDialog(int id)
     {
         switch (id) {
         default:
             return super.onCreateDialog(id);
+        case MAP_DLG:
+            this.sharedMap = new WebView(this);
+            sharedMap.setAlwaysDrawnWithCacheEnabled(false);
+            sharedMap.setKeepScreenOn(true);
+            return new AlertDialog.Builder(this).setTitle(R.string.app_name).setView(sharedMap).setOnCancelListener(
+                    new OnCancelListener() {
+
+                        @Override
+                        public void onCancel(DialogInterface arg0)
+                        {
+                            finish();
+                        }
+                    }).setPositiveButton(R.string.share_it, new OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface arg0, int arg1)
+                {
+                    Executors.newCachedThreadPool().execute(new Runnable() {
+
+                        @Override
+                        public void run()
+                        {
+                            String address = getAddress(location);
+                            String uri = getLocationUrl(location);
+                            String msg = getString(R.string.body, uri, address);
+                            Intent t = new Intent(Intent.ACTION_SEND);
+                            t.setType("text/plain");
+                            t.addCategory(Intent.CATEGORY_DEFAULT);
+                            t.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject));
+                            t.putExtra(Intent.EXTRA_TEXT, msg);
+                            Intent share = Intent.createChooser(t, getString(R.string.app_name));
+                            startActivity(share);
+                            finish();
+                        }
+
+                    });
+                }
+            }).setNegativeButton(R.string.retry, new OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface arg0, int arg1)
+                {
+                    performLocation(false);
+                }
+            }).create();
         case PROGRESS_DLG:
             final View progress = LayoutInflater.from(this).inflate(R.layout.progress, null);
 
@@ -221,28 +297,11 @@ public class ShareMyPosition extends Activity implements LocationListener {
         Log.d(LOG, "location changed: " + location.toString());
         locationManager.removeUpdates(this);
 
+        this.location = location;
+
         progressText.setText(R.string.location_changed);
 
-        Executors.newCachedThreadPool().execute(new Runnable() {
-
-            @Override
-            public void run()
-            {
-                String address = getAddress(location);
-                String uri = getLocationUrl(location);
-                String msg = getString(R.string.body, uri, address);
-                Intent t = new Intent(Intent.ACTION_SEND);
-                t.setType("text/plain");
-                t.addCategory(Intent.CATEGORY_DEFAULT);
-                t.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject));
-                t.putExtra(Intent.EXTRA_TEXT, msg);
-                Intent share = Intent.createChooser(t, getString(R.string.app_name));
-                startActivity(share);
-                finish();
-            }
-
-        });
-
+        showDialog(MAP_DLG);
     }
 
     public String getLocationUrl(Location location)
