@@ -13,7 +13,8 @@
 	<string name="location_changed">traitement ...</string>
 		<string name="share_it">partager</string>
 	<string name="retry">localiser</string>
-	<string name="add_geocoded_location">ajouter l\'adresse de la position</string>
-	<string name="add_urllink_location">ajouter un lien url vers la carte</string>
+	<string name="add_geocoded_location">ajouter l\'adresse géocodée</string>
+	<string name="add_urllink_location">ajouter l\'URL raccourcie de la carte</string>
 	<string name="exit">quitter</string>
+	<string name="options">options</string>
 </resources>

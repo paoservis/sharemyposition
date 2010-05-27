@@ -6,18 +6,26 @@
 		android:gravity="center">
 		<WebView android:id="@+id/sharedmap_webview"
 			android:layout_width="fill_parent" android:layout_height="wrap_content" />
-		<ScrollView android:layout_width="fill_parent"
+		<Button android:id="@+id/toggle_layout" android:text="@string/options"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" />
+		<ScrollView android:id="@+id/custom_layout"
+			android:visibility="gone" android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
 			<LinearLayout android:orientation="vertical"
 				android:layout_width="fill_parent" android:layout_height="fill_parent">
 				<EditText android:id="@+id/body" android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:text="@string/body" />
-				<CheckBox android:id="@+id/add_address_location"
-					android:layout_width="fill_parent" android:layout_height="wrap_content"
-					android:checked="true" android:text="@string/add_geocoded_location" />
-				<CheckBox android:id="@+id/add_url_location"
-					android:layout_width="fill_parent" android:layout_height="wrap_content"
-					android:checked="true" android:text="@string/add_urllink_location" />
+				<LinearLayout android:orientation="horizontal"
+					android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<CheckBox android:id="@+id/add_address_location"
+						android:layout_width="0px" android:layout_height="wrap_content"
+						android:layout_weight="50" android:checked="true"
+						android:text="@string/add_geocoded_location" android:gravity="center" />
+					<CheckBox android:id="@+id/add_url_location"
+						android:layout_width="0px" android:layout_height="wrap_content"
+						android:layout_weight="50" android:checked="true"
+						android:text="@string/add_urllink_location" android:gravity="center" />
+				</LinearLayout>
 			</LinearLayout>
 		</ScrollView>
 	</LinearLayout>

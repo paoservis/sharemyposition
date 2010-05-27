@@ -24,6 +24,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.location.Address;
@@ -35,11 +36,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -65,7 +68,7 @@ import java.util.concurrent.Executors;
 
 public class ShareMyPosition extends Activity implements LocationListener {
 
-    private static final String VERSION = "1.0.6";
+    private static final String VERSION = "1.0.7";
 
     private static final String LOG = "ShareMyPosition";
 
@@ -83,6 +86,12 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private final static int MAP_DLG = PROGRESS_DLG + 1;
 
+    private static final String PREF_ADDRESS_CHECKED = "net.sylvek.sharemyposition.pref.address.checked";
+
+    private static final String PREF_URL_CHECKED = "net.sylvek.sharemyposition.pref.url.checked";
+
+    private static final String PREF_BODY_DEFAULT = "net.sylvek.sharemyposition.pref.body.default";
+
     private LocationManager locationManager;
 
     private Geocoder gc;
@@ -99,6 +108,8 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private WebView sharedMap;
 
+    private SharedPreferences pref;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -111,6 +122,8 @@ public class ShareMyPosition extends Activity implements LocationListener {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         initWakeLock();
+
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     private void initWakeLock()
@@ -181,7 +194,7 @@ public class ShareMyPosition extends Activity implements LocationListener {
         case MAP_DLG:
             if (location != null) {
                 final StringBuilder pos = new StringBuilder().append(location.getLatitude()).append(",").append(
-                        location.getLongitude()).append("&size=300x155");
+                        location.getLongitude()).append("&size=300x185");
                 Log.d("preview.url", pos.toString());
                 sharedMap.loadUrl(SHARED_WEP_MAP + pos.toString());
             } else {
@@ -202,6 +215,27 @@ public class ShareMyPosition extends Activity implements LocationListener {
             this.sharedMap = (WebView) sharedMapView.findViewById(R.id.sharedmap_webview);
             sharedMap.setAlwaysDrawnWithCacheEnabled(false);
             sharedMap.setKeepScreenOn(true);
+
+            final Button options = (Button) sharedMapView.findViewById(R.id.toggle_layout);
+            final View optionsLayout = (View) sharedMapView.findViewById(R.id.custom_layout);
+            final CheckBox geocodeAddress = (CheckBox) sharedMapView.findViewById(R.id.add_address_location);
+            final CheckBox urlShortening = (CheckBox) sharedMapView.findViewById(R.id.add_url_location);
+            final EditText body = (EditText) sharedMapView.findViewById(R.id.body);
+
+            geocodeAddress.setChecked(pref.getBoolean(PREF_ADDRESS_CHECKED, true));
+            urlShortening.setChecked(pref.getBoolean(PREF_URL_CHECKED, true));
+            body.setText(pref.getString(PREF_BODY_DEFAULT, getString(R.string.body)));
+
+            options.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0)
+                {
+                    options.setVisibility(View.GONE);
+                    optionsLayout.setVisibility(View.VISIBLE);
+                }
+            });
+
             return new AlertDialog.Builder(this).setTitle(R.string.app_name).setView(sharedMapView).setOnCancelListener(
                     new OnCancelListener() {
 
@@ -225,6 +259,12 @@ public class ShareMyPosition extends Activity implements LocationListener {
                     final boolean isGeocodeAddress = ((CheckBox) sharedMapView.findViewById(R.id.add_address_location)).isChecked();
                     final boolean isUrlShortening = ((CheckBox) sharedMapView.findViewById(R.id.add_url_location)).isChecked();
                     final EditText body = (EditText) sharedMapView.findViewById(R.id.body);
+
+                    pref.edit()
+                            .putBoolean(PREF_ADDRESS_CHECKED, isGeocodeAddress)
+                            .putBoolean(PREF_URL_CHECKED, isUrlShortening)
+                            .putString(PREF_BODY_DEFAULT, body.getText().toString())
+                            .commit();
 
                     Executors.newCachedThreadPool().execute(new Runnable() {
 
