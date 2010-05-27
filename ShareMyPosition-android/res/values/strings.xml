@@ -8,10 +8,13 @@
 	</string>
 	<string name="progression_desc">acquiring the current position</string>
 	<string name="subject">my current position</string>
-	<string name="body">i am here, %s %s</string>
+	<string name="body">i am here</string>
 	<string name="inside_mode">mode inside</string>
 	<string name="outside_mode">activate the mode inside</string>
-	<string name="location_changed">location found, catching of address and shortening</string>
+	<string name="location_changed">processing ...</string>
 	<string name="share_it">share</string>
 	<string name="retry">retry</string>
+	<string name="add_geocoded_location">add the address of the position</string>
+	<string name="add_urllink_location">add a url pointing to a map</string>
+	<string name="exit">exit</string>
 </resources>

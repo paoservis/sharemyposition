@@ -7,10 +7,13 @@
 	</string>
 	<string name="progression_desc">acquisition de la position</string>
 	<string name="subject">ma position actuelle</string>
-	<string name="body">Je suis à cet endroit, %s %s</string>
+	<string name="body">Je suis à cet endroit</string>
 	<string name="inside_mode">mode en interieur</string>
 	<string name="outside_mode">activer le mode en interieur</string>
-	<string name="location_changed">position trouvée, récupération de l\'adresse et raccourcissement</string>
+	<string name="location_changed">traitement ...</string>
 		<string name="share_it">partager</string>
-	<string name="retry">recommencer</string>
+	<string name="retry">localiser</string>
+	<string name="add_geocoded_location">ajouter l\'adresse de la position</string>
+	<string name="add_urllink_location">ajouter un lien url vers la carte</string>
+	<string name="exit">quitter</string>
 </resources>

@@ -40,7 +40,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -63,7 +65,7 @@ import java.util.concurrent.Executors;
 
 public class ShareMyPosition extends Activity implements LocationListener {
 
-    private static final String VERSION = "1.0.5";
+    private static final String VERSION = "1.0.6";
 
     private static final String LOG = "ShareMyPosition";
 
@@ -179,7 +181,7 @@ public class ShareMyPosition extends Activity implements LocationListener {
         case MAP_DLG:
             if (location != null) {
                 final StringBuilder pos = new StringBuilder().append(location.getLatitude()).append(",").append(
-                        location.getLongitude()).append("&size=300x250");
+                        location.getLongitude()).append("&size=300x155");
                 Log.d("preview.url", pos.toString());
                 sharedMap.loadUrl(SHARED_WEP_MAP + pos.toString());
             } else {
@@ -196,10 +198,11 @@ public class ShareMyPosition extends Activity implements LocationListener {
         default:
             return super.onCreateDialog(id);
         case MAP_DLG:
-            this.sharedMap = new WebView(this);
+            final View sharedMapView = LayoutInflater.from(this).inflate(R.layout.sharedmap, null);
+            this.sharedMap = (WebView) sharedMapView.findViewById(R.id.sharedmap_webview);
             sharedMap.setAlwaysDrawnWithCacheEnabled(false);
             sharedMap.setKeepScreenOn(true);
-            return new AlertDialog.Builder(this).setTitle(R.string.app_name).setView(sharedMap).setOnCancelListener(
+            return new AlertDialog.Builder(this).setTitle(R.string.app_name).setView(sharedMapView).setOnCancelListener(
                     new OnCancelListener() {
 
                         @Override
@@ -207,24 +210,42 @@ public class ShareMyPosition extends Activity implements LocationListener {
                         {
                             finish();
                         }
-                    }).setPositiveButton(R.string.share_it, new OnClickListener() {
+                    }).setNeutralButton(R.string.exit, new OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface arg0, int arg1)
                 {
+                    finish();
+                }
+            }).setPositiveButton(R.string.share_it, new OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface arg0, int arg1)
+                {
+                    final boolean isGeocodeAddress = ((CheckBox) sharedMapView.findViewById(R.id.add_address_location)).isChecked();
+                    final boolean isUrlShortening = ((CheckBox) sharedMapView.findViewById(R.id.add_url_location)).isChecked();
+                    final EditText body = (EditText) sharedMapView.findViewById(R.id.body);
+
                     Executors.newCachedThreadPool().execute(new Runnable() {
 
                         @Override
                         public void run()
                         {
-                            String address = getAddress(location);
-                            String uri = getLocationUrl(location);
-                            String msg = getString(R.string.body, uri, address);
+                            final StringBuilder msg = new StringBuilder(body.getText().toString());
+                            if (isGeocodeAddress) {
+                                final String address = getAddress(location);
+                                if (!address.equals("")) {
+                                    msg.append(", ").append(address);
+                                }
+                            }
+                            if (isUrlShortening) {
+                                msg.append(", ").append(getLocationUrl(location));
+                            }
                             Intent t = new Intent(Intent.ACTION_SEND);
                             t.setType("text/plain");
                             t.addCategory(Intent.CATEGORY_DEFAULT);
                             t.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject));
-                            t.putExtra(Intent.EXTRA_TEXT, msg);
+                            t.putExtra(Intent.EXTRA_TEXT, msg.toString());
                             Intent share = Intent.createChooser(t, getString(R.string.app_name));
                             startActivity(share);
                             finish();
@@ -232,14 +253,16 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
                     });
                 }
-            }).setNegativeButton(R.string.retry, new OnClickListener() {
+            })
+                    .setNegativeButton(R.string.retry, new OnClickListener() {
 
-                @Override
-                public void onClick(DialogInterface arg0, int arg1)
-                {
-                    performLocation(false);
-                }
-            }).create();
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1)
+                        {
+                            performLocation(false);
+                        }
+                    })
+                    .create();
         case PROGRESS_DLG:
             final View progress = LayoutInflater.from(this).inflate(R.layout.progress, null);
 
@@ -348,7 +371,9 @@ public class ShareMyPosition extends Activity implements LocationListener {
         StringBuilder b = new StringBuilder();
         for (int i = 0; i < a.getMaxAddressLineIndex(); i++) {
             b.append(a.getAddressLine(i));
-            b.append(" ");
+            if (i < a.getMaxAddressLineIndex()) {
+                b.append(" ");
+            }
         }
 
         return b.toString();
