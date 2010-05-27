@@ -371,7 +371,7 @@ public class ShareMyPosition extends Activity implements LocationListener {
         StringBuilder b = new StringBuilder();
         for (int i = 0; i < a.getMaxAddressLineIndex(); i++) {
             b.append(a.getAddressLine(i));
-            if (i < a.getMaxAddressLineIndex()) {
+            if (i < (a.getMaxAddressLineIndex() - 1)) {
                 b.append(" ");
             }
         }
