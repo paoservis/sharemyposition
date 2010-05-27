@@ -14,7 +14,8 @@
 	<string name="location_changed">processing ...</string>
 	<string name="share_it">share</string>
 	<string name="retry">retry</string>
-	<string name="add_geocoded_location">add the address of the position</string>
-	<string name="add_urllink_location">add a url pointing to a map</string>
+	<string name="add_geocoded_location">add the geocoded address</string>
+	<string name="add_urllink_location">add the shortened\'s map URL</string>
 	<string name="exit">exit</string>
+	<string name="options">options</string>
 </resources>
