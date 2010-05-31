@@ -68,7 +68,7 @@ import java.util.concurrent.Executors;
 
 public class ShareMyPosition extends Activity implements LocationListener {
 
-    private static final String VERSION = "1.0.7";
+    private static final String VERSION = "1.0.8";
 
     private static final String LOG = "ShareMyPosition";
 
@@ -192,6 +192,21 @@ public class ShareMyPosition extends Activity implements LocationListener {
             super.onPrepareDialog(id, dialog);
             break;
         case MAP_DLG:
+            final View optionsLayout = (View) dialog.findViewById(R.id.custom_layout);
+            /* to catch dismiss event from AlertControler, we need to "override" onClickListener */
+            Button neutral = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
+            neutral.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0)
+                {
+                    if (optionsLayout.getVisibility() == View.GONE) {
+                        optionsLayout.setVisibility(View.VISIBLE);
+                    } else {
+                        optionsLayout.setVisibility(View.GONE);
+                    }
+                }
+            });
             if (location != null) {
                 final StringBuilder pos = new StringBuilder().append(location.getLatitude()).append(",").append(
                         location.getLongitude()).append("&size=300x185");
@@ -216,8 +231,6 @@ public class ShareMyPosition extends Activity implements LocationListener {
             sharedMap.setAlwaysDrawnWithCacheEnabled(false);
             sharedMap.setKeepScreenOn(true);
 
-            final Button options = (Button) sharedMapView.findViewById(R.id.toggle_layout);
-            final View optionsLayout = (View) sharedMapView.findViewById(R.id.custom_layout);
             final CheckBox geocodeAddress = (CheckBox) sharedMapView.findViewById(R.id.add_address_location);
             final CheckBox urlShortening = (CheckBox) sharedMapView.findViewById(R.id.add_url_location);
             final EditText body = (EditText) sharedMapView.findViewById(R.id.body);
@@ -225,16 +238,6 @@ public class ShareMyPosition extends Activity implements LocationListener {
             geocodeAddress.setChecked(pref.getBoolean(PREF_ADDRESS_CHECKED, true));
             urlShortening.setChecked(pref.getBoolean(PREF_URL_CHECKED, true));
             body.setText(pref.getString(PREF_BODY_DEFAULT, getString(R.string.body)));
-
-            options.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View arg0)
-                {
-                    options.setVisibility(View.GONE);
-                    optionsLayout.setVisibility(View.VISIBLE);
-                }
-            });
 
             return new AlertDialog.Builder(this).setTitle(R.string.app_name).setView(sharedMapView).setOnCancelListener(
                     new OnCancelListener() {
@@ -244,12 +247,12 @@ public class ShareMyPosition extends Activity implements LocationListener {
                         {
                             finish();
                         }
-                    }).setNeutralButton(R.string.exit, new OnClickListener() {
+                    }).setNeutralButton(R.string.options, new OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface arg0, int arg1)
                 {
-                    finish();
+                    /* needed to display neutral button */
                 }
             }).setPositiveButton(R.string.share_it, new OnClickListener() {
 
@@ -275,11 +278,17 @@ public class ShareMyPosition extends Activity implements LocationListener {
                             if (isGeocodeAddress) {
                                 final String address = getAddress(location);
                                 if (!address.equals("")) {
-                                    msg.append(", ").append(address);
+                                    if (msg.length() > 0) {
+                                        msg.append(", ");
+                                    }
+                                    msg.append(address);
                                 }
                             }
                             if (isUrlShortening) {
-                                msg.append(", ").append(getLocationUrl(location));
+                                if (msg.length() > 0) {
+                                    msg.append(", ");
+                                }
+                                msg.append(getLocationUrl(location));
                             }
                             Intent t = new Intent(Intent.ACTION_SEND);
                             t.setType("text/plain");
