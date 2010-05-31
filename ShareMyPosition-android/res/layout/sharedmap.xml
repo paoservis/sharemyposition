@@ -6,8 +6,6 @@
 		android:gravity="center">
 		<WebView android:id="@+id/sharedmap_webview"
 			android:layout_width="fill_parent" android:layout_height="wrap_content" />
-		<Button android:id="@+id/toggle_layout" android:text="@string/options"
-			android:layout_width="fill_parent" android:layout_height="wrap_content" />
 		<ScrollView android:id="@+id/custom_layout"
 			android:visibility="gone" android:layout_width="fill_parent"
 			android:layout_height="fill_parent">
