@@ -68,7 +68,7 @@ import java.util.concurrent.Executors;
 
 public class ShareMyPosition extends Activity implements LocationListener {
 
-    private static final String VERSION = "1.0.8";
+    private static final String VERSION = "1.0.9";
 
     private static final String LOG = "ShareMyPosition";
 
@@ -138,7 +138,6 @@ public class ShareMyPosition extends Activity implements LocationListener {
         List<String> providers = locationManager.getProviders(true);
         if (providerAvailable(providers)) {
             showDialog(PROGRESS_DLG);
-            progressText.setText(R.string.progression_desc);
 
             boolean containsGPS = providers.contains(LocationManager.GPS_PROVIDER);
             boolean containsNetwork = providers.contains(LocationManager.NETWORK_PROVIDER);
@@ -228,8 +227,7 @@ public class ShareMyPosition extends Activity implements LocationListener {
         case MAP_DLG:
             final View sharedMapView = LayoutInflater.from(this).inflate(R.layout.sharedmap, null);
             this.sharedMap = (WebView) sharedMapView.findViewById(R.id.sharedmap_webview);
-            sharedMap.setAlwaysDrawnWithCacheEnabled(false);
-            sharedMap.setKeepScreenOn(true);
+            sharedMap.setVerticalScrollbarOverlay(false);
 
             final CheckBox geocodeAddress = (CheckBox) sharedMapView.findViewById(R.id.add_address_location);
             final CheckBox urlShortening = (CheckBox) sharedMapView.findViewById(R.id.add_url_location);
@@ -308,6 +306,8 @@ public class ShareMyPosition extends Activity implements LocationListener {
                         @Override
                         public void onClick(DialogInterface arg0, int arg1)
                         {
+                            progressText.setText(R.string.progression_desc);
+                            insideMode.setChecked(false);
                             performLocation(false);
                         }
                     })
