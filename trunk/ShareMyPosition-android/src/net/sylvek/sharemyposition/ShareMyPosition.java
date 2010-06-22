@@ -47,6 +47,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
@@ -64,6 +65,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Executors;
 
 public class ShareMyPosition extends Activity implements LocationListener {
@@ -96,7 +98,7 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private Geocoder gc;
 
-    private HttpParams params = new BasicHttpParams();
+    private final HttpParams params = new BasicHttpParams();
 
     private WakeLock lock;
 
@@ -109,6 +111,10 @@ public class ShareMyPosition extends Activity implements LocationListener {
     private WebView sharedMap;
 
     private SharedPreferences pref;
+
+    private String[] tips;
+
+    private final Random random = new Random();
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -124,7 +130,18 @@ public class ShareMyPosition extends Activity implements LocationListener {
         initWakeLock();
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        tips = getResources().getStringArray(R.array.tips);
+
     }
+
+    private void displayTip()
+    {
+        int index = random.nextInt(tips.length);
+        String tip = tips[index];
+        Log.d(LOG, "generate random tips: " + index + "->" + tip);
+        Toast.makeText(ShareMyPosition.this, tip, Toast.LENGTH_LONG).show();
+    };
 
     private void initWakeLock()
     {
@@ -146,10 +163,12 @@ public class ShareMyPosition extends Activity implements LocationListener {
                 Log.d(LOG, "gps selected");
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 5, this);
                 insideMode.setEnabled(containsNetwork);
+                displayTip();
             } else if (containsNetwork) {
                 Log.d(LOG, "network selected");
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 5, this);
                 insideMode.setEnabled(false);
+                displayTip();
             } else {
                 Log.w(LOG, "no provided found (GPS or NETWORK)");
                 finish();
@@ -372,6 +391,8 @@ public class ShareMyPosition extends Activity implements LocationListener {
         this.location = location;
 
         progressText.setText(R.string.location_changed);
+
+        Log.d(LOG, "stopping tips");
 
         showDialog(MAP_DLG);
     }
