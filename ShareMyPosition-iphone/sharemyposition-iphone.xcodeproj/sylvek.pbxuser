@@ -8,9 +8,9 @@
 	};
 	28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {712, 845}}";
+			sepNavIntBoundsRect = "{{0, 0}, {759, 845}}";
 			sepNavSelRange = "{606, 0}";
-			sepNavVisRange = "{0, 726}";
+			sepNavVisRange = "{0, 610}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
@@ -41,7 +41,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					402,
+					581,
 					20,
 					48,
 					43,
@@ -64,7 +64,7 @@
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
 					20,
-					378,
+					557,
 					20,
 					48,
 					43,
@@ -82,11 +82,13 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 299411120;
-			PBXWorkspaceStateSaveDate = 299411120;
+			PBXPerProjectTemplateStateSaveDate = 299429174;
+			PBXWorkspaceStateSaveDate = 299429174;
 		};
 		perUserProjectItems = {
-			E37F2B2F11D8A6B90031DB1C /* PBXTextBookmark */ = E37F2B2F11D8A6B90031DB1C /* PBXTextBookmark */;
+			E37F2B2F11D8A6B90031DB1C = E37F2B2F11D8A6B90031DB1C /* PBXTextBookmark */;
+			E3B791E311D8EDAC006B80A1 /* PBXBookmark */ = E3B791E311D8EDAC006B80A1 /* PBXBookmark */;
+			E3B791E411D8EDAC006B80A1 /* PBXTextBookmark */ = E3B791E411D8EDAC006B80A1 /* PBXTextBookmark */;
 			E3CF2FBB11D8A6A000D07CB0 = E3CF2FBB11D8A6A000D07CB0 /* PBXBookmark */;
 			E3CF2FBC11D8A6A000D07CB0 = E3CF2FBC11D8A6A000D07CB0 /* PBXTextBookmark */;
 		};
@@ -110,6 +112,20 @@
 		rLoc = 606;
 		rType = 0;
 		vrLen = 726;
+		vrLoc = 0;
+	};
+	E3B791E311D8EDAC006B80A1 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+	};
+	E3B791E411D8EDAC006B80A1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 22";
+		rLen = 0;
+		rLoc = 606;
+		rType = 0;
+		vrLen = 610;
 		vrLoc = 0;
 	};
 	E3CF2F8411D885B700D07CB0 /* sharemyposition-iphone */ = {
