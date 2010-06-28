@@ -1,256 +1,0 @@
-Tsharemyposition-iphone
-v7
-r0
-t299403846.287751
-cCheck dependencies
-cProcessInfoPlistFile /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/Info.plist sharemyposition_iphone-Info.plist
-cCompileXIB /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/MainWindow.xib
-cCompileXIB /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/sharemyposition_iphoneViewController.xib
-cProcessPCH /var/folders/Mr/MrFS+eiSHLqD+adIGy25xU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/sharemyposition_iphone_Prefix-bnhgwfubbwwvrkfqdbpvjqawqudo/sharemyposition_iphone_Prefix.pch.gch sharemyposition_iphone_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/main.o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition_iphoneAppDelegate.o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition_iphoneViewController.o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-cLd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone normal i386
-cGenerateDSYMFile /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app.dSYM /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone
-cTouch /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk
-c000000004C28471D0000000000000132
-t1277708061
-s306
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
-c000000004BFDFE39000000000027C7D0
-t1274936889
-s2607056
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004BFDFE7C000000000029D5D0
-t1274936956
-s2741712
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004BFDFE6E0000000000001466
-t1274936942
-s5222
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
-c000000004C0470BB00000000000009CD
-t1275359419
-s2509
-
-N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk/System/Library/Frameworks/UIKit.framework/UIKit
-c000000004C0471620000000001D47210
-t1275359586
-s30700048
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneAppDelegate.h
-c000000004C284E370000000000000237
-t1277709879
-s567
-i<UIKit/UIKit.h>
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneAppDelegate.m
-c000000004C284E370000000000000AD4
-t1277709879
-s2772
-i"sharemyposition_iphoneAppDelegate.h"
-i"sharemyposition_iphoneViewController.h"
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneViewController.h
-c000000004C284E370000000000000119
-t1277709879
-s281
-i<UIKit/UIKit.h>
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneViewController.m
-c000000004C284E3700000000000005F3
-t1277709879
-s1523
-i"sharemyposition_iphoneViewController.h"
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/MainWindow.xib
-c000000004C284E370000000000004EDD
-t1277709879
-s20189
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app
-t1277709894
-s238
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app.dSYM
-t1277709894
-s102
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/Info.plist
-t1277709892
-s657
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/MainWindow.nib
-t1277709893
-s1153
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/PkgInfo
-t1277709892
-s8
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone
-t1277709894
-s17980
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition_iphoneViewController.nib
-t1277709892
-s795
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/main.o
-t1277709893
-s6348
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition-iphone.LinkFileList
-c000000004C284E440000000000000247
-t1277709892
-s583
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition_iphoneAppDelegate.o
-t1277709893
-s48628
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition_iphoneViewController.o
-t1277709893
-s34756
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/main.m
-c000000004C284E370000000000000176
-t1277709879
-s374
-i<UIKit/UIKit.h>
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/sharemyposition_iphoneViewController.xib
-c000000004C284E370000000000001A81
-t1277709879
-s6785
-
-N/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/sharemyposition_iphone_Prefix.pch
-c000000004C284E3700000000000000D5
-t1277709879
-s213
-i<Foundation/Foundation.h>
-i<UIKit/UIKit.h>
-
-N/var/folders/Mr/MrFS+eiSHLqD+adIGy25xU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/sharemyposition_iphone_Prefix-bnhgwfubbwwvrkfqdbpvjqawqudo/sharemyposition_iphone_Prefix.pch.gch
-t1277709893
-s15232016
-
-Nsharemyposition_iphone-Info.plist
-c000000004C284E37000000000000038D
-t1277709879
-s909
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies299403846#299403846#0(0"0(0#1#0"8604245920#0"0#
-
-CCompileC build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/main.o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s299402693.778627
-e299402693.895643
-r1
-xCompileC
-xbuild/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/main.o
-x/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/main.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@75"Compile /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/main.m299402693#299402693#0(0"0(0#0#67"/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/main.m8602804096#2443"    cd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-generated-files.hmap -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-own-target-headers.hmap -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-all-target-headers.hmap -iquote /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-project-headers.hmap -F/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/include -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/DerivedSources/i386 -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/DerivedSources -include /var/folders/Mr/MrFS+eiSHLqD+adIGy25xU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/sharemyposition_iphone_Prefix-bnhgwfubbwwvrkfqdbpvjqawqudo/sharemyposition_iphone_Prefix.pch -c /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/main.m -o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/main.o0#
-
-CCompileC build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition_iphoneAppDelegate.o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s299402693.779506
-e299402693.911394
-r1
-xCompileC
-xbuild/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition_iphoneAppDelegate.o
-x/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneAppDelegate.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@112"Compile /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneAppDelegate.m299402693#299402693#0(0"0(0#0#104"/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneAppDelegate.m8594382464#2509"    cd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-generated-files.hmap -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-own-target-headers.hmap -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-all-target-headers.hmap -iquote /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-project-headers.hmap -F/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/include -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/DerivedSources/i386 -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/DerivedSources -include /var/folders/Mr/MrFS+eiSHLqD+adIGy25xU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/sharemyposition_iphone_Prefix-bnhgwfubbwwvrkfqdbpvjqawqudo/sharemyposition_iphone_Prefix.pch -c /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneAppDelegate.m -o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition_iphoneAppDelegate.o0#
-
-CCompileC build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition_iphoneViewController.o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
-s299402693.895725
-e299402693.947666
-r1
-xCompileC
-xbuild/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition_iphoneViewController.o
-x/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneViewController.m
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@115"Compile /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneViewController.m299402693#299402693#0(0"0(0#0#107"/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneViewController.m8603513440#2515"    cd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-generated-files.hmap -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-own-target-headers.hmap -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-all-target-headers.hmap -iquote /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-project-headers.hmap -F/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/include -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/DerivedSources/i386 -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/DerivedSources -include /var/folders/Mr/MrFS+eiSHLqD+adIGy25xU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/sharemyposition_iphone_Prefix-bnhgwfubbwwvrkfqdbpvjqawqudo/sharemyposition_iphone_Prefix.pch -c /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/Classes/sharemyposition_iphoneViewController.m -o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition_iphoneViewController.o0#
-
-CCompileXIB /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/MainWindow.xib
-s299402692.667769
-e299402693.050896
-r1
-xCompileXIB
-x/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/MainWindow.xib
-lSLF07#2@25"CompileXIB MainWindow.xib299402692#299402693#0(0"0(0#0#75"/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/MainWindow.xib8590403552#651"    cd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.0    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/MainWindow.nib /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/MainWindow.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk0#
-
-CCompileXIB /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/sharemyposition_iphoneViewController.xib
-s299402692.669211
-e299402693.037671
-r1
-xCompileXIB
-x/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/sharemyposition_iphoneViewController.xib
-lSLF07#2@51"CompileXIB sharemyposition_iphoneViewController.xib299402692#299402693#0(0"0(0#0#101"/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/sharemyposition_iphoneViewController.xib8602820512#703"    cd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.0    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition_iphoneViewController.nib /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/sharemyposition_iphoneViewController.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk0#
-
-CGenerateDSYMFile /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app.dSYM /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone
-s299402694.110673
-e299402694.160905
-r1
-xGenerateDSYMFile
-x/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app.dSYM
-x/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone
-lSLF07#2@154"GenerateDSYMFile build/Debug-iphonesimulator/sharemyposition-iphone.app.dSYM build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone299402694#299402694#0(0"0(0#0#138"/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone8602826944#494"    cd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone -o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app.dSYM0#
-
-CLd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone normal i386
-s299402693.947746
-e299402694.110591
-r1
-xLd
-x/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone
-xnormal
-xi386
-lSLF07#2@143"Link /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone299402693#299402694#0(0"0(0#0#0"8603263456#1085"    cd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk -L/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator -F/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator -filelist /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/Objects-normal/i386/sharemyposition-iphone.LinkFileList -mmacosx-version-min=10.6 -Xlinker -objc_abi_version -Xlinker 2 -framework Foundation -framework UIKit -framework CoreGraphics -o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/sharemyposition-iphone0#
-
-CProcessInfoPlistFile /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/Info.plist sharemyposition_iphone-Info.plist
-s299402692.635098
-e299402692.667677
-r1
-xProcessInfoPlistFile
-x/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/Info.plist
-xsharemyposition_iphone-Info.plist
-lSLF07#2@41"Process sharemyposition_iphone-Info.plist299402692#299402692#0(0"0(0#0#94"/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/sharemyposition_iphone-Info.plist31244220637446252#590"    cd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility sharemyposition_iphone-Info.plist -genpkginfo /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app/Info.plist0#
-
-CProcessPCH /var/folders/Mr/MrFS+eiSHLqD+adIGy25xU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/sharemyposition_iphone_Prefix-bnhgwfubbwwvrkfqdbpvjqawqudo/sharemyposition_iphone_Prefix.pch.gch sharemyposition_iphone_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
-s299402693.051017
-e299402693.778545
-r1
-xProcessPCH
-x/var/folders/Mr/MrFS+eiSHLqD+adIGy25xU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/sharemyposition_iphone_Prefix-bnhgwfubbwwvrkfqdbpvjqawqudo/sharemyposition_iphone_Prefix.pch.gch
-xsharemyposition_iphone_Prefix.pch
-xnormal
-xi386
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@44"Precompile sharemyposition_iphone_Prefix.pch299402693#299402693#0(0"0(0#0#94"/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/sharemyposition_iphone_Prefix.pch8601384672#2298"    cd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.0.sdk -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-generated-files.hmap -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-own-target-headers.hmap -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-all-target-headers.hmap -iquote /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/sharemyposition-iphone-project-headers.hmap -F/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/include -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/DerivedSources/i386 -I/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/sharemyposition-iphone.build/Debug-iphonesimulator/sharemyposition-iphone.build/DerivedSources -c /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/sharemyposition_iphone_Prefix.pch -o /var/folders/Mr/MrFS+eiSHLqD+adIGy25xU+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/sharemyposition_iphone_Prefix-bnhgwfubbwwvrkfqdbpvjqawqudo/sharemyposition_iphone_Prefix.pch.gch0#
-
-CTouch /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app
-s299402694.161048
-e299402694.163146
-r1
-xTouch
-x/Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app
-lSLF07#2@121"Touch /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app299402694#299402694#0(0"0(0#0#0"8602593184#337"    cd /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/sylvek/Desktop/sharemyposition/sharemyposition-iphone/build/Debug-iphonesimulator/sharemyposition-iphone.app0#
-
