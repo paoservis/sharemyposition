@@ -1,0 +1,171 @@
+// !$*UTF8*$!
+{
+	1D6058900D05DD3D006BFB54 /* sharemyposition-iphone */ = {
+		activeExec = 0;
+		executables = (
+			E3CF2F8411D885B700D07CB0 /* sharemyposition-iphone */,
+		);
+	};
+	28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {712, 845}}";
+			sepNavSelRange = "{606, 0}";
+			sepNavVisRange = "{0, 726}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = E3CF2F8411D885B700D07CB0 /* sharemyposition-iphone */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* sharemyposition-iphone */;
+		codeSenseManager = E3CF2F9D11D885C600D07CB0 /* Code sense */;
+		executables = (
+			E3CF2F8411D885B700D07CB0 /* sharemyposition-iphone */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					290,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					402,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.XCSCMDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					20,
+					378,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_SCM_ColumnID,
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 299411120;
+			PBXWorkspaceStateSaveDate = 299411120;
+		};
+		perUserProjectItems = {
+			E37F2B2F11D8A6B90031DB1C /* PBXTextBookmark */ = E37F2B2F11D8A6B90031DB1C /* PBXTextBookmark */;
+			E3CF2FBB11D8A6A000D07CB0 = E3CF2FBB11D8A6A000D07CB0 /* PBXBookmark */;
+			E3CF2FBC11D8A6A000D07CB0 = E3CF2FBC11D8A6A000D07CB0 /* PBXTextBookmark */;
+		};
+		sourceControlManager = E3CF2F9C11D885C600D07CB0 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	29B97316FDCFA39411CA2CEA /* main.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {888, 949}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 374}";
+			sepNavWindowFrame = "{{15, 78}, {947, 1100}}";
+		};
+	};
+	E37F2B2F11D8A6B90031DB1C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 22";
+		rLen = 0;
+		rLoc = 606;
+		rType = 0;
+		vrLen = 726;
+		vrLoc = 0;
+	};
+	E3CF2F8411D885B700D07CB0 /* sharemyposition-iphone */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = "sharemyposition-iphone";
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	E3CF2F9C11D885C600D07CB0 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "google sharemyposition";
+			};
+		};
+	};
+	E3CF2F9D11D885C600D07CB0 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	E3CF2FBB11D8A6A000D07CB0 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+	};
+	E3CF2FBC11D8A6A000D07CB0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 22";
+		rLen = 0;
+		rLoc = 606;
+		rType = 0;
+		vrLen = 727;
+		vrLoc = 0;
+	};
+}
