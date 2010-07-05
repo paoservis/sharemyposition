@@ -15,6 +15,8 @@
 		2899E5220DE3E06400AC0155 /* sharemyposition_iphoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* sharemyposition_iphoneViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* sharemyposition_iphoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */; };
+		E3EB1AD111E1FFB000FE66C0 /* ShareMyPositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EB1AD011E1FFB000FE66C0 /* ShareMyPositionView.m */; };
+		E3EB1AE811E2017600FE66C0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3EB1AE711E2017600FE66C0 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* sharemyposition_iphone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sharemyposition_iphone_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* sharemyposition_iphone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "sharemyposition_iphone-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareMyPositionView.h; path = ../ShareMyPositionView.h; sourceTree = "<group>"; };
+		E3EB1AD011E1FFB000FE66C0 /* ShareMyPositionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareMyPositionView.m; path = ../ShareMyPositionView.m; sourceTree = "<group>"; };
+		E3EB1AE711E2017600FE66C0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +46,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				E3EB1AE811E2017600FE66C0 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +56,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */,
+				E3EB1AD011E1FFB000FE66C0 /* ShareMyPositionView.m */,
 				1D3623240D0F684500981E51 /* sharemyposition_iphoneAppDelegate.h */,
 				1D3623250D0F684500981E51 /* sharemyposition_iphoneAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */,
@@ -103,6 +111,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
+				E3EB1AE711E2017600FE66C0 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -164,6 +173,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* sharemyposition_iphoneAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* sharemyposition_iphoneViewController.m in Sources */,
+				E3EB1AD111E1FFB000FE66C0 /* ShareMyPositionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
