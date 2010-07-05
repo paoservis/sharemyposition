@@ -3,7 +3,7 @@
 	1D3623240D0F684500981E51 /* sharemyposition_iphoneAppDelegate.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {695, 310}}";
-			sepNavSelRange = "{256, 33}";
+			sepNavSelRange = "{244, 0}";
 			sepNavVisRange = "{0, 567}";
 		};
 	};
@@ -24,16 +24,16 @@
 	28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {695, 310}}";
-			sepNavSelRange = "{200, 0}";
-			sepNavVisRange = "{0, 281}";
+			sepNavSelRange = "{386, 0}";
+			sepNavVisRange = "{0, 394}";
 			sepNavWindowFrame = "{{15, 74}, {750, 804}}";
 		};
 	};
 	28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {712, 858}}";
-			sepNavSelRange = "{1514, 0}";
-			sepNavVisRange = "{877, 638}";
+			sepNavSelRange = "{1437, 0}";
+			sepNavVisRange = "{1055, 468}";
 			sepNavWindowFrame = "{{15, 74}, {750, 804}}";
 		};
 	};
@@ -107,7 +107,7 @@
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
 					20,
-					378,
+					493,
 					20,
 					48,
 					43,
@@ -195,6 +195,38 @@
 			E3EB1B6611E20D9000FE66C0 /* PBXTextBookmark */ = E3EB1B6611E20D9000FE66C0 /* PBXTextBookmark */;
 			E3EB1B6711E20D9000FE66C0 /* PBXTextBookmark */ = E3EB1B6711E20D9000FE66C0 /* PBXTextBookmark */;
 			E3EB1B6811E20D9000FE66C0 /* PBXTextBookmark */ = E3EB1B6811E20D9000FE66C0 /* PBXTextBookmark */;
+			E3EB1B6B11E20E2600FE66C0 /* PBXTextBookmark */ = E3EB1B6B11E20E2600FE66C0 /* PBXTextBookmark */;
+			E3EB1B6C11E20E2600FE66C0 /* PBXTextBookmark */ = E3EB1B6C11E20E2600FE66C0 /* PBXTextBookmark */;
+			E3EB1B6D11E20E2600FE66C0 /* PBXTextBookmark */ = E3EB1B6D11E20E2600FE66C0 /* PBXTextBookmark */;
+			E3EB1B6E11E20E2600FE66C0 /* PBXTextBookmark */ = E3EB1B6E11E20E2600FE66C0 /* PBXTextBookmark */;
+			E3EB1B7011E20F1E00FE66C0 /* PBXTextBookmark */ = E3EB1B7011E20F1E00FE66C0 /* PBXTextBookmark */;
+			E3EB1B7111E20F1E00FE66C0 /* PBXTextBookmark */ = E3EB1B7111E20F1E00FE66C0 /* PBXTextBookmark */;
+			E3EB1B7211E20FB400FE66C0 /* PBXTextBookmark */ = E3EB1B7211E20FB400FE66C0 /* PBXTextBookmark */;
+			E3EB1B7311E2101100FE66C0 /* PBXTextBookmark */ = E3EB1B7311E2101100FE66C0 /* PBXTextBookmark */;
+			E3EB1B7811E2114800FE66C0 /* PBXBookmark */ = E3EB1B7811E2114800FE66C0 /* PBXBookmark */;
+			E3EB1B7B11E211D800FE66C0 /* PBXTextBookmark */ = E3EB1B7B11E211D800FE66C0 /* PBXTextBookmark */;
+			E3EB1B7C11E211D800FE66C0 /* XCBuildMessageTextBookmark */ = E3EB1B7C11E211D800FE66C0 /* XCBuildMessageTextBookmark */;
+			E3EB1B7D11E211D800FE66C0 /* PBXTextBookmark */ = E3EB1B7D11E211D800FE66C0 /* PBXTextBookmark */;
+			E3EB1B8011E211D800FE66C0 /* PBXTextBookmark */ = E3EB1B8011E211D800FE66C0 /* PBXTextBookmark */;
+			E3EB1B8211E2136000FE66C0 /* PBXBookmark */ = E3EB1B8211E2136000FE66C0 /* PBXBookmark */;
+			E3EB1B8311E2137500FE66C0 /* PBXTextBookmark */ = E3EB1B8311E2137500FE66C0 /* PBXTextBookmark */;
+			E3EB1B8411E2137500FE66C0 /* PBXTextBookmark */ = E3EB1B8411E2137500FE66C0 /* PBXTextBookmark */;
+			E3EB1B8711E2137500FE66C0 /* PBXTextBookmark */ = E3EB1B8711E2137500FE66C0 /* PBXTextBookmark */;
+			E3EB1B8A11E213C500FE66C0 /* PBXTextBookmark */ = E3EB1B8A11E213C500FE66C0 /* PBXTextBookmark */;
+			E3EB1B8B11E213C500FE66C0 /* PBXTextBookmark */ = E3EB1B8B11E213C500FE66C0 /* PBXTextBookmark */;
+			E3EB1B8C11E213C500FE66C0 /* PBXTextBookmark */ = E3EB1B8C11E213C500FE66C0 /* PBXTextBookmark */;
+			E3EB1B8D11E213C500FE66C0 /* PBXTextBookmark */ = E3EB1B8D11E213C500FE66C0 /* PBXTextBookmark */;
+			E3EB1B9111E213F200FE66C0 /* PBXTextBookmark */ = E3EB1B9111E213F200FE66C0 /* PBXTextBookmark */;
+			E3EB1B9211E213F200FE66C0 /* PBXTextBookmark */ = E3EB1B9211E213F200FE66C0 /* PBXTextBookmark */;
+			E3EB1B9311E2145C00FE66C0 /* PBXTextBookmark */ = E3EB1B9311E2145C00FE66C0 /* PBXTextBookmark */;
+			E3EB1B9411E2145C00FE66C0 /* XCBuildMessageTextBookmark */ = E3EB1B9411E2145C00FE66C0 /* XCBuildMessageTextBookmark */;
+			E3EB1B9511E2145C00FE66C0 /* PBXTextBookmark */ = E3EB1B9511E2145C00FE66C0 /* PBXTextBookmark */;
+			E3EB1B9611E2146200FE66C0 /* PBXTextBookmark */ = E3EB1B9611E2146200FE66C0 /* PBXTextBookmark */;
+			E3EB1B9F11E2165600FE66C0 /* PBXTextBookmark */ = E3EB1B9F11E2165600FE66C0 /* PBXTextBookmark */;
+			E3EB1BA011E2167000FE66C0 /* PBXTextBookmark */ = E3EB1BA011E2167000FE66C0 /* PBXTextBookmark */;
+			E3EB1BA111E2167000FE66C0 /* PBXTextBookmark */ = E3EB1BA111E2167000FE66C0 /* PBXTextBookmark */;
+			E3EB1BA211E2167000FE66C0 /* PBXTextBookmark */ = E3EB1BA211E2167000FE66C0 /* PBXTextBookmark */;
+			E3EB1BA311E2167000FE66C0 /* PBXTextBookmark */ = E3EB1BA311E2167000FE66C0 /* PBXTextBookmark */;
 		};
 		sourceControlManager = E3CF2F9C11D885C600D07CB0 /* Source Control */;
 		userBuildSettings = {
@@ -319,17 +351,29 @@
 		indexTemplatePath = "";
 	};
 	E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = ShareMyPositionView.h;
+		path = "/Users/sylvek/Documents/workspace/ShareMyPosition-iphone/ShareMyPositionView.h";
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {695, 310}}";
-			sepNavSelRange = "{344, 0}";
-			sepNavVisRange = "{0, 387}";
+			sepNavSelRange = "{228, 0}";
+			sepNavVisRange = "{0, 275}";
 		};
 	};
 	E3EB1AD011E1FFB000FE66C0 /* ShareMyPositionView.m */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.objc;
+		name = ShareMyPositionView.m;
+		path = "/Users/sylvek/Documents/workspace/ShareMyPosition-iphone/ShareMyPositionView.m";
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {695, 546}}";
 			sepNavSelRange = "{672, 0}";
-			sepNavVisRange = "{0, 509}";
+			sepNavVisRange = "{347, 371}";
 		};
 	};
 	E3EB1AD311E1FFC500FE66C0 /* PBXTextBookmark */ = {
@@ -408,7 +452,7 @@
 		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
 		name = "ShareMyPositionView.h: 13";
 		rLen = 0;
-		rLoc = 340;
+		rLoc = 228;
 		rType = 0;
 		vrLen = 237;
 		vrLoc = 0;
@@ -418,7 +462,7 @@
 		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
 		name = "ShareMyPositionView.h: 13";
 		rLen = 0;
-		rLoc = 340;
+		rLoc = 228;
 		rType = 0;
 		vrLen = 237;
 		vrLoc = 0;
@@ -428,7 +472,7 @@
 		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
 		name = "ShareMyPositionView.h: 16";
 		rLen = 0;
-		rLoc = 339;
+		rLoc = 228;
 		rType = 0;
 		vrLen = 349;
 		vrLoc = 0;
@@ -488,7 +532,7 @@
 		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
 		name = "ShareMyPositionView.h: 16";
 		rLen = 0;
-		rLoc = 339;
+		rLoc = 228;
 		rType = 0;
 		vrLen = 349;
 		vrLoc = 0;
@@ -508,7 +552,7 @@
 		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
 		name = "sharemyposition_iphoneViewController.h: 13";
 		rLen = 0;
-		rLoc = 271;
+		rLoc = 384;
 		rType = 0;
 		vrLen = 318;
 		vrLoc = 0;
@@ -518,7 +562,7 @@
 		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
 		name = "sharemyposition_iphoneViewController.h: 13";
 		rLen = 0;
-		rLoc = 271;
+		rLoc = 384;
 		rType = 0;
 		vrLen = 318;
 		vrLoc = 0;
@@ -549,7 +593,7 @@
 		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
 		fallbackIsa = XCBuildMessageTextBookmark;
 		rLen = 1;
-		rLoc = 18;
+		rLoc = 15;
 		rType = 1;
 	};
 	E3EB1B0411E208B600FE66C0 /* PBXTextBookmark */ = {
@@ -557,7 +601,7 @@
 		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
 		name = "ShareMyPositionView.h: 19";
 		rLen = 0;
-		rLoc = 376;
+		rLoc = 264;
 		rType = 0;
 		vrLen = 390;
 		vrLoc = 0;
@@ -567,7 +611,7 @@
 		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
 		name = "ShareMyPositionView.h: 19";
 		rLen = 0;
-		rLoc = 344;
+		rLoc = 232;
 		rType = 0;
 		vrLen = 322;
 		vrLoc = 59;
@@ -577,7 +621,7 @@
 		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
 		name = "sharemyposition_iphoneViewController.h: 14";
 		rLen = 0;
-		rLoc = 271;
+		rLoc = 384;
 		rType = 0;
 		vrLen = 350;
 		vrLoc = 0;
@@ -674,7 +718,7 @@
 		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
 		name = "ShareMyPositionView.h: 19";
 		rLen = 0;
-		rLoc = 374;
+		rLoc = 262;
 		rType = 0;
 		vrLen = 387;
 		vrLoc = 0;
@@ -694,7 +738,7 @@
 		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
 		name = "sharemyposition_iphoneViewController.h: 12";
 		rLen = 0;
-		rLoc = 271;
+		rLoc = 384;
 		rType = 0;
 		vrLen = 281;
 		vrLoc = 0;
@@ -753,7 +797,7 @@
 		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
 		name = "sharemyposition_iphoneViewController.h: 12";
 		rLen = 0;
-		rLoc = 271;
+		rLoc = 384;
 		rType = 0;
 		vrLen = 281;
 		vrLoc = 0;
@@ -773,7 +817,7 @@
 		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
 		name = "ShareMyPositionView.h: 19";
 		rLen = 0;
-		rLoc = 344;
+		rLoc = 232;
 		rType = 0;
 		vrLen = 387;
 		vrLoc = 0;
@@ -833,7 +877,7 @@
 		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
 		name = "ShareMyPositionView.h: 19";
 		rLen = 0;
-		rLoc = 344;
+		rLoc = 232;
 		rType = 0;
 		vrLen = 387;
 		vrLoc = 0;
@@ -926,5 +970,311 @@
 		rType = 0;
 		vrLen = 638;
 		vrLoc = 877;
+	};
+	E3EB1B6B11E20E2600FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 62";
+		rLen = 0;
+		rLoc = 1514;
+		rType = 0;
+		vrLen = 611;
+		vrLoc = 0;
+	};
+	E3EB1B6C11E20E2600FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E3EB1ACF11E1FFB000FE66C0 /* ShareMyPositionView.h */;
+		name = "ShareMyPositionView.h: 19";
+		rLen = 0;
+		rLoc = 232;
+		rType = 0;
+		vrLen = 387;
+		vrLoc = 0;
+	};
+	E3EB1B6D11E20E2600FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E3EB1AD011E1FFB000FE66C0 /* ShareMyPositionView.m */;
+		name = "ShareMyPositionView.m: 38";
+		rLen = 0;
+		rLoc = 672;
+		rType = 0;
+		vrLen = 371;
+		vrLoc = 347;
+	};
+	E3EB1B6E11E20E2600FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E3EB1AD011E1FFB000FE66C0 /* ShareMyPositionView.m */;
+		name = "ShareMyPositionView.m: 38";
+		rLen = 0;
+		rLoc = 672;
+		rType = 0;
+		vrLen = 371;
+		vrLoc = 347;
+	};
+	E3EB1B7011E20F1E00FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 62";
+		rLen = 0;
+		rLoc = 1514;
+		rType = 0;
+		vrLen = 611;
+		vrLoc = 0;
+	};
+	E3EB1B7111E20F1E00FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
+		name = "sharemyposition_iphoneViewController.h: 15";
+		rLen = 0;
+		rLoc = 384;
+		rType = 0;
+		vrLen = 394;
+		vrLoc = 0;
+	};
+	E3EB1B7211E20FB400FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
+		name = "sharemyposition_iphoneViewController.h: 14";
+		rLen = 0;
+		rLoc = 328;
+		rType = 0;
+		vrLen = 388;
+		vrLoc = 0;
+	};
+	E3EB1B7311E2101100FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
+		name = "sharemyposition_iphoneViewController.h: 14";
+		rLen = 0;
+		rLoc = 339;
+		rType = 0;
+		vrLen = 394;
+		vrLoc = 0;
+	};
+	E3EB1B7811E2114800FE66C0 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+	};
+	E3EB1B7B11E211D800FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
+		name = "sharemyposition_iphoneViewController.h: 18";
+		rLen = 0;
+		rLoc = 386;
+		rType = 0;
+		vrLen = 426;
+		vrLoc = 0;
+	};
+	E3EB1B7C11E211D800FE66C0 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Incomplete implementation of class 'sharemyposition_iphoneViewController'";
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 64;
+		rType = 1;
+	};
+	E3EB1B7D11E211D800FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 66";
+		rLen = 0;
+		rLoc = 1516;
+		rType = 0;
+		vrLen = 389;
+		vrLoc = 1169;
+	};
+	E3EB1B8011E211D800FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 66";
+		rLen = 0;
+		rLoc = 1516;
+		rType = 0;
+		vrLen = 1171;
+		vrLoc = 387;
+	};
+	E3EB1B8211E2136000FE66C0 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
+	};
+	E3EB1B8311E2137500FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 65";
+		rLen = 0;
+		rLoc = 1516;
+		rType = 0;
+		vrLen = 389;
+		vrLoc = 1169;
+	};
+	E3EB1B8411E2137500FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 63";
+		rLen = 0;
+		rLoc = 1516;
+		rType = 0;
+		vrLen = 468;
+		vrLoc = 1055;
+	};
+	E3EB1B8711E2137500FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
+		name = "sharemyposition_iphoneViewController.h: 18";
+		rLen = 0;
+		rLoc = 386;
+		rType = 0;
+		vrLen = 444;
+		vrLoc = 0;
+	};
+	E3EB1B8A11E213C500FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 63";
+		rLen = 0;
+		rLoc = 1516;
+		rType = 0;
+		vrLen = 468;
+		vrLoc = 1055;
+	};
+	E3EB1B8B11E213C500FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* sharemyposition_iphoneAppDelegate.h */;
+		name = "sharemyposition_iphoneAppDelegate.h: 13";
+		rLen = 33;
+		rLoc = 256;
+		rType = 0;
+		vrLen = 567;
+		vrLoc = 0;
+	};
+	E3EB1B8C11E213C500FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* sharemyposition_iphoneAppDelegate.h */;
+		name = "sharemyposition_iphoneAppDelegate.h: 18";
+		rLen = 8;
+		rLoc = 440;
+		rType = 0;
+		vrLen = 567;
+		vrLoc = 0;
+	};
+	E3EB1B8D11E213C500FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
+		name = "sharemyposition_iphoneViewController.h: 20";
+		rLen = 0;
+		rLoc = 386;
+		rType = 0;
+		vrLen = 567;
+		vrLoc = 0;
+	};
+	E3EB1B9111E213F200FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* sharemyposition_iphoneAppDelegate.h */;
+		name = "sharemyposition_iphoneAppDelegate.h: 18";
+		rLen = 8;
+		rLoc = 440;
+		rType = 0;
+		vrLen = 567;
+		vrLoc = 0;
+	};
+	E3EB1B9211E213F200FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
+		name = "sharemyposition_iphoneViewController.h: 16";
+		rLen = 0;
+		rLoc = 386;
+		rType = 0;
+		vrLen = 394;
+		vrLoc = 0;
+	};
+	E3EB1B9311E2145C00FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* sharemyposition_iphoneAppDelegate.m */;
+		name = "sharemyposition_iphoneAppDelegate.m: 89";
+		rLen = 0;
+		rLoc = 2772;
+		rType = 0;
+		vrLen = 993;
+		vrLoc = 371;
+	};
+	E3EB1B9411E2145C00FE66C0 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Property 'locateMe' requires the method 'setLocateMe:' to be defined - use @synthesize, @dynamic or provide a method implementation";
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 64;
+		rType = 1;
+	};
+	E3EB1B9511E2145C00FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 65";
+		rLen = 0;
+		rLoc = 1518;
+		rType = 0;
+		vrLen = 562;
+		vrLoc = 961;
+	};
+	E3EB1B9611E2146200FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* sharemyposition_iphoneAppDelegate.h */;
+		name = "sharemyposition_iphoneAppDelegate.h: 12";
+		rLen = 0;
+		rLoc = 244;
+		rType = 0;
+		vrLen = 567;
+		vrLoc = 0;
+	};
+	E3EB1B9F11E2165600FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 65";
+		rLen = 0;
+		rLoc = 1518;
+		rType = 0;
+		vrLen = 614;
+		vrLoc = 0;
+	};
+	E3EB1BA011E2167000FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* sharemyposition_iphoneAppDelegate.h */;
+		name = "sharemyposition_iphoneAppDelegate.h: 12";
+		rLen = 0;
+		rLoc = 244;
+		rType = 0;
+		vrLen = 567;
+		vrLoc = 0;
+	};
+	E3EB1BA111E2167000FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* sharemyposition_iphoneViewController.h */;
+		name = "sharemyposition_iphoneViewController.h: 16";
+		rLen = 0;
+		rLoc = 386;
+		rType = 0;
+		vrLen = 394;
+		vrLoc = 0;
+	};
+	E3EB1BA211E2167000FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 56";
+		rLen = 0;
+		rLoc = 1437;
+		rType = 0;
+		vrLen = 468;
+		vrLoc = 1055;
+	};
+	E3EB1BA311E2167000FE66C0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* sharemyposition_iphoneViewController.m */;
+		name = "sharemyposition_iphoneViewController.m: 56";
+		rLen = 0;
+		rLoc = 1437;
+		rType = 0;
+		vrLen = 468;
+		vrLoc = 1055;
 	};
 }
