@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyCLController.h"
 
-@interface sharemyposition_iphoneViewController : UIViewController {
-
+@interface sharemyposition_iphoneViewController : UIViewController<MyCLControllerDelegate> {
+	
+	MyCLController *locationController;
+	IBOutlet UIWebView *preview;
+	IBOutlet UIBarButtonItem *locateMe;
+	IBOutlet UIActivityIndicatorView *activity;
 }
+
+- (IBAction)locateMeNow:(id)sender;
+- (void)locationUpdate:(CLLocation*)location;
+- (void)locationError:(NSError*)error;
 
 @end
 
