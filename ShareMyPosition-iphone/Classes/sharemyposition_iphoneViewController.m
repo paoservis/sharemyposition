@@ -29,12 +29,12 @@
 */
 
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+	locationController = [[MyCLController alloc] init];
+	locationController.delegate = self;
     [super viewDidLoad];
 }
-*/
 
 
 /*
@@ -59,7 +59,34 @@
 
 
 - (void)dealloc {
+    [locationController release];
     [super dealloc];
+}
+
+-(IBAction)locateMeNow:(id)sender {
+	NSLog(@"locate me now ...");
+	[activity startAnimating];
+    [locationController.locationManager startUpdatingLocation];
+}
+
+- (void)locationUpdate:(CLLocation*)location {
+	NSLog(@"update location with %@", [location description]);
+	[activity stopAnimating];
+	
+	NSURL *url = [NSURL URLWithString:
+				   [NSString stringWithFormat:@"http://sharemyposition.appspot.com/sharedmap.jsp?pos=%f,%f&size=320x220",
+						location.coordinate.latitude,
+						location.coordinate.longitude
+				   ]
+				  ];
+	NSLog(@"loading url .. %@", url);
+	
+	[preview loadRequest:[NSURLRequest requestWithURL:url]];
+}
+
+- (void)locationError:(NSError*)error {
+	NSLog(@"error %@", [error description]);
+	[activity stopAnimating];
 }
 
 @end
