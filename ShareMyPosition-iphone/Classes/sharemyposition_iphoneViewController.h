@@ -15,6 +15,10 @@
 	IBOutlet UIWebView *preview;
 	IBOutlet UIBarButtonItem *locateMe;
 	IBOutlet UIActivityIndicatorView *activity;
+	IBOutlet UIButton *shareBySMS;
+	IBOutlet UIButton *shareByMAIL;
+	IBOutlet UIButton *shareByGoogleLatitude;
+	IBOutlet UISwitch *geocodeAddressSwitch;
 }
 
 - (IBAction)locateMeNow:(id)sender;
