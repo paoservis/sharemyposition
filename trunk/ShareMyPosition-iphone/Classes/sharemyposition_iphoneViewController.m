@@ -34,6 +34,7 @@
 	locationController = [[MyCLController alloc] init];
 	locationController.delegate = self;
     [super viewDidLoad];
+	[self locateMeNow:self];
 }
 
 
@@ -71,7 +72,6 @@
 
 - (void)locationUpdate:(CLLocation*)location {
 	NSLog(@"update location with %@", [location description]);
-	[activity stopAnimating];
 	
 	NSURL *url = [NSURL URLWithString:
 				   [NSString stringWithFormat:@"http://sharemyposition.appspot.com/sharedmap.jsp?pos=%f,%f&size=320x220",
@@ -82,6 +82,11 @@
 	NSLog(@"loading url .. %@", url);
 	
 	[preview loadRequest:[NSURLRequest requestWithURL:url]];
+	[activity stopAnimating];
+	geocodeAddressSwitch.enabled=YES;
+	shareBySMS.enabled=YES;
+	shareByMAIL.enabled=YES;
+	shareByGoogleLatitude.enabled=YES;
 }
 
 - (void)locationError:(NSError*)error {
