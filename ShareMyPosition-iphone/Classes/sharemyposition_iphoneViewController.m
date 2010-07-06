@@ -113,6 +113,15 @@
 	NSLog(@"treating lastLocation ... %@", [self.lastLocation description]);
 	
 	[self stopRequestLocation];
+	
+	NSString *url = [NSString 
+						stringWithFormat:@"http://sharemyposition.appspot.com/static.jsp?pos=%f,%f",
+						self.lastLocation.coordinate.latitude, 
+						self.lastLocation.coordinate.longitude
+					 ];
+	
+	NSString *shortenedUrl = [self shorteningUrl:url];
+	NSLog(@"shortenedUrl: %@ from %@", shortenedUrl, url);
 }
 
 - (void)stopRequestLocation {
@@ -121,7 +130,7 @@
 }
 
 - (NSString*)shorteningUrl:(NSString*)url {
-	return @"";
+	return url;
 }
 
 @end
