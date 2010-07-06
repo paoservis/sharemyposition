@@ -32,6 +32,7 @@
 - (void)locationUpdate:(CLLocation*)location;
 - (void)locationError:(NSError*)error;
 - (void)stopRequestLocation;
+- (NSString*)shareIt;
 
 @end
 

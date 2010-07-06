@@ -110,18 +110,24 @@
 
 - (IBAction)shareItBySMS:(id)sender {
 	NSLog(@"share by SMS selected");
+	NSString *shareIt = [self shareIt];
+}
+
+- (NSString*)shareIt {
 	NSLog(@"treating lastLocation ... %@", [self.lastLocation description]);
 	
 	[self stopRequestLocation];
 	
 	NSString *url = [NSString 
-						stringWithFormat:@"http://sharemyposition.appspot.com/static.jsp?pos=%f,%f",
-						self.lastLocation.coordinate.latitude, 
-						self.lastLocation.coordinate.longitude
+					 stringWithFormat:@"http://sharemyposition.appspot.com/static.jsp?pos=%f,%f",
+					 self.lastLocation.coordinate.latitude, 
+					 self.lastLocation.coordinate.longitude
 					 ];
 	
 	NSString *shortenedUrl = [self shorteningUrl:url];
 	NSLog(@"shortenedUrl: %@ from %@", shortenedUrl, url);
+	
+	return shortenedUrl;
 }
 
 - (void)stopRequestLocation {
