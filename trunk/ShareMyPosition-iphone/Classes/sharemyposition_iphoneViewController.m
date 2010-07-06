@@ -11,6 +11,7 @@
 @implementation sharemyposition_iphoneViewController
 
 
+@synthesize lastLocation;
 
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -61,6 +62,7 @@
 
 - (void)dealloc {
     [locationController release];
+	[lastLocation release];
     [super dealloc];
 }
 
@@ -73,6 +75,21 @@
 - (void)locationUpdate:(CLLocation*)location {
 	NSLog(@"update location with %@", [location description]);
 	
+	[activity stopAnimating];
+	
+	NSTimeInterval locationAge = -[location.timestamp timeIntervalSinceNow];
+    if (locationAge > 5.0) {
+		NSLog(@"you will not want to rely on cached measurements");
+		return;
+	}
+	
+	if (lastLocation == nil || lastLocation.horizontalAccuracy > location.horizontalAccuracy) {
+		self.lastLocation = location;
+	} else {
+		NSLog(@"nothing to do because lastLocation is more accurate.");
+		return;
+	}
+	
 	NSURL *url = [NSURL URLWithString:
 				   [NSString stringWithFormat:@"http://sharemyposition.appspot.com/sharedmap.jsp?pos=%f,%f&size=320x220",
 						location.coordinate.latitude,
@@ -82,16 +99,29 @@
 	NSLog(@"loading url .. %@", url);
 	
 	[preview loadRequest:[NSURLRequest requestWithURL:url]];
-	[activity stopAnimating];
 	geocodeAddressSwitch.enabled=YES;
 	shareBySMS.enabled=YES;
-	shareByMAIL.enabled=YES;
-	shareByGoogleLatitude.enabled=YES;
 }
 
 - (void)locationError:(NSError*)error {
 	NSLog(@"error %@", [error description]);
 	[activity stopAnimating];
+}
+
+- (IBAction)shareItBySMS:(id)sender {
+	NSLog(@"share by SMS selected");
+	NSLog(@"treating lastLocation ... %@", [self.lastLocation description]);
+	
+	[self stopRequestLocation];
+}
+
+- (void)stopRequestLocation {
+	NSLog(@"stopping request location");
+    [locationController.locationManager stopUpdatingLocation];
+}
+
+- (NSString*)shorteningUrl:(NSString*)url {
+	return @"";
 }
 
 @end
