@@ -29,6 +29,7 @@
 - (IBAction)locateMeNow:(id)sender;
 - (IBAction)shareItBySMS:(id)sender;
 - (NSString*)shorteningUrl:(NSString*)url;
+- (NSString*)gettingAddress;
 - (void)locationUpdate:(CLLocation*)location;
 - (void)locationError:(NSError*)error;
 - (void)stopRequestLocation;
