@@ -111,6 +111,7 @@
 - (IBAction)shareItBySMS:(id)sender {
 	NSLog(@"share by SMS selected");
 	NSString *shareIt = [self shareIt];
+	NSLog(@"result:%@", shareIt);
 }
 
 - (NSString*)shareIt {
@@ -122,12 +123,17 @@
 					 stringWithFormat:@"http://sharemyposition.appspot.com/static.jsp?pos=%f,%f",
 					 self.lastLocation.coordinate.latitude, 
 					 self.lastLocation.coordinate.longitude
-					 ];
+					];
 	
 	NSString *shortenedUrl = [self shorteningUrl:url];
-	NSLog(@"shortenedUrl: %@ from %@", shortenedUrl, url);
+	NSString *address;
 	
-	return shortenedUrl;
+	if ([geocodeAddressSwitch isOn]) {
+		address = [self gettingAddress];
+	}
+	
+	return [NSString stringWithFormat:@"I am currently here, %@ %@",
+			address, shortenedUrl];
 }
 
 - (void)stopRequestLocation {
@@ -135,8 +141,34 @@
     [locationController.locationManager stopUpdatingLocation];
 }
 
+- (NSString*)gettingAddress {
+	return @"toto";
+}
+
 - (NSString*)shorteningUrl:(NSString*)url {
-	return url;
+
+	NSURLRequest *theRequest=[NSURLRequest requestWithURL:
+							  [NSURL
+								URLWithString:
+									[NSString 
+									 stringWithFormat:@"http://sharemyposition.appspot.com/service/create?url=%@",
+									 url
+									]
+							  ]
+							 ];
+	
+	NSURLResponse *response;
+	NSError *error;
+	NSData *data = [NSURLConnection 
+						sendSynchronousRequest:theRequest
+						returningResponse:&response 
+						error:&error
+					];
+	
+	NSLog(@"request:%@", theRequest);
+	//TODO: gestion des erreurs
+	return [[NSString alloc] initWithBytes:[data bytes]
+							  length:[data length] encoding: NSUTF8StringEncoding];
 }
 
 @end
