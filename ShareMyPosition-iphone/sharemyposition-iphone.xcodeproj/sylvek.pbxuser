@@ -168,6 +168,9 @@
 			E345429811E541C300110A83 /* PBXTextBookmark */ = E345429811E541C300110A83 /* PBXTextBookmark */;
 			E345429A11E5A89700110A83 /* PBXTextBookmark */ = E345429A11E5A89700110A83 /* PBXTextBookmark */;
 			E345429B11E5A89700110A83 /* PBXTextBookmark */ = E345429B11E5A89700110A83 /* PBXTextBookmark */;
+			E345429C11E5A8A500110A83 /* PBXTextBookmark */ = E345429C11E5A8A500110A83 /* PBXTextBookmark */;
+			E34542A111E711D700110A83 /* PBXTextBookmark */ = E34542A111E711D700110A83 /* PBXTextBookmark */;
+			E34542A211E711D700110A83 /* PBXTextBookmark */ = E34542A211E711D700110A83 /* PBXTextBookmark */;
 			E3CE704811E2806900FBF2A2 = E3CE704811E2806900FBF2A2 /* PBXTextBookmark */;
 			E3CE704911E2806900FBF2A2 = E3CE704911E2806900FBF2A2 /* PBXTextBookmark */;
 			E3CE705911E2814C00FBF2A2 = E3CE705911E2814C00FBF2A2 /* PBXTextBookmark */;
@@ -559,13 +562,14 @@
 	};
 	E345429511E541C300110A83 /* sylvek.pbxuser */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = text;
 		name = sylvek.pbxuser;
 		path = "/Users/sylvek/Desktop/sharemyposition/ShareMyPosition-iphone/sharemyposition-iphone.xcodeproj/sylvek.pbxuser";
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {713, 9854}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{21865, 741}";
+			sepNavIntBoundsRect = "{{0, 0}, {713, 10309}}";
+			sepNavSelRange = "{25593, 0}";
+			sepNavVisRange = "{22652, 816}";
 		};
 	};
 	E345429611E541C300110A83 /* PBXTextBookmark */ = {
@@ -580,6 +584,7 @@
 	};
 	E345429711E541C300110A83 /* project.pbxproj */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = text.pbxproject;
 		name = project.pbxproj;
 		path = "/Users/sylvek/Desktop/sharemyposition/ShareMyPosition-iphone/sharemyposition-iphone.xcodeproj/project.pbxproj";
 		sourceTree = "<absolute>";
@@ -613,6 +618,36 @@
 		rType = 0;
 		vrLen = 741;
 		vrLoc = 21865;
+	};
+	E345429C11E5A8A500110A83 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E345429511E541C300110A83 /* sylvek.pbxuser */;
+		name = "sylvek.pbxuser: 769";
+		rLen = 0;
+		rLoc = 25218;
+		rType = 0;
+		vrLen = 837;
+		vrLoc = 22200;
+	};
+	E34542A111E711D700110A83 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E345429511E541C300110A83 /* sylvek.pbxuser */;
+		name = "sylvek.pbxuser: 781";
+		rLen = 0;
+		rLoc = 25593;
+		rType = 0;
+		vrLen = 816;
+		vrLoc = 22652;
+	};
+	E34542A211E711D700110A83 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = E345429511E541C300110A83 /* sylvek.pbxuser */;
+		name = "sylvek.pbxuser: 781";
+		rLen = 0;
+		rLoc = 25593;
+		rType = 0;
+		vrLen = 816;
+		vrLoc = 22652;
 	};
 	E3CE701911E2419100FBF2A2 /* MyCLController.h */ = {
 		uiCtxt = {
