@@ -130,6 +130,8 @@
 	
 	if ([geocodeAddressSwitch isOn]) {
 		address = [self gettingAddress];
+	} else {
+		address = @"";
 	}
 	
 	return [NSString stringWithFormat:@"I am currently here, %@ %@",
@@ -142,6 +144,7 @@
 }
 
 - (NSString*)gettingAddress {
+	//TODO: ici la detection de l'adresse
 	return @"toto";
 }
 
