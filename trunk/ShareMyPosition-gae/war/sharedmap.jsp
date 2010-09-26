@@ -11,7 +11,7 @@
 	final String size = request.getParameter("size");
 %>
 <div style="margin: 0; padding: 0; overflow: hidden"><img
-	src="http://maps.google.com/staticmap?markers=<%=pos%>,blue&amp;zoom=15&amp;mobile=true&amp;size=<%=size%>&amp;maptype=roadmap&amp;mobile=true&amp;key=ABQIAAAAAEcqvI14a3gJGb3vVQgfdxQX01MF0MrseK3w-nIw2auEB9UHhBSSWixmPtdizdy6aL9TvAbmLmtuzw&amp;sensor=true"
+	src="http://maps.google.com/maps/api/staticmap?markers=color:blue|label:A|<%=pos%>&zoom=15&mobile=true&size=<%=size%>&maptype=roadmap&sensor=true"
 	alt="i am here" /></div>
 </body>
 </html>
