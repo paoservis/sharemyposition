@@ -32,16 +32,20 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -70,7 +74,7 @@ import java.util.concurrent.Executors;
 
 public class ShareMyPosition extends Activity implements LocationListener {
 
-    private static final String VERSION = "1.0.9";
+    private static final String VERSION = "1.0.11";
 
     private static final String LOG = "ShareMyPosition";
 
@@ -88,6 +92,8 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private final static int MAP_DLG = PROGRESS_DLG + 1;
 
+    private static final String PREF_LAT_LON_CHECKED = "net.sylvek.sharemyposition.pref.latlon.checked";
+
     private static final String PREF_ADDRESS_CHECKED = "net.sylvek.sharemyposition.pref.address.checked";
 
     private static final String PREF_URL_CHECKED = "net.sylvek.sharemyposition.pref.url.checked";
@@ -95,6 +101,10 @@ public class ShareMyPosition extends Activity implements LocationListener {
     private static final String PREF_BODY_DEFAULT = "net.sylvek.sharemyposition.pref.body.default";
 
     private LocationManager locationManager;
+
+    private ConnectivityManager connectivityManager;
+
+    private TelephonyManager telephonyManager;
 
     private Geocoder gc;
 
@@ -127,12 +137,28 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
         initWakeLock();
 
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         tips = getResources().getStringArray(R.array.tips);
 
+    }
+
+    private boolean isConnected()
+    {
+        if (telephonyManager == null || connectivityManager == null) {
+            return false;
+        }
+
+        final boolean roaming = telephonyManager.isNetworkRoaming();
+        final NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+
+        return info != null && info.isConnected() && !roaming;
     }
 
     private void displayTip()
@@ -210,9 +236,12 @@ public class ShareMyPosition extends Activity implements LocationListener {
             super.onPrepareDialog(id, dialog);
             break;
         case MAP_DLG:
+            final CheckBox geocodeAddress = (CheckBox) dialog.findViewById(R.id.add_address_location);
+            geocodeAddress.setEnabled(isConnected());
+
             final View optionsLayout = (View) dialog.findViewById(R.id.custom_layout);
             /* to catch dismiss event from AlertControler, we need to "override" onClickListener */
-            Button neutral = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
+            final Button neutral = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
             neutral.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -229,6 +258,7 @@ public class ShareMyPosition extends Activity implements LocationListener {
                 final StringBuilder pos = new StringBuilder().append(location.getLatitude()).append(",").append(
                         location.getLongitude()).append("&size=300x185");
                 Log.d("preview.url", pos.toString());
+                sharedMap.setVisibility(View.VISIBLE);
                 sharedMap.loadUrl(SHARED_WEP_MAP + pos.toString());
             } else {
                 Log.w("preview.url", "location is null");
@@ -246,12 +276,21 @@ public class ShareMyPosition extends Activity implements LocationListener {
         case MAP_DLG:
             final View sharedMapView = LayoutInflater.from(this).inflate(R.layout.sharedmap, null);
             this.sharedMap = (WebView) sharedMapView.findViewById(R.id.sharedmap_webview);
-            sharedMap.setVerticalScrollbarOverlay(false);
+            this.sharedMap.setVerticalScrollbarOverlay(false);
+            this.sharedMap.setWebViewClient(new WebViewClient() {
+                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl)
+                {
+                    ShareMyPosition.this.sharedMap.setVisibility(View.GONE);
+                    Toast.makeText(ShareMyPosition.this, getString(R.string.unable_to_display_map), Toast.LENGTH_LONG).show();
+                }
+            });
 
+            final CheckBox latlonAddress = (CheckBox) sharedMapView.findViewById(R.id.add_lat_lon_location);
             final CheckBox geocodeAddress = (CheckBox) sharedMapView.findViewById(R.id.add_address_location);
             final CheckBox urlShortening = (CheckBox) sharedMapView.findViewById(R.id.add_url_location);
             final EditText body = (EditText) sharedMapView.findViewById(R.id.body);
 
+            latlonAddress.setChecked(pref.getBoolean(PREF_LAT_LON_CHECKED, true));
             geocodeAddress.setChecked(pref.getBoolean(PREF_ADDRESS_CHECKED, true));
             urlShortening.setChecked(pref.getBoolean(PREF_URL_CHECKED, true));
             body.setText(pref.getString(PREF_BODY_DEFAULT, getString(R.string.body)));
@@ -276,11 +315,13 @@ public class ShareMyPosition extends Activity implements LocationListener {
                 @Override
                 public void onClick(DialogInterface arg0, int arg1)
                 {
+                    final boolean isLatLong = ((CheckBox) sharedMapView.findViewById(R.id.add_lat_lon_location)).isChecked();
                     final boolean isGeocodeAddress = ((CheckBox) sharedMapView.findViewById(R.id.add_address_location)).isChecked();
                     final boolean isUrlShortening = ((CheckBox) sharedMapView.findViewById(R.id.add_url_location)).isChecked();
                     final EditText body = (EditText) sharedMapView.findViewById(R.id.body);
 
                     pref.edit()
+                            .putBoolean(PREF_LAT_LON_CHECKED, isLatLong)
                             .putBoolean(PREF_ADDRESS_CHECKED, isGeocodeAddress)
                             .putBoolean(PREF_URL_CHECKED, isUrlShortening)
                             .putString(PREF_BODY_DEFAULT, body.getText().toString())
@@ -291,8 +332,9 @@ public class ShareMyPosition extends Activity implements LocationListener {
                         @Override
                         public void run()
                         {
+                            final boolean isConnected = isConnected();
                             final StringBuilder msg = new StringBuilder(body.getText().toString());
-                            if (isGeocodeAddress) {
+                            if (isGeocodeAddress && isConnected) {
                                 final String address = getAddress(location);
                                 if (!address.equals("")) {
                                     if (msg.length() > 0) {
@@ -305,7 +347,13 @@ public class ShareMyPosition extends Activity implements LocationListener {
                                 if (msg.length() > 0) {
                                     msg.append(", ");
                                 }
-                                msg.append(getLocationUrl(location));
+                                msg.append(getLocationUrl(isConnected, location));
+                            }
+                            if (isLatLong) {
+                                if (msg.length() > 0) {
+                                    msg.append(", ");
+                                }
+                                msg.append(getLatLong(location));
                             }
                             Intent t = new Intent(Intent.ACTION_SEND);
                             t.setType("text/plain");
@@ -397,15 +445,16 @@ public class ShareMyPosition extends Activity implements LocationListener {
         showDialog(MAP_DLG);
     }
 
-    public String getLocationUrl(Location location)
+    public String getLocationUrl(boolean isConnected, Location location)
     {
         String url = getCurrentStaticLocationUrl(location);
-        try {
-            url = getTinyLink(url);
-        } catch (Exception e) {
-            Log.e(LOG, "tinyLink don't work: " + url);
+        if (isConnected) {
+            try {
+                url = getTinyLink(url);
+            } catch (Exception e) {
+                Log.e(LOG, "tinyLink don't work: " + url);
+            }
         }
-
         return url;
     }
 
@@ -420,8 +469,13 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     public String getAddress(Location location)
     {
-        Double latitude = location.getLatitude();
-        Double longitude = location.getLongitude();
+        if (location == null) {
+            Log.w(LOG, "location is null, very strange.");
+            return "";
+        }
+
+        final Double latitude = location.getLatitude();
+        final Double longitude = location.getLongitude();
 
         List<Address> address = null;
         try {
@@ -447,6 +501,17 @@ public class ShareMyPosition extends Activity implements LocationListener {
         }
 
         return b.toString();
+    }
+
+    public String getLatLong(Location location)
+    {
+        if (location == null) {
+            Log.w(LOG, "location is null, very strange.");
+            return "";
+        }
+
+        return "(pos=" + location.getLatitude() + "," + location.getLongitude() + ";altitude=" + location.getAltitude()
+                + "m;speed=" + (location.getSpeed() * 3.6) + "km/h;accuracy=" + location.getAccuracy() + "m)";
     }
 
     public String getTinyLink(String url) throws ClientProtocolException, IOException, JSONException
@@ -476,6 +541,6 @@ public class ShareMyPosition extends Activity implements LocationListener {
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras)
     {
-        performLocation(false);
+        // do nothing here
     }
 }

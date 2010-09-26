@@ -15,8 +15,10 @@
 	<string name="retry">localiser</string>
 	<string name="add_geocoded_location">ajouter l\'adresse géocodée</string>
 	<string name="add_urllink_location">ajouter l\'URL raccourcie de la carte</string>
+	<string name="add_lat_lon_location">ajouter la latitude et longitude</string>
 	<string name="exit">quitter</string>
 	<string name="options">options</string>
+	<string name="unable_to_display_map">impossible d\'afficher la carte. Vérifier votre connexion data.</string>
 	<string-array name="tips">
 		<item>astuce: utiliser le mode intérieur pour acquerir votre position plus facilement</item>
 		<item>astuce: vous pouvez configurer vos informations à partager en selectionnant "options"</item>

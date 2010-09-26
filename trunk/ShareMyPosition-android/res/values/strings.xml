@@ -15,8 +15,10 @@
 	<string name="retry">retry</string>
 	<string name="add_geocoded_location">add the geocoded address</string>
 	<string name="add_urllink_location">add the shortened\'s map URL</string>
+	<string name="add_lat_lon_location">add the latitude and longitude</string>
 	<string name="exit">exit</string>
 	<string name="options">options</string>
+	<string name="unable_to_display_map">unable to display a map, watch your data connection.</string>
 	<string-array name="tips">
 		<item>tip: use the mode indoor to acquire your position more easily</item>
 		<item>tip: you can configure your data to share by selecting "options"</item>
