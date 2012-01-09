@@ -78,7 +78,7 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     public static final String LOG = "ShareMyPosition";
 
-    private static final String VERSION = "1.1.0";
+    private static final String VERSION = "1.1.0-beta1";
 
     private static final String HOST = "http://sharemyposition.appspot.com/";
 
@@ -128,8 +128,6 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private final Random random = new Random();
 
-    private Intent extra;
-
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -150,9 +148,6 @@ public class ShareMyPosition extends Activity implements LocationListener {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         tips = getResources().getStringArray(R.array.tips);
-
-        extra = getIntent().getParcelableExtra(EXTRA_INTENT);
-
     }
 
     private boolean isConnected()
@@ -436,20 +431,28 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
         Log.d(LOG, "stopping tips");
 
+        final Intent extra = getIntent().getParcelableExtra(EXTRA_INTENT);
         if (extra != null) {
-            Intent b = getIntent();
-            boolean isGeocodeAddress = b.getBooleanExtra(ShareMyPosition.PREF_ADDRESS_CHECKED, true);
-            boolean isLatLong = b.getBooleanExtra(ShareMyPosition.PREF_LAT_LON_CHECKED, true);
-            boolean isUrlShortening = b.getBooleanExtra(ShareMyPosition.PREF_URL_CHECKED, true);
-            String body = b.getStringExtra(ShareMyPosition.PREF_BODY_DEFAULT);
-            String msg = getMessage(body, isGeocodeAddress, isUrlShortening, isLatLong);
+            Executors.newCachedThreadPool().execute(new Runnable() {
 
-            extra.addCategory(Intent.CATEGORY_DEFAULT);
-            extra.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject));
-            extra.putExtra(Intent.EXTRA_TEXT, msg);
-            extra.putExtra("sms_body", msg);
-            startActivity(extra);
-            finish();
+                @Override
+                public void run()
+                {
+                    Intent b = getIntent();
+                    boolean isGeocodeAddress = b.getBooleanExtra(ShareMyPosition.PREF_ADDRESS_CHECKED, true);
+                    boolean isLatLong = b.getBooleanExtra(ShareMyPosition.PREF_LAT_LON_CHECKED, true);
+                    boolean isUrlShortening = b.getBooleanExtra(ShareMyPosition.PREF_URL_CHECKED, true);
+                    String body = b.getStringExtra(ShareMyPosition.PREF_BODY_DEFAULT);
+                    String msg = getMessage(body, isGeocodeAddress, isUrlShortening, isLatLong);
+
+                    extra.addCategory(Intent.CATEGORY_DEFAULT);
+                    extra.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject));
+                    extra.putExtra(Intent.EXTRA_TEXT, msg);
+                    extra.putExtra("sms_body", msg);
+                    startActivity(extra);
+                    finish();
+                }
+            });
         } else {
             showDialog(MAP_DLG);
         }
