@@ -28,6 +28,12 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
+import org.mapsforge.android.maps.GeoPoint;
+import org.mapsforge.android.maps.MapActivity;
+import org.mapsforge.android.maps.MapView;
+import org.mapsforge.android.maps.MapViewMode;
+import org.mapsforge.android.maps.Overlay;
+import org.mapsforge.android.maps.Projection;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -35,7 +41,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -44,6 +49,11 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -61,32 +71,31 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class ShareMyPosition extends Activity implements LocationListener {
+public class ShareMyPosition extends MapActivity implements LocationListener {
 
     public static final String EXTRA_INTENT = "extra_intent";
 
     public static final String LOG = "ShareMyPosition";
 
-    private static final String VERSION = "1.1.0-beta1";
+    private static final String VERSION = "1.1.0-beta3";
+
+    private static final int ZOOM_LEVEL = 16;
 
     private static final String HOST = "http://sharemyposition.appspot.com/";
 
     private static final String SHORTY_URI = HOST + "service/create?url=";
 
     private static final String STATIC_WEB_MAP = HOST + "static.jsp";
-
-    private static final String SHARED_WEP_MAP = HOST + "sharedmap.jsp?pos=";
 
     private final static int PROVIDERS_DLG = Menu.FIRST;
 
@@ -120,7 +129,7 @@ public class ShareMyPosition extends Activity implements LocationListener {
 
     private Location location;
 
-    private WebView sharedMap;
+    private MapView sharedMap;
 
     private SharedPreferences pref;
 
@@ -148,6 +157,13 @@ public class ShareMyPosition extends Activity implements LocationListener {
         pref = PreferenceManager.getDefaultSharedPreferences(this);
 
         tips = getResources().getStringArray(R.array.tips);
+
+        sharedMap = new MapView(ShareMyPosition.this, MapViewMode.MAPNIK_TILE_DOWNLOAD);
+        sharedMap.setClickable(true);
+        sharedMap.setAlwaysDrawnWithCacheEnabled(true);
+        sharedMap.setFocusable(true);
+        sharedMap.getOverlays().add(new CenterOverlay(sharedMap));
+
     }
 
     private boolean isConnected()
@@ -237,10 +253,8 @@ public class ShareMyPosition extends Activity implements LocationListener {
             super.onPrepareDialog(id, dialog);
             break;
         case MAP_DLG:
-            final CheckBox geocodeAddress = (CheckBox) dialog.findViewById(R.id.add_address_location);
-            geocodeAddress.setEnabled(isConnected());
-
             final View optionsLayout = (View) dialog.findViewById(R.id.custom_layout);
+            final FrameLayout map = (FrameLayout) dialog.findViewById(R.id.sharedmap);
             /* to catch dismiss event from AlertControler, we need to "override" onClickListener */
             final Button neutral = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
             neutral.setOnClickListener(new View.OnClickListener() {
@@ -250,22 +264,28 @@ public class ShareMyPosition extends Activity implements LocationListener {
                 {
                     if (optionsLayout.getVisibility() == View.GONE) {
                         optionsLayout.setVisibility(View.VISIBLE);
+                        map.setVisibility(View.GONE);
+                        neutral.setText(R.string.hide);
                     } else {
                         optionsLayout.setVisibility(View.GONE);
+                        map.setVisibility(View.VISIBLE);
+                        neutral.setText(R.string.options);
                     }
                 }
             });
             if (location != null) {
-                final StringBuilder pos = new StringBuilder().append(location.getLatitude())
-                        .append(",")
-                        .append(location.getLongitude())
-                        .append("&size=300x185");
-                Log.d("preview.url", pos.toString());
-                sharedMap.setVisibility(View.VISIBLE);
-                sharedMap.loadUrl(SHARED_WEP_MAP + pos.toString());
-            } else {
-                Log.w("preview.url", "location is null");
+                sharedMap.getController().setZoom(ZOOM_LEVEL);
+                sharedMap.getController().setCenter(new GeoPoint(location.getLatitude(), location.getLongitude()));
             }
+
+            if (!isConnected()) {
+                final CheckBox geocodeAddress = (CheckBox) dialog.findViewById(R.id.add_address_location);
+                geocodeAddress.setEnabled(false);
+                neutral.setEnabled(false);
+                map.setVisibility(View.GONE);
+                optionsLayout.setVisibility(View.VISIBLE);
+            }
+
             break;
         }
     }
@@ -278,16 +298,8 @@ public class ShareMyPosition extends Activity implements LocationListener {
             return super.onCreateDialog(id);
         case MAP_DLG:
             final View sharedMapView = LayoutInflater.from(this).inflate(R.layout.sharedmap, null);
-            this.sharedMap = (WebView) sharedMapView.findViewById(R.id.sharedmap_webview);
-            this.sharedMap.setVerticalScrollbarOverlay(false);
-            this.sharedMap.setWebViewClient(new WebViewClient() {
-                public void onReceivedError(WebView view, int errorCode, String description, String failingUrl)
-                {
-                    ShareMyPosition.this.sharedMap.setVisibility(View.GONE);
-                    Toast.makeText(ShareMyPosition.this, getString(R.string.unable_to_display_map), Toast.LENGTH_LONG).show();
-                }
-            });
-
+            final FrameLayout map = (FrameLayout) sharedMapView.findViewById(R.id.sharedmap);
+            map.addView(this.sharedMap);
             final CheckBox latlonAddress = (CheckBox) sharedMapView.findViewById(R.id.add_lat_lon_location);
             final CheckBox geocodeAddress = (CheckBox) sharedMapView.findViewById(R.id.add_address_location);
             final CheckBox urlShortening = (CheckBox) sharedMapView.findViewById(R.id.add_url_location);
@@ -338,8 +350,11 @@ public class ShareMyPosition extends Activity implements LocationListener {
                                 @Override
                                 public void run()
                                 {
+                                    GeoPoint p = sharedMap.getMapCenter();
                                     String b = body.getText().toString();
-                                    String msg = getMessage(b, isLatLong, isGeocodeAddress, isUrlShortening);
+                                    double lat = p.getLatitude();
+                                    double lon = p.getLongitude();
+                                    String msg = getMessage(lat, lon, b, isLatLong, isGeocodeAddress, isUrlShortening);
                                     Intent t = new Intent(Intent.ACTION_SEND);
                                     t.setType("text/plain");
                                     t.addCategory(Intent.CATEGORY_DEFAULT);
@@ -443,7 +458,8 @@ public class ShareMyPosition extends Activity implements LocationListener {
                     boolean isLatLong = b.getBooleanExtra(ShareMyPosition.PREF_LAT_LON_CHECKED, true);
                     boolean isUrlShortening = b.getBooleanExtra(ShareMyPosition.PREF_URL_CHECKED, true);
                     String body = b.getStringExtra(ShareMyPosition.PREF_BODY_DEFAULT);
-                    String msg = getMessage(body, isGeocodeAddress, isUrlShortening, isLatLong);
+                    String msg = getMessage(location.getLatitude(), location.getLongitude(), body, isGeocodeAddress,
+                            isUrlShortening, isLatLong);
 
                     extra.addCategory(Intent.CATEGORY_DEFAULT);
                     extra.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject));
@@ -458,12 +474,13 @@ public class ShareMyPosition extends Activity implements LocationListener {
         }
     }
 
-    private String getMessage(String body, boolean isGeocodeAddress, boolean isUrlShortening, boolean isLatLong)
+    private String getMessage(double latitude, double longitude, String body, boolean isGeocodeAddress, boolean isUrlShortening,
+            boolean isLatLong)
     {
         final boolean isConnected = isConnected();
         final StringBuilder msg = new StringBuilder(body);
         if (isGeocodeAddress && isConnected) {
-            final String address = getAddress(location);
+            final String address = getAddress(latitude, longitude);
             if (!address.equals("")) {
                 if (msg.length() > 0) {
                     msg.append(", ");
@@ -475,21 +492,21 @@ public class ShareMyPosition extends Activity implements LocationListener {
             if (msg.length() > 0) {
                 msg.append(", ");
             }
-            msg.append(getLocationUrl(isConnected, location));
+            msg.append(getLocationUrl(isConnected, latitude, longitude));
         }
         if (isLatLong) {
             if (msg.length() > 0) {
                 msg.append(", ");
             }
-            msg.append(getLatLong(location));
+            msg.append(getLatLong(latitude, longitude));
         }
 
         return msg.toString();
     }
 
-    public String getLocationUrl(boolean isConnected, Location location)
+    public String getLocationUrl(boolean isConnected, double latitude, double longitude)
     {
-        String url = getCurrentStaticLocationUrl(location);
+        String url = getCurrentStaticLocationUrl(latitude, longitude);
         if (isConnected) {
             try {
                 url = getTinyLink(url);
@@ -500,25 +517,14 @@ public class ShareMyPosition extends Activity implements LocationListener {
         return url;
     }
 
-    public String getCurrentStaticLocationUrl(Location location)
+    public String getCurrentStaticLocationUrl(double latitude, double longitude)
     {
-        Double latitude = location.getLatitude();
-        Double longitude = location.getLongitude();
-
         StringBuilder uri = new StringBuilder(STATIC_WEB_MAP).append("?pos=").append(latitude).append(",").append(longitude);
         return uri.toString();
     }
 
-    public String getAddress(Location location)
+    public String getAddress(double latitude, double longitude)
     {
-        if (location == null) {
-            Log.w(LOG, "location is null, very strange.");
-            return "";
-        }
-
-        final Double latitude = location.getLatitude();
-        final Double longitude = location.getLongitude();
-
         List<Address> address = null;
         try {
             address = gc.getFromLocation(latitude, longitude, 1);
@@ -545,15 +551,9 @@ public class ShareMyPosition extends Activity implements LocationListener {
         return b.toString();
     }
 
-    public String getLatLong(Location location)
+    public String getLatLong(double latitude, double longitude)
     {
-        if (location == null) {
-            Log.w(LOG, "location is null, very strange.");
-            return "";
-        }
-
-        return "(pos=" + location.getLatitude() + "," + location.getLongitude() + ";altitude=" + location.getAltitude()
-                + "m;speed=" + (location.getSpeed() * 3.6) + "km/h;accuracy=" + location.getAccuracy() + "m)";
+        return "(pos=" + latitude + "," + longitude + ")";
     }
 
     public String getTinyLink(String url) throws ClientProtocolException, IOException, JSONException
@@ -585,4 +585,48 @@ public class ShareMyPosition extends Activity implements LocationListener {
     {
         // do nothing here
     }
+
+    public class CenterOverlay extends Overlay {
+
+        private final MapView map;
+
+        private Bitmap pin;
+
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG) {
+            {
+                this.setAlpha(255);
+                this.setStyle(android.graphics.Paint.Style.FILL_AND_STROKE);
+            }
+        };
+
+        private Point out;
+
+        /**
+         * @param fillPaint
+         * @param outlinePaint
+         */
+        public CenterOverlay(MapView map)
+        {
+            super();
+            this.map = map;
+
+            BitmapDrawable b = (BitmapDrawable) getResources().getDrawable(R.drawable.pin);
+            this.pin = b.getBitmap();
+        }
+
+        @Override
+        protected void drawOverlayBitmap(Canvas canvas, Point drawPosition, Projection projection, byte drawZoomLevel)
+        {
+            if (map != null) {
+                final GeoPoint in = map.getMapCenter();
+                if (in != null) {
+                    out = projection.toPoint(in, out, drawZoomLevel);
+                    float x = out.x - drawPosition.x - pin.getWidth() / 2;
+                    float y = out.y - drawPosition.y - pin.getHeight();
+                    canvas.drawBitmap(pin, x, y, paint);
+                }
+            }
+        }
+    }
+
 }
