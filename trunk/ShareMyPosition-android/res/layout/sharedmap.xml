@@ -9,9 +9,9 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <WebView
-            android:id="@+id/sharedmap_webview"
-            android:layout_width="fill_parent"
+        <FrameLayout
+            android:id="@+id/sharedmap"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <ScrollView

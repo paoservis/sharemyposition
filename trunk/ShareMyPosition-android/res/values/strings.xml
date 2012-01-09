@@ -19,6 +19,7 @@
 	<string name="add_lat_lon_location">add the latitude and longitude</string>
 	<string name="exit">exit</string>
 	<string name="options">options</string>
+	<string name="hide">hide</string>
 	<string name="unable_to_display_map">unable to display a map, watch your data connection.</string>
 	<string name="save">save and add this widget</string>
 	<string name="select_contact">select a contact</string>
