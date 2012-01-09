@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:debuggable="false"
     package="net.sylvek.sharemyposition"
-    android:versionCode="17"
-    android:versionName="1.1.0-beta" >
+    android:versionCode="18"
+    android:versionName="1.1.0-beta1" >
 
     <application
         android:icon="@drawable/icon"
