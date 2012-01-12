@@ -87,7 +87,7 @@ public class ShareMyPosition extends MapActivity implements LocationListener {
 
     public static final String LOG = "ShareMyPosition";
 
-    private static final String VERSION = "1.1.0-beta3";
+    private static final String VERSION = "1.1.0-beta4";
 
     private static final int ZOOM_LEVEL = 16;
 
