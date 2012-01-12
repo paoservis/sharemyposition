@@ -354,7 +354,7 @@ public class ShareMyPosition extends MapActivity implements LocationListener {
                                     String b = body.getText().toString();
                                     double lat = p.getLatitude();
                                     double lon = p.getLongitude();
-                                    String msg = getMessage(lat, lon, b, isLatLong, isGeocodeAddress, isUrlShortening);
+                                    String msg = getMessage(lat, lon, b, isGeocodeAddress, isUrlShortening, isLatLong);
                                     Intent t = new Intent(Intent.ACTION_SEND);
                                     t.setType("text/plain");
                                     t.addCategory(Intent.CATEGORY_DEFAULT);
