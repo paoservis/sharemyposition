@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/icon" />
 
     <TextView
@@ -16,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="nobody with someone"
+        android:text="@string/nobody"
         android:textColor="@android:color/white" />
 
 </LinearLayout>

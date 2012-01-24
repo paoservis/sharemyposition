@@ -1,83 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:padding="6dip" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/configuration"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selectHandler"
+            android:text="@string/select_contact" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical" >
 
-            <TextView
+            <EditText
+                android:id="@+id/body"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/configuration"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:inputType="text"
+                android:text="@string/body" />
 
-            <Button
-                android:layout_width="fill_parent"
+            <CheckBox
+                android:id="@+id/add_lat_lon_location"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="selectHandler"
-                android:text="@string/select_contact" />
+                android:checked="true"
+                android:gravity="center"
+                android:text="@string/add_lat_lon_location" />
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical" >
-
-                <EditText
-                    android:id="@+id/body"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/body" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
                 <CheckBox
-                    android:id="@+id/add_lat_lon_location"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/add_address_location"
+                    android:layout_width="0px"
                     android:layout_height="wrap_content"
+                    android:layout_weight="50"
                     android:checked="true"
                     android:gravity="center"
-                    android:text="@string/add_lat_lon_location" />
+                    android:text="@string/add_geocoded_location" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <CheckBox
+                    android:id="@+id/add_url_location"
+                    android:layout_width="0px"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <CheckBox
-                        android:id="@+id/add_address_location"
-                        android:layout_width="0px"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:text="@string/add_geocoded_location" />
-
-                    <CheckBox
-                        android:id="@+id/add_url_location"
-                        android:layout_width="0px"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:text="@string/add_urllink_location" />
-                </LinearLayout>
+                    android:layout_weight="50"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/add_urllink_location" />
             </LinearLayout>
-
-            <Button
-                android:id="@+id/save"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:onClick="saveHandler"
-                android:text="@string/save" />
         </LinearLayout>
-    </ScrollView>
 
-</FrameLayout>
+        <Button
+            android:id="@+id/save"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:onClick="saveHandler"
+            android:text="@string/save" />
+    </LinearLayout>
+
+</ScrollView>

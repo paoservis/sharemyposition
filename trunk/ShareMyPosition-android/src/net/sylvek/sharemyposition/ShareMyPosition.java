@@ -87,7 +87,7 @@ public class ShareMyPosition extends MapActivity implements LocationListener {
 
     public static final String LOG = "ShareMyPosition";
 
-    private static final String VERSION = "1.1.0";
+    private static final String VERSION = "1.1.1";
 
     private static final int ZOOM_LEVEL = 17;
 
@@ -237,7 +237,7 @@ public class ShareMyPosition extends MapActivity implements LocationListener {
 
     private boolean providerAvailable(List<String> providers)
     {
-        if (providers.isEmpty()) {
+        if (!providers.contains(LocationManager.GPS_PROVIDER) && !providers.contains(LocationManager.NETWORK_PROVIDER)) {
             showDialog(PROVIDERS_DLG);
             return false;
         }
