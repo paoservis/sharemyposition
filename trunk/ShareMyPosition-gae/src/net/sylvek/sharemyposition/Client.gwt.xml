@@ -4,7 +4,6 @@
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 	<inherits name="com.google.code.gwt.geolocation.Html5Geolocation" />
 	<inherits name="com.google.gwt.maps.GoogleMaps" />
-	<inherits name="com.capsula.gwt.reversegeocoder.ReverseGeocoder" />
 	<entry-point class='net.sylvek.sharemyposition.client.Client' />
 	<source path='client' />
 </module>

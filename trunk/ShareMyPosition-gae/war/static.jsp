@@ -1,3 +1,5 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.lang.Boolean"%>
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,6 +12,21 @@
 <link rel="shortcut icon" href="icon.png">
 <link type="text/css" rel="stylesheet" href="client.css">
 <title>share my position</title>
+<%
+    String pos = request.getParameter("pos");
+	String isTracked = request.getParameter("tracked");
+	String uuid = request.getParameter("uuid");
+	
+	if(Boolean.parseBoolean(isTracked)) {
+	    Map<String, String> map = (Map<String, String>)request.getSession().getServletContext().getAttribute("map");
+	    if(map != null && map.containsKey(uuid)) {
+	        pos = map.get(uuid);
+	    }
+	}
+%>
+<% if (Boolean.parseBoolean(isTracked)) { %>
+	<meta http-equiv="refresh" content="10">
+<% } %>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -52,17 +69,14 @@ window.googleAfmcRequest = {
 <!--</script>-->
 <!--<script type="text/javascript" src="http://mm.admob.com/static/iphone/iadmob.js"></script>-->
 <div class="title"><span>share my position</span><br />
-<button onclick="window.location='index.html'" class="button">click
-here to share your own position</button>
+<button onclick="window.location='index.html'" class="button">click here to share your own position</button>
+<br />
+<a href="http://maps.google.com/maps?geocode=&q=<%=pos%>">
+	<img src="http://maps.google.com/maps/api/staticmap?markers=color:blue|label:A|<%=pos%>&zoom=15&mobile=true&size=320x240&maptype=roadmap&sensor=true" alt="i am here" />
+	<br />
+	click on the map to open Google Map
+</a>
 </div>
-<%
-    String pos = request.getParameter("pos");
-%>
-<center><a
-	href="http://maps.google.com/maps?geocode=&q=<%=pos%>"> <img
-	src="http://maps.google.com/maps/api/staticmap?markers=color:blue|label:A|<%=pos%>&zoom=15&mobile=true&size=320x240&maptype=roadmap&sensor=true"
-	alt="i am here" /> <br />
-click on the map to open Google Map</a></center>
 </body>
 </html>
 

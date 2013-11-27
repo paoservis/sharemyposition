@@ -53,6 +53,8 @@ public class ShareByWidget extends AppWidgetProvider {
     public static final String PREF_ADDRESS = ".address";
 
     public static final String PREF_URL = ".url";
+    
+    public static final String PREF_TRACK = ".track";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
@@ -76,22 +78,23 @@ public class ShareByWidget extends AppWidgetProvider {
                     .remove(prefix + PREF_BODY)
                     .remove(prefix + PREF_LATLON)
                     .remove(prefix + PREF_ADDRESS)
-                    .remove(prefix + PREF_URL);
+                    .remove(prefix + PREF_URL)
+                    .remove(prefix + PREF_TRACK);
         }
         editor.commit();
     }
 
     public static final void update(Context context, SharedPreferences pref, AppWidgetManager appWidgetManager, int appWidgetId)
     {
-        String prefix = context.getString(R.string.with) + " ";
         String item = pref.getString(PREF_PREFIX + appWidgetId + PREF_ITEM, "");
         String name = pref.getString(PREF_PREFIX + appWidgetId + PREF_NAME, item);
         String body = pref.getString(PREF_PREFIX + appWidgetId + PREF_BODY, "");
         boolean address = pref.getBoolean(PREF_PREFIX + appWidgetId + PREF_ADDRESS, false);
         boolean latlon = pref.getBoolean(PREF_PREFIX + appWidgetId + PREF_LATLON, false);
         boolean url = pref.getBoolean(PREF_PREFIX + appWidgetId + PREF_URL, false);
+        boolean track = pref.getBoolean(PREF_PREFIX + appWidgetId + PREF_TRACK, false);
 
-        Log.d(ShareMyPosition.LOG, "adding -> [" + appWidgetId + "," + item + "," + prefix + name + "]");
+        Log.d(ShareMyPosition.LOG, "adding -> [" + appWidgetId + "," + item + "," + name + "]");
 
         item = (item.contains("@")) ? "mailto:" + item : "smsto:" + item;
 
@@ -101,8 +104,9 @@ public class ShareByWidget extends AppWidgetProvider {
         launch.putExtra(ShareMyPosition.PREF_LAT_LON_CHECKED, latlon);
         launch.putExtra(ShareMyPosition.PREF_URL_CHECKED, url);
         launch.putExtra(ShareMyPosition.PREF_BODY_DEFAULT, body);
+        launch.putExtra(ShareMyPosition.PREF_TRACK_CHECKED, track);
 
-        views.setTextViewText(R.id.name, prefix + name);
+        views.setTextViewText(R.id.name, name);
         views.setOnClickPendingIntent(R.id.picture,
                 PendingIntent.getActivity(context, appWidgetId, launch, PendingIntent.FLAG_UPDATE_CURRENT));
 
