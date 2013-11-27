@@ -18,9 +18,6 @@
  */
 package net.sylvek.sharemyposition.client;
 
-import com.capsula.gwt.reversegeocoder.client.ExtendedPlacemark;
-import com.capsula.gwt.reversegeocoder.client.ReverseGeocoder;
-import com.capsula.gwt.reversegeocoder.client.ReverseGeocoderCallback;
 import com.google.code.gwt.geolocation.client.Coordinates;
 import com.google.code.gwt.geolocation.client.Geolocation;
 import com.google.code.gwt.geolocation.client.Position;
@@ -30,14 +27,8 @@ import com.google.code.gwt.geolocation.client.PositionOptions;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -77,9 +68,8 @@ public class Client implements EntryPoint {
 
         if (!Geolocation.isSupported()) {
             RootPanel.get("error")
-                    .add(
-                            new Label(
-                                    "Geolocation API is not supported. You need to use a iPhone, Android Phone or Firefox browser (> 3.5)."));
+                    .add(new Label(
+                            "Geolocation API is not supported. You need to use a iPhone, Android Phone or Firefox browser (> 3.5)."));
         }
 
     }
@@ -116,55 +106,7 @@ public class Client implements EntryPoint {
 
                 final LatLng point = LatLng.newInstance(c.getLatitude(), c.getLongitude());
                 final String url = URL_STATIC + "?pos=" + point.toUrlValue();
-                ReverseGeocoder.reverseGeocode(point, new ReverseGeocoderCallback() {
-
-                    @Override
-                    public void onFailure(LatLng point)
-                    {
-                        getShortyUrl(url, new RequestCallback() {
-                            public void onError(Request request, Throwable exception)
-                            {
-                                addLinks(url, "");
-                            }
-
-                            public void onResponseReceived(Request request, Response response)
-                            {
-                                if (200 == response.getStatusCode()) {
-                                    addLinks(response.getText(), "");
-                                }
-
-                                if (500 == response.getStatusCode()) {
-                                    addLinks(url, "");
-                                    RootPanel.get("error").add(new Label("an error occured during the shortening of the url."));
-                                }
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onSuccess(final ExtendedPlacemark placemark)
-                    {
-                        getShortyUrl(url, new RequestCallback() {
-                            public void onError(Request request, Throwable exception)
-                            {
-                                addLinks(url, placemark.getAddress());
-                            }
-
-                            public void onResponseReceived(Request request, Response response)
-                            {
-                                if (200 == response.getStatusCode()) {
-                                    addLinks(response.getText(), placemark.getAddress());
-                                }
-
-                                if (500 == response.getStatusCode()) {
-                                    addLinks(url, placemark.getAddress());
-                                    RootPanel.get("error").add(new Label("an error occured during the shortening of the url."));
-                                }
-                            }
-                        });
-                    }
-
-                });
+                addLinks(url, "");
             }
         }, PositionOptions.getPositionOptions(true /* GPS if possible */, 60000 /* timeout 1min */, 0 /* new position */));
     }
@@ -174,23 +116,10 @@ public class Client implements EntryPoint {
         location.setVisible(false);
 
         RootPanel.get("links")
-                .add(
-                        new HTML("<a class='tinylink' href='" + "mailto:?subject=my%20current%20position&body=i%20am%20here,%20"
-                                + url + " " + URL.encode(address)
-                                + "'>share my position by mail</a><br/>or copy this link and send it by sms"));
+                .add(new HTML("<a class='tinylink' href='" + "mailto:?subject=my%20current%20position&body=i%20am%20here,%20"
+                        + url + " " + URL.encode(address)
+                        + "'>share my position by mail</a><br/>or copy this link and send it by sms"));
 
         RootPanel.get("tinyurl").add(new HTML("<a class='tinylink' href='" + url + "'>" + url + "</a>"));
     }
-
-    private void getShortyUrl(String url, RequestCallback requestCallback)
-    {
-        String query = URL_CREATE + "?url=" + url;
-        RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, URL.encode(query));
-        try {
-            builder.sendRequest(null, requestCallback);
-        } catch (RequestException e) {
-            Window.alert(e.getMessage());
-        }
-    }
-
 }

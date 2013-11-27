@@ -2,27 +2,30 @@
 <resources>
 
     <string name="nobody">personne</string>
-    <string name="app_name">partager ma position</string>
-    <string name="with">avec</string>
+    <string name="app_name">Ma position</string>
     <string name="providers_needed">aucun des moyens permettant de trouver votre
 		position semble être activé.\n\nSouhaitez-vous en activer un ?
 		\n\nDans le cas contraire, vous ne pourrez partager votre position.</string>
-    <string name="progression_desc">acquisition de la position</string>
+    <string name="progression_desc">traitement en cours …</string>
     <string name="subject">ma position actuelle</string>
     <string name="body">Je suis à cet endroit</string>
-    <string name="inside_mode">je suis à l\'extérieur</string>
-    <string name="outside_mode">je suis à l\'intérieur</string>
+    <string name="inside_mode">je suis à l\'extérieur d\'un batiment</string>
+    <string name="outside_mode">je suis à l\'intérieur d\'un batiment</string>
     <string name="location_changed">traitement …</string>
     <string name="share_it">partager</string>
     <string name="retry">localiser</string>
     <string name="add_geocoded_location">ajouter l\'adresse géocodée</string>
     <string name="add_urllink_location">ajouter l\'URL raccourcie de la carte</string>
     <string name="add_lat_lon_location">ajouter la latitude et longitude</string>
+    <string name="add_track_location">suivre ma position</string>
+    <string name="track_location_notification">le suivi de position est activé</string>
+    <string name="track_stop_it">arrêter</string>
     <string name="options">options</string>
     <string name="hide">masquer</string>
     <string name="save">sauver et ajouter ce widget</string>
     <string name="select_contact">sélectionner un contact</string>
     <string name="configuration">Sélectionner un contact, ainsi qu\'un texte de présentation qui s\'affichera avant la position</string>
+    <string name="no_play_service">Play Service est nécessaire</string>
 
     <string-array name="tips">
         <item>astuce: utiliser le mode intérieur pour acquerir votre position plus facilement</item>

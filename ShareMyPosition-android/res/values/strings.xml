@@ -2,12 +2,11 @@
 <resources>
 
     <string name="nobody">nobody with someone</string>
-    <string name="app_name">share my position</string>
-    <string name="with">with</string>
+    <string name="app_name">My position</string>
     <string name="providers_needed">no way to know your position seems to be
 		activated.\n\nWould you start one?
 		\n\nOtherwise, you can not share your position.</string>
-    <string name="progression_desc">acquiring the current position</string>
+    <string name="progression_desc">processing …</string>
     <string name="subject">my current position</string>
     <string name="body">i am here</string>
     <string name="inside_mode">I am outdoor</string>
@@ -18,11 +17,15 @@
     <string name="add_geocoded_location">add the geocoded address</string>
     <string name="add_urllink_location">add the shortened\'s map URL</string>
     <string name="add_lat_lon_location">add the latitude and longitude</string>
+    <string name="add_track_location">track my position</string>
+    <string name="track_location_notification">tracking is enable</string>
+    <string name="track_stop_it">stop</string>
     <string name="options">options</string>
     <string name="hide">hide</string>
     <string name="save">save and add this widget</string>
     <string name="select_contact">select a contact</string>
     <string name="configuration">Select a contact, and a sentence that will be displayed before the position</string>
+    <string name="no_play_service">Play Service is needed</string>
 
     <string-array name="tips">
         <item>tip: use the mode indoor to acquire your position more easily</item>

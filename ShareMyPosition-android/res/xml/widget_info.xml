@@ -2,6 +2,6 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:configure="net.sylvek.sharemyposition.ShareByWidgetConfigure"
     android:initialLayout="@layout/widget"
-    android:minHeight="72dp"
-    android:minWidth="72dp"
+    android:minHeight="40dp"
+    android:minWidth="40dp"
     android:updatePeriodMillis="0" />

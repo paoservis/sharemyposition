@@ -35,8 +35,11 @@ import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 /**
  * @author sylvek
@@ -75,6 +78,25 @@ public class ShareByWidgetConfigure extends Activity {
             displayName = icicle.getString("name");
             item = icicle.getString("item");
         }
+        
+        final CheckBox latlon = (CheckBox) findViewById(R.id.add_lat_lon_location);
+        final CheckBox address = (CheckBox) findViewById(R.id.add_address_location);
+        final CheckBox url = (CheckBox) findViewById(R.id.add_url_location);
+        final ToggleButton track = (ToggleButton) findViewById(R.id.add_track_location);
+
+        track.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                latlon.setEnabled(!isChecked);
+                latlon.setChecked(!isChecked);
+                address.setEnabled(!isChecked);
+                address.setChecked(!isChecked);
+                url.setEnabled(!isChecked);
+                url.setChecked(true);
+            }
+        });
     }
 
     @Override
@@ -168,10 +190,11 @@ public class ShareByWidgetConfigure extends Activity {
     public void saveHandler(View view)
     {
         String prefix = ShareByWidget.PREF_PREFIX + mAppWidgetId;
-        TextView body = (TextView) findViewById(R.id.body);
-        CheckBox latlon = (CheckBox) findViewById(R.id.add_lat_lon_location);
-        CheckBox address = (CheckBox) findViewById(R.id.add_address_location);
-        CheckBox url = (CheckBox) findViewById(R.id.add_url_location);
+        final TextView body = (TextView) findViewById(R.id.body);
+        final CheckBox latlon = (CheckBox) findViewById(R.id.add_lat_lon_location);
+        final CheckBox address = (CheckBox) findViewById(R.id.add_address_location);
+        final CheckBox url = (CheckBox) findViewById(R.id.add_url_location);
+        final ToggleButton track = (ToggleButton) findViewById(R.id.add_track_location);
 
         // store date to preferences
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -182,6 +205,7 @@ public class ShareByWidgetConfigure extends Activity {
                 .putBoolean(prefix + ShareByWidget.PREF_LATLON, latlon.isChecked())
                 .putBoolean(prefix + ShareByWidget.PREF_ADDRESS, address.isChecked())
                 .putBoolean(prefix + ShareByWidget.PREF_URL, url.isChecked())
+                .putBoolean(prefix + ShareByWidget.PREF_TRACK, track.isChecked())
                 .commit();
 
         ShareByWidget.update(this, pref, AppWidgetManager.getInstance(this), mAppWidgetId);
