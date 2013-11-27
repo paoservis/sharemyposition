@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <ToggleButton
+        android:id="@+id/add_track_location"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textOff="@string/add_track_location"
+        android:textOn="@string/add_track_location" />
+
+    <EditText
+        android:id="@+id/body"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textNoSuggestions"
+        android:text="@string/body" />
+
+    <CheckBox
+        android:id="@+id/add_lat_lon_location"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/add_lat_lon_location" />
+
+    <CheckBox
+        android:id="@+id/add_address_location"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/add_geocoded_location" />
+
+    <CheckBox
+        android:id="@+id/add_url_location"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:checked="true"
+        android:text="@string/add_urllink_location" />
+
+</LinearLayout>
