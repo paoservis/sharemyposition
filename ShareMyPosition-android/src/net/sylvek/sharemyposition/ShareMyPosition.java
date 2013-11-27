@@ -94,7 +94,7 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
 
     public static final String LOG = "ShareMyPosition";
 
-    public static final String VERSION = "1.2.0";
+    public static final String VERSION = "1.2.2";
 
     private static final int ZOOM_LEVEL = 17;
 
