@@ -94,7 +94,7 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
 
     public static final String LOG = "ShareMyPosition";
 
-    public static final String VERSION = "1.2.2";
+    public static final String VERSION = "1.2.3";
 
     private static final int ZOOM_LEVEL = 17;
 
@@ -570,15 +570,19 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
         t.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject));
         t.putExtra(Intent.EXTRA_TEXT, msg);
         t.putExtra("sms_body", msg);
-        
+
         final Intent shareIntent = Intent.createChooser(t, getString(R.string.app_name));
         shareIntent.addCategory(Intent.CATEGORY_DEFAULT);
-        
+
+        final boolean isJellyBeanOrGreater = Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN;
+
         final PendingIntent delete = PendingIntent.getBroadcast(context, 0, deleteIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         final PendingIntent share = PendingIntent.getActivity(context, 0, shareIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(R.drawable.notification)
                 .setContentTitle(getString(R.string.app_name))
-                .setOngoing(true)
+                .setOngoing(isJellyBeanOrGreater)
+                .setAutoCancel(!isJellyBeanOrGreater)
+                .setDeleteIntent(delete)
                 .addAction(android.R.drawable.ic_menu_share, getString(R.string.share_it), share)
                 .addAction(android.R.drawable.ic_menu_close_clear_cancel, getString(R.string.track_stop_it), delete)
                 .setContentText(getString(R.string.track_location_notification));
