@@ -30,45 +30,28 @@
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-817536-13']);
+  _gaq.push(['_setAccount', 'UA-46087713-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
 </script>
 </head>
 <body onload="window.scrollTo(0, 1)">
-<script type="text/javascript">
-window.googleAfmcRequest = {
-  client: 'ca-mb-pub-7256263753683362',
-  ad_type: 'text_image',
-  output: 'html',
-  channel: '',
-  format: '320x50_mb',
-  oe: 'utf8',
-  color_border: '336699',
-  color_bg: 'FFFFFF',
-  color_link: '0000FF',
-  color_text: '000000',
-  color_url: '008000',
-};
-//</script>
-<script type="text/javascript"
-	src="http://pagead2.googlesyndication.com/pagead/show_afmc_ads.js"></script>
-<!--<script type="text/javascript">-->
-<!--var admob_vars = {-->
-<!-- pubid: 'a14b53a13a8079d', // publisher id-->
-<!-- bgcolor: '356FA8', // background color (hex)-->
-<!-- text: 'FFFFFF', // font-color (hex)-->
-<!-- test: false // test mode, set to false if non-test mode-->
-<!--};-->
-<!--</script>-->
-<!--<script type="text/javascript" src="http://mm.admob.com/static/iphone/iadmob.js"></script>-->
-<div class="title"><span>share my position</span><br />
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7256263753683362";
+/* ma position */
+google_ad_slot = "6102448287";
+google_ad_width = 320;
+google_ad_height = 50;
+//-->
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+<div class="title"><span>My position</span><br />
 <button onclick="window.location='index.html'" class="button">click here to share your own position</button>
 <br />
 <a href="http://maps.google.com/maps?geocode=&q=<%=pos%>">

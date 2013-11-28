@@ -51,7 +51,7 @@ public class Client implements EntryPoint {
     {
         location = new Button();
         location.setEnabled(true);
-        location.setText("click here to find my location");
+        location.setText("click here to find my position");
         location.setStylePrimaryName("button");
         location.setEnabled(Geolocation.isSupported());
         location.addClickHandler(new ClickHandler() {
