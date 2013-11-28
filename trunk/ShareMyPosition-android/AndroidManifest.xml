@@ -29,7 +29,6 @@
 
         <activity
             android:name=".ShareMyPosition"
-            android:configChanges="orientation|keyboard|keyboardHidden"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@style/Translucent" >
@@ -62,6 +61,7 @@
 
         <service android:name=".ShareByTracking" />
         <service android:name=".ShareByTracking$ServiceHandler" />
+
         <receiver android:name=".ShareByTracking$StopService" />
     </application>
 
