@@ -16,11 +16,16 @@
     String pos = request.getParameter("pos");
 	String isTracked = request.getParameter("tracked");
 	String uuid = request.getParameter("uuid");
+	long lastTime = 0L;
 	
 	if(Boolean.parseBoolean(isTracked)) {
 	    Map<String, String> map = (Map<String, String>)request.getSession().getServletContext().getAttribute("map");
+	    Map<String, Long> uptime = (Map<String, Long>) request.getSession().getServletContext().getAttribute("uptime");
 	    if(map != null && map.containsKey(uuid)) {
 	        pos = map.get(uuid);
+	    }
+	    if(uptime != null && uptime.containsKey(uuid)) {
+	        lastTime = (System.currentTimeMillis() - uptime.get(uuid)) / 1000L;
 	    }
 	}
 %>
@@ -57,9 +62,28 @@ google_ad_height = 50;
 <a href="http://maps.google.com/maps?geocode=&q=<%=pos%>">
 	<img src="http://maps.google.com/maps/api/staticmap?markers=color:blue|label:A|<%=pos%>&zoom=15&mobile=true&size=320x240&maptype=roadmap&sensor=true" alt="i am here" />
 	<br />
-	click on the map to open Google Map
+	<span>click on the map to open Google Map</span>
 </a>
+<% if (Boolean.parseBoolean(isTracked)) { %>
+	<br />
+    <span>refresh every 10 seconds</span>
+    <br />
+    <span>(last update from <%=lastTime %> seconds)</span>
+<% } %>
 </div>
+<!-- Placez cette balise où vous souhaitez faire apparaître le gadget Bouton +1. -->
+<div class="g-plusone" data-annotation="inline" data-width="300"></div>
+
+<!-- Placez cette ballise après la dernière balise Bouton +1. -->
+<script type="text/javascript">
+  window.___gcfg = {lang: 'fr'};
+
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
 </body>
 </html>
 
