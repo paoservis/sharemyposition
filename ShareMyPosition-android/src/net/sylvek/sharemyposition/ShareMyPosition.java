@@ -90,11 +90,13 @@ import android.widget.ToggleButton;
 public class ShareMyPosition extends MapActivity implements GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener, LocationListener {
 
+    private static final boolean IS_JELLY_BEAN_OR_GREATER = Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN;
+
     public static final String EXTRA_INTENT = "extra_intent";
 
     public static final String LOG = "ShareMyPosition";
 
-    public static final String VERSION = "1.2.4";
+    public static final String VERSION = "1.2.5";
 
     private static final int ZOOM_LEVEL = 17;
 
@@ -443,10 +445,10 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                     startTracking(uuid, msg);
                 }
 
-                extra.addCategory(Intent.CATEGORY_DEFAULT);
-                extra.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject));
-                extra.putExtra(Intent.EXTRA_TEXT, msg);
-                extra.putExtra("sms_body", msg);
+                extra.addCategory(Intent.CATEGORY_DEFAULT)
+                        .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject))
+                        .putExtra(Intent.EXTRA_TEXT, msg)
+                        .putExtra("sms_body", msg);
                 startActivity((toLaunch != null) ? toLaunch : extra);
                 finish();
             }
@@ -560,32 +562,31 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
     private void startTracking(final String uuid, final String msg)
     {
         final Context context = getApplicationContext();
-        ShareByTracking.startService(context, uuid);
 
-        final Intent deleteIntent = new Intent(context, ShareByTracking.StopService.class);
+        // start the tracker
+        sendBroadcast(new Intent(context, ShareByTracking.StartTracking.class).putExtra(ShareByTracking.UUID, uuid));
 
-        final Intent t = new Intent(Intent.ACTION_SEND);
-        t.setType("text/plain");
-        t.addCategory(Intent.CATEGORY_DEFAULT);
-        t.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject));
-        t.putExtra(Intent.EXTRA_TEXT, msg);
-        t.putExtra("sms_body", msg);
-
-        final Intent shareIntent = Intent.createChooser(t, getString(R.string.app_name));
-        shareIntent.addCategory(Intent.CATEGORY_DEFAULT);
-
-        final boolean isJellyBeanOrGreater = Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN;
-
+        // generate delete action
+        final Intent deleteIntent = new Intent(context, ShareByTracking.StopTracking.class);
+        final Intent t = new Intent(Intent.ACTION_SEND).setType("text/plain")
+                .addCategory(Intent.CATEGORY_DEFAULT)
+                .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject))
+                .putExtra(Intent.EXTRA_TEXT, msg)
+                .putExtra("sms_body", msg);
         final PendingIntent delete = PendingIntent.getBroadcast(context, 0, deleteIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // generate share action
+        final Intent shareIntent = Intent.createChooser(t, getString(R.string.app_name)).addCategory(Intent.CATEGORY_DEFAULT);
         final PendingIntent share = PendingIntent.getActivity(context, 0, shareIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // show notification
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context).setSmallIcon(R.drawable.notification)
                 .setContentTitle(getString(R.string.app_name))
-                .setOngoing(isJellyBeanOrGreater)
+                .setOngoing(IS_JELLY_BEAN_OR_GREATER)
                 .setDeleteIntent(delete)
                 .addAction(android.R.drawable.ic_menu_share, getString(R.string.share_it), share)
                 .addAction(android.R.drawable.ic_menu_close_clear_cancel, getString(R.string.track_stop_it), delete)
                 .setContentText(getString(R.string.track_location_notification));
-
         final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(R.string.app_name, mBuilder.build());
     }
@@ -648,11 +649,11 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
     @Override
     public void onConnected(Bundle bundle)
     {
-        Log.d(LOG, "onConnected");
-        final LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setNumUpdates(1);
+        final LocationRequest locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setNumUpdates(1);
         this.mLocationClient.requestLocationUpdates(locationRequest, this);
+        Log.d(LOG, "onConnected");
     }
 
     @Override

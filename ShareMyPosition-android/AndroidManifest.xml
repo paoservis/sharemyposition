@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.sylvek.sharemyposition"
-    android:versionCode="29"
-    android:versionName="1.2.4" >
+    android:versionCode="30"
+    android:versionName="1.2.5" >
 
     <supports-screens
         android:anyDensity="true"
@@ -60,9 +60,9 @@
         </receiver>
 
         <service android:name=".ShareByTracking" />
-        <service android:name=".ShareByTracking$ServiceHandler" />
 
-        <receiver android:name=".ShareByTracking$StopService" />
+        <receiver android:name=".ShareByTracking$StopTracking" />
+        <receiver android:name=".ShareByTracking$StartTracking" />
     </application>
 
 </manifest>
