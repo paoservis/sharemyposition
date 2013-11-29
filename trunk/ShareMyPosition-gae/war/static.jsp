@@ -71,19 +71,6 @@ google_ad_height = 50;
 	<br />refresh every 10 seconds<br />(last update from <%=lastTime %> <%=unit %>)
 <% } %>
 </div>
-<!-- Placez cette balise où vous souhaitez faire apparaître le gadget Bouton +1. -->
-<div class="g-plusone" data-annotation="inline" data-width="300"></div>
-
-<!-- Placez cette ballise après la dernière balise Bouton +1. -->
-<script type="text/javascript">
-  window.___gcfg = {lang: 'fr'};
-
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/platform.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
 </body>
 </html>
 
