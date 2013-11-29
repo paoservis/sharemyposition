@@ -61,14 +61,9 @@ google_ad_height = 50;
 <br />
 <a href="http://maps.google.com/maps?geocode=&q=<%=pos%>">
 	<img src="http://maps.google.com/maps/api/staticmap?markers=color:blue|label:A|<%=pos%>&zoom=15&mobile=true&size=320x240&maptype=roadmap&sensor=true" alt="i am here" />
-	<br />
-	<span>click on the map to open Google Map</span>
-</a>
+	<br />click on the map to open Google Map</a>
 <% if (Boolean.parseBoolean(isTracked)) { %>
-	<br />
-    <span>refresh every 10 seconds</span>
-    <br />
-    <span>(last update from <%=lastTime %> seconds)</span>
+	<br />refresh every 10 seconds<br />(last update from <%=lastTime %> seconds)
 <% } %>
 </div>
 <!-- Placez cette balise où vous souhaitez faire apparaître le gadget Bouton +1. -->
