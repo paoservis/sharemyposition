@@ -53,6 +53,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -96,7 +97,7 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
 
     public static final String LOG = "ShareMyPosition";
 
-    public static final String VERSION = "1.2.5";
+    public static final String VERSION = "1.2.6";
 
     private static final int ZOOM_LEVEL = 17;
 
@@ -360,19 +361,20 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                     })
                     .create();
         case PROGRESS_DLG:
-            final View progress = LayoutInflater.from(this).inflate(R.layout.progress, null);
-            return new AlertDialog.Builder(this).setTitle(getText(R.string.app_name))
-                    .setView(progress)
-                    .setCancelable(true)
-                    .setOnCancelListener(new OnCancelListener() {
+            final ProgressDialog dlg = new ProgressDialog(this);
+            dlg.setTitle(getText(R.string.app_name));
+            dlg.setMessage(getText(R.string.progression_desc));
+            dlg.setIndeterminate(true);
+            dlg.setCancelable(true);
+            dlg.setOnCancelListener(new OnCancelListener() {
 
-                        @Override
-                        public void onCancel(DialogInterface dialog)
-                        {
-                            finish();
-                        }
-                    })
-                    .create();
+                @Override
+                public void onCancel(DialogInterface dialog)
+                {
+                    finish();
+                }
+            });
+            return dlg;
         case PROVIDERS_DLG:
             return new AlertDialog.Builder(this).setTitle(R.string.app_name)
                     .setCancelable(false)

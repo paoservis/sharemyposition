@@ -76,8 +76,6 @@ public class ShareByTracking extends IntentService {
 
     private WakeLock wl;
 
-    protected static PendingIntent service;
-
     protected static final ConnectionCallbacks connectionCallbacks = new ConnectionCallbacks() {
 
         @Override
@@ -104,6 +102,7 @@ public class ShareByTracking extends IntentService {
         @Override
         public void onReceive(final Context context, final Intent intent)
         {
+            final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             final LocationClient locationClient = new LocationClient(context, connectionCallbacks, onConnectionFailedListener);
             locationClient.registerConnectionCallbacks(new ConnectionCallbacks() {
 
@@ -116,18 +115,16 @@ public class ShareByTracking extends IntentService {
                 @Override
                 public void onConnected(Bundle arg0)
                 {
+                    final PendingIntent service = PendingIntent.getService(context, 0,
+                            new Intent(context, ShareByTracking.class), PendingIntent.FLAG_UPDATE_CURRENT);
                     locationClient.removeLocationUpdates(service);
                     locationClient.disconnect();
-                    service = null;
+                    notificationManager.cancel(R.string.app_name);
                     Log.d(LOG, "StopTracking.onConnected");
                 }
             });
 
-            if (service != null) {
-                locationClient.connect();
-                final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.cancel(R.string.app_name);
-            }
+            locationClient.connect();
         }
 
     }
@@ -155,17 +152,15 @@ public class ShareByTracking extends IntentService {
                                 .setSmallestDisplacement(SMALLEST_DISPLACEMENT)
                                 .setInterval(INTERVAL)
                                 .setPriority(PRIORITY);
-                        final Intent intent = new Intent(context, ShareByTracking.class).putExtra(UUID, uuid);
-                        service = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                        final PendingIntent service = PendingIntent.getService(context, 0, new Intent(context,
+                                ShareByTracking.class).putExtra(UUID, uuid), PendingIntent.FLAG_UPDATE_CURRENT);
                         locationClient.requestLocationUpdates(locationRequest, service);
                         locationClient.disconnect();
                         Log.d(LOG, "StartTracking.onConnected");
                     }
                 });
 
-                if (service == null) {
-                    locationClient.connect();
-                }
+                locationClient.connect();
             }
         }
     }
