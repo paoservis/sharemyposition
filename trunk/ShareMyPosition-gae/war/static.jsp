@@ -17,6 +17,7 @@
 	String isTracked = request.getParameter("tracked");
 	String uuid = request.getParameter("uuid");
 	long lastTime = 0L;
+	String unit = "seconds";
 	
 	if(Boolean.parseBoolean(isTracked)) {
 	    Map<String, String> map = (Map<String, String>)request.getSession().getServletContext().getAttribute("map");
@@ -26,6 +27,10 @@
 	    }
 	    if(uptime != null && uptime.containsKey(uuid)) {
 	        lastTime = (System.currentTimeMillis() - uptime.get(uuid)) / 1000L;
+	        if (lastTime > 60) {
+	            lastTime = lastTime / 60;
+	            unit = "minutes";
+	        }
 	    }
 	}
 %>
@@ -63,7 +68,7 @@ google_ad_height = 50;
 	<img src="http://maps.google.com/maps/api/staticmap?markers=color:blue|label:A|<%=pos%>&zoom=15&mobile=true&size=320x240&maptype=roadmap&sensor=true" alt="i am here" />
 	<br />click on the map to open Google Map</a>
 <% if (Boolean.parseBoolean(isTracked)) { %>
-	<br />refresh every 10 seconds<br />(last update from <%=lastTime %> seconds)
+	<br />refresh every 10 seconds<br />(last update from <%=lastTime %> <%=unit %>)
 <% } %>
 </div>
 <!-- Placez cette balise où vous souhaitez faire apparaître le gadget Bouton +1. -->
