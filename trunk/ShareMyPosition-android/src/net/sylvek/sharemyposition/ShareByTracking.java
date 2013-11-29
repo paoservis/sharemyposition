@@ -37,7 +37,6 @@ import java.util.concurrent.Executors;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -67,7 +66,7 @@ public class ShareByTracking extends IntentService {
 
     private static final String UPDATE_LOCATION = "http://sharemyposition.appspot.com/update.jsp";
 
-    private static final String UUID = ".uuid";
+    static final String UUID = ".uuid";
 
     private final HttpParams params = new BasicHttpParams();
 
@@ -77,77 +76,97 @@ public class ShareByTracking extends IntentService {
 
     private WakeLock wl;
 
-    public static class StopService extends BroadcastReceiver {
+    protected static PendingIntent service;
+
+    protected static final ConnectionCallbacks connectionCallbacks = new ConnectionCallbacks() {
 
         @Override
-        public void onReceive(Context context, Intent intent)
+        public void onDisconnected()
         {
-            context.stopService(new Intent(context, ServiceHandler.class));
-        }
-
-    }
-
-    public static class ServiceHandler extends Service implements ConnectionCallbacks, OnConnectionFailedListener {
-
-        private LocationClient mLocationClient;
-
-        private PendingIntent service;
-
-        private String uuid;
-
-        @Override
-        public IBinder onBind(Intent arg0)
-        {
-            return null;
-        }
-
-        @Override
-        public int onStartCommand(Intent intent, int flags, int startId)
-        {
-            mLocationClient = new LocationClient(this, this, this);
-            mLocationClient.connect();
-            uuid = intent.getStringExtra(UUID);
-            return START_NOT_STICKY;
-        }
-
-        @Override
-        public void onDestroy()
-        {
-            if (mLocationClient.isConnected()) {
-                mLocationClient.removeLocationUpdates(service);
-                final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.cancel(R.string.app_name);
-                mLocationClient.disconnect();
-                Log.d(LOG, "disconnect");
-            }
-            super.onDestroy();
-        }
-
-        @Override
-        public void onConnectionFailed(ConnectionResult arg0)
-        {
-            Log.d(LOG, "onConnectionFailed");
         }
 
         @Override
         public void onConnected(Bundle arg0)
         {
-            Log.d(LOG, "onConnected");
-            final LocationRequest locationRequest = LocationRequest.create();
-            locationRequest.setSmallestDisplacement(SMALLEST_DISPLACEMENT);
-            locationRequest.setInterval(INTERVAL);
-            locationRequest.setPriority(PRIORITY);
-            final ServiceHandler context = ServiceHandler.this;
-            final Intent intent = new Intent(context, ShareByTracking.class);
-            intent.putExtra(UUID, uuid);
-            service = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            mLocationClient.requestLocationUpdates(locationRequest, service);
         }
+    };
+
+    protected static final OnConnectionFailedListener onConnectionFailedListener = new OnConnectionFailedListener() {
 
         @Override
-        public void onDisconnected()
+        public void onConnectionFailed(ConnectionResult arg0)
         {
-            Log.d(LOG, "onDisconnected");
+        }
+    };
+
+    public static class StopTracking extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(final Context context, final Intent intent)
+        {
+            final LocationClient locationClient = new LocationClient(context, connectionCallbacks, onConnectionFailedListener);
+            locationClient.registerConnectionCallbacks(new ConnectionCallbacks() {
+
+                @Override
+                public void onDisconnected()
+                {
+                    Log.d(LOG, "StopTracking.onDisconnected");
+                }
+
+                @Override
+                public void onConnected(Bundle arg0)
+                {
+                    locationClient.removeLocationUpdates(service);
+                    locationClient.disconnect();
+                    service = null;
+                    Log.d(LOG, "StopTracking.onConnected");
+                }
+            });
+
+            if (service != null) {
+                locationClient.connect();
+                final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancel(R.string.app_name);
+            }
+        }
+
+    }
+
+    public static class StartTracking extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(final Context context, final Intent intent)
+        {
+            if (intent.getExtras().containsKey(UUID)) {
+                final String uuid = intent.getStringExtra(UUID);
+                final LocationClient locationClient = new LocationClient(context, connectionCallbacks, onConnectionFailedListener);
+                locationClient.registerConnectionCallbacks(new ConnectionCallbacks() {
+
+                    @Override
+                    public void onDisconnected()
+                    {
+                        Log.d(LOG, "StartTracking.onDisconnected");
+                    }
+
+                    @Override
+                    public void onConnected(Bundle arg0)
+                    {
+                        final LocationRequest locationRequest = LocationRequest.create()
+                                .setSmallestDisplacement(SMALLEST_DISPLACEMENT)
+                                .setInterval(INTERVAL)
+                                .setPriority(PRIORITY);
+                        final Intent intent = new Intent(context, ShareByTracking.class).putExtra(UUID, uuid);
+                        service = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                        locationClient.requestLocationUpdates(locationRequest, service);
+                        locationClient.disconnect();
+                        Log.d(LOG, "StartTracking.onConnected");
+                    }
+                });
+
+                if (service == null) {
+                    locationClient.connect();
+                }
+            }
         }
     }
 
@@ -173,7 +192,7 @@ public class ShareByTracking extends IntentService {
 
     public void share(final Location location, final String uuid)
     {
-        Log.d(LOG, "share: " + location);
+        Log.d(LOG, "share(" + uuid + "): " + location);
         final String position = location.getLatitude() + "," + location.getLongitude();
         Executors.newCachedThreadPool().execute(new Runnable() {
 
@@ -203,13 +222,6 @@ public class ShareByTracking extends IntentService {
                 this.wl.release();
             }
         }
-    }
-
-    public static void startService(final Context context, final String uuid)
-    {
-        final Intent intent = new Intent(context, ServiceHandler.class);
-        intent.putExtra(UUID, uuid);
-        context.startService(intent);
     }
 
     @Override

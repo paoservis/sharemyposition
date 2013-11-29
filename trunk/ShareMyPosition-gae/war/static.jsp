@@ -16,7 +16,7 @@
     String pos = request.getParameter("pos");
 	String isTracked = request.getParameter("tracked");
 	String uuid = request.getParameter("uuid");
-	long lastTime = 0L;
+	long lastTime = -1L;
 	String unit = "seconds";
 	
 	if(Boolean.parseBoolean(isTracked)) {
@@ -67,7 +67,7 @@ google_ad_height = 50;
 <a href="http://maps.google.com/maps?geocode=&q=<%=pos%>">
 	<img src="http://maps.google.com/maps/api/staticmap?markers=color:blue|label:A|<%=pos%>&zoom=15&mobile=true&size=320x240&maptype=roadmap&sensor=true" alt="i am here" />
 	<br />click on the map to open Google Map</a>
-<% if (Boolean.parseBoolean(isTracked)) { %>
+<% if (Boolean.parseBoolean(isTracked) && lastTime > 0) { %>
 	<br />refresh every 10 seconds<br />(last update from <%=lastTime %> <%=unit %>)
 <% } %>
 </div>
