@@ -20,6 +20,8 @@ package net.sylvek.sharemyposition;
 
 import java.util.ArrayList;
 
+import android.widget.RadioButton;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.appwidget.AppWidgetManager;
@@ -81,7 +83,9 @@ public class ShareByWidgetConfigure extends Activity {
         
         final CheckBox latlon = (CheckBox) findViewById(R.id.add_lat_lon_location);
         final CheckBox address = (CheckBox) findViewById(R.id.add_address_location);
-        final CheckBox url = (CheckBox) findViewById(R.id.add_url_location);
+        final RadioButton nourl = (RadioButton) findViewById(R.id.add_no_url_location);
+        final RadioButton url = (RadioButton) findViewById(R.id.add_url_location);
+        final RadioButton gmap = (RadioButton) findViewById(R.id.add_gmap_location);
         final ToggleButton track = (ToggleButton) findViewById(R.id.add_track_location);
 
         track.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -95,6 +99,10 @@ public class ShareByWidgetConfigure extends Activity {
                 address.setChecked(!isChecked);
                 url.setEnabled(!isChecked);
                 url.setChecked(true);
+                gmap.setEnabled(!isChecked);
+                gmap.setChecked(!isChecked);
+                nourl.setEnabled(!isChecked);
+                nourl.setChecked(!isChecked);
             }
         });
     }
@@ -193,7 +201,8 @@ public class ShareByWidgetConfigure extends Activity {
         final TextView body = (TextView) findViewById(R.id.body);
         final CheckBox latlon = (CheckBox) findViewById(R.id.add_lat_lon_location);
         final CheckBox address = (CheckBox) findViewById(R.id.add_address_location);
-        final CheckBox url = (CheckBox) findViewById(R.id.add_url_location);
+        final RadioButton url = (RadioButton) findViewById(R.id.add_url_location);
+        final RadioButton gmap = (RadioButton) findViewById(R.id.add_gmap_location);
         final ToggleButton track = (ToggleButton) findViewById(R.id.add_track_location);
 
         // store date to preferences
@@ -205,6 +214,7 @@ public class ShareByWidgetConfigure extends Activity {
                 .putBoolean(prefix + ShareByWidget.PREF_LATLON, latlon.isChecked())
                 .putBoolean(prefix + ShareByWidget.PREF_ADDRESS, address.isChecked())
                 .putBoolean(prefix + ShareByWidget.PREF_URL, url.isChecked())
+                .putBoolean(prefix + ShareByWidget.PREF_GMAP, gmap.isChecked())
                 .putBoolean(prefix + ShareByWidget.PREF_TRACK, track.isChecked())
                 .commit();
 
