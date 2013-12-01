@@ -85,7 +85,7 @@ public class ShareByWidgetConfigure extends Activity {
         final CheckBox address = (CheckBox) findViewById(R.id.add_address_location);
         final RadioButton nourl = (RadioButton) findViewById(R.id.add_no_url_location);
         final RadioButton url = (RadioButton) findViewById(R.id.add_url_location);
-        final RadioButton gmap = (RadioButton) findViewById(R.id.add_gmap_location);
+        final RadioButton gmap = (RadioButton) findViewById(R.id.add_native_location);
         final ToggleButton track = (ToggleButton) findViewById(R.id.add_track_location);
 
         track.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -202,7 +202,7 @@ public class ShareByWidgetConfigure extends Activity {
         final CheckBox latlon = (CheckBox) findViewById(R.id.add_lat_lon_location);
         final CheckBox address = (CheckBox) findViewById(R.id.add_address_location);
         final RadioButton url = (RadioButton) findViewById(R.id.add_url_location);
-        final RadioButton gmap = (RadioButton) findViewById(R.id.add_gmap_location);
+        final RadioButton gmap = (RadioButton) findViewById(R.id.add_native_location);
         final ToggleButton track = (ToggleButton) findViewById(R.id.add_track_location);
 
         // store date to preferences

@@ -64,9 +64,13 @@ google_ad_height = 50;
 <div class="title"><span>My position</span><br />
 <button onclick="window.location='index.html'" class="button">click here to share your own position</button>
 <br />
-<a href="http://maps.google.com/maps?geocode=&q=<%=pos%>">
-	<img src="http://maps.google.com/maps/api/staticmap?markers=color:blue|label:A|<%=pos%>&zoom=15&mobile=true&size=320x240&maptype=roadmap&sensor=true" alt="i am here" />
-	<br />click on the map to open Google Map</a>
+<img src="http://staticmap.openstreetmap.de/staticmap.php?center=<%=pos%>&zoom=15&size=320x240&markers=<%=pos%>,ol-marker-blue" alt="i am here" />
+<br />	
+<a href="http://maps.google.com/maps?geocode=&q=<%=pos%>">click here to open Google Maps</a>
+<br />	
+<a href="http://maps.apple.com/?ll=<%=pos%>">click here to open Apple Maps</a>
+<br />
+<a href="http://www.openstreetmap.org/?mlat=<%=pos.substring(0, pos.indexOf(",")) %>&mlon=<%=pos.substring(pos.indexOf(",") + 1) %>#map=15/<%=pos.replace(",", "/")%>">click here to open OpenStreetMap</a>
 <% if (Boolean.parseBoolean(isTracked) && lastTime > 0) { %>
 	<br />refresh every 10 seconds<br />(last update from <%=lastTime %> <%=unit %>)
 <% } %>

@@ -92,22 +92,21 @@ import android.widget.ToggleButton;
 public class ShareMyPosition extends MapActivity implements GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener, LocationListener {
 
-
     private static final boolean IS_JELLY_BEAN_OR_GREATER = Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN;
 
     public static final String EXTRA_INTENT = "extra_intent";
 
     public static final String LOG = "ShareMyPosition";
 
-    public static final String VERSION = "1.2.7";
+    public static final String VERSION = "1.2.8";
 
     private static final int ZOOM_LEVEL = 17;
-
-    private static final String GMAP_URI = "http://maps.google.com/maps?geocode=&q=";
 
     public static final String HOST = "http://sharemyposition.appspot.com/";
 
     private static final String SHORTY_URI = HOST + "service/create?url=";
+
+    private static final String NATIVE_WEB_MAP = HOST + "native.jsp";
 
     private static final String STATIC_WEB_MAP = HOST + "static.jsp";
 
@@ -285,7 +284,7 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
             final CheckBox geocodeAddress = (CheckBox) sharedMapView.findViewById(R.id.add_address_location);
             final RadioButton nourl = (RadioButton) sharedMapView.findViewById(R.id.add_no_url_location);
             final RadioButton url = (RadioButton) sharedMapView.findViewById(R.id.add_url_location);
-            final RadioButton gmap = (RadioButton) sharedMapView.findViewById(R.id.add_gmap_location);
+            final RadioButton gmap = (RadioButton) sharedMapView.findViewById(R.id.add_native_location);
             final EditText body = (EditText) sharedMapView.findViewById(R.id.body);
             final ToggleButton track = (ToggleButton) sharedMapView.findViewById(R.id.add_track_location);
 
@@ -356,7 +355,7 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                             final boolean isLatLong = ((CheckBox) sharedMapView.findViewById(R.id.add_lat_lon_location)).isChecked();
                             final boolean isGeocodeAddress = ((CheckBox) sharedMapView.findViewById(R.id.add_address_location)).isChecked();
                             final boolean isUrl = ((RadioButton) sharedMapView.findViewById(R.id.add_url_location)).isChecked();
-                            final boolean isGmap = ((RadioButton) sharedMapView.findViewById(R.id.add_gmap_location)).isChecked();
+                            final boolean isGmap = ((RadioButton) sharedMapView.findViewById(R.id.add_native_location)).isChecked();
                             final EditText body = (EditText) sharedMapView.findViewById(R.id.body);
                             final boolean isTracked = ((ToggleButton) sharedMapView.findViewById(R.id.add_track_location)).isChecked();
                             final String uuid = UUID.randomUUID().toString();
@@ -481,7 +480,7 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
     }
 
     private String getMessage(double latitude, double longitude, String body, boolean isGeocodeAddress, boolean isUrl,
-            boolean isGmap, boolean isLatLong, boolean isTracked, String uuid)
+            boolean isNative, boolean isLatLong, boolean isTracked, String uuid)
     {
         final boolean isConnected = isConnected();
         final StringBuilder msg = new StringBuilder(body);
@@ -494,17 +493,11 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                 msg.append(address);
             }
         }
-        if (isUrl) {
+        if (isUrl || isNative) {
             if (msg.length() > 0) {
                 msg.append(", ");
             }
-            msg.append(getLocationUrl(isConnected, latitude, longitude, isTracked, uuid));
-        }
-        if (isGmap) {
-            if (msg.length() > 0) {
-                msg.append(", ");
-            }
-            msg.append(GMAP_URI + latitude + "," + longitude);
+            msg.append(getLocationUrl(isConnected, isNative, isTracked, latitude, longitude, uuid));
         }
         if (isLatLong) {
             if (msg.length() > 0) {
@@ -516,9 +509,10 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
         return msg.toString();
     }
 
-    public String getLocationUrl(boolean isConnected, double latitude, double longitude, boolean isTracked, String uuid)
+    public String getLocationUrl(boolean isConnected, boolean isNative, boolean isTracked, double latitude, double longitude,
+            String uuid)
     {
-        String url = getCurrentStaticLocationUrl(latitude, longitude, isTracked, uuid);
+        String url = getCurrentStaticLocationUrl(latitude, longitude, isNative, isTracked, uuid);
         if (isConnected) {
             try {
                 url = getTinyLink(url);
@@ -529,9 +523,9 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
         return url;
     }
 
-    public String getCurrentStaticLocationUrl(double latitude, double longitude, boolean isTracked, String uuid)
+    public String getCurrentStaticLocationUrl(double latitude, double longitude, boolean isNative, boolean isTracked, String uuid)
     {
-        StringBuilder uri = new StringBuilder(STATIC_WEB_MAP).append("?pos=")
+        StringBuilder uri = new StringBuilder((isNative) ? NATIVE_WEB_MAP : STATIC_WEB_MAP).append("?pos=")
                 .append(latitude)
                 .append(",")
                 .append(longitude)
