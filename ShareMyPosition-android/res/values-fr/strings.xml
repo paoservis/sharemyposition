@@ -15,11 +15,11 @@
     <string name="share_it">partager</string>
     <string name="retry">localiser</string>
     <string name="add_geocoded_location">ajouter l\'adresse géocodée</string>
-    <string name="add_nolink_location">aucun lien URL</string>
-    <string name="add_urllink_location">ajouter l\'URL de la carte</string>
-    <string name="add_gmaplink_location">ajouter l\'URL Google Maps</string>
-    <string name="add_urllink_location_desc">plus rapide à l\'affichage</string>
-    <string name="add_gmaplink_location_desc">plus rapide à l\'envoi</string>
+    <string name="add_nolink_location">aucun lien cartographique</string>
+    <string name="add_urllink_location">ajouter un lien web</string>
+    <string name="add_nativelink_location">ajouter un lien natif</string>
+    <string name="add_urllink_location_desc">rapide et fonctionne partout</string>
+    <string name="add_nativelink_location_desc">pour Android, iOS ou Windows Phone</string>
     <string name="add_lat_lon_location">ajouter la latitude et longitude</string>
     <string name="add_track_location">suivre ma position</string>
     <string name="track_location_notification">le suivi de position est activé</string>

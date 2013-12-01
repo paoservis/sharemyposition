@@ -44,17 +44,17 @@
             android:text="@string/add_nolink_location" />
 
         <RadioButton
-            android:id="@+id/add_gmap_location"
+            android:id="@+id/add_native_location"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="@string/add_gmaplink_location" />
+            android:text="@string/add_nativelink_location" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dip"
-            android:text="@string/add_gmaplink_location_desc" />
+            android:text="@string/add_nativelink_location_desc" />
 
         <RadioButton
             android:id="@+id/add_url_location"
