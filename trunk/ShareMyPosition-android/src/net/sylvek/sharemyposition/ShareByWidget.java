@@ -56,6 +56,8 @@ public class ShareByWidget extends AppWidgetProvider {
     
     public static final String PREF_TRACK = ".track";
 
+    public static final String PREF_GMAP = ".gmap";
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
     {
@@ -79,6 +81,7 @@ public class ShareByWidget extends AppWidgetProvider {
                     .remove(prefix + PREF_LATLON)
                     .remove(prefix + PREF_ADDRESS)
                     .remove(prefix + PREF_URL)
+                    .remove(prefix + PREF_GMAP)
                     .remove(prefix + PREF_TRACK);
         }
         editor.commit();
@@ -92,6 +95,7 @@ public class ShareByWidget extends AppWidgetProvider {
         boolean address = pref.getBoolean(PREF_PREFIX + appWidgetId + PREF_ADDRESS, false);
         boolean latlon = pref.getBoolean(PREF_PREFIX + appWidgetId + PREF_LATLON, false);
         boolean url = pref.getBoolean(PREF_PREFIX + appWidgetId + PREF_URL, false);
+        boolean gmap = pref.getBoolean(PREF_PREFIX + appWidgetId + PREF_GMAP, false);
         boolean track = pref.getBoolean(PREF_PREFIX + appWidgetId + PREF_TRACK, false);
 
         Log.d(ShareMyPosition.LOG, "adding -> [" + appWidgetId + "," + item + "," + name + "]");
@@ -103,6 +107,7 @@ public class ShareByWidget extends AppWidgetProvider {
         launch.putExtra(ShareMyPosition.PREF_ADDRESS_CHECKED, address);
         launch.putExtra(ShareMyPosition.PREF_LAT_LON_CHECKED, latlon);
         launch.putExtra(ShareMyPosition.PREF_URL_CHECKED, url);
+        launch.putExtra(ShareMyPosition.PREF_GMAP_CHECKED, gmap);
         launch.putExtra(ShareMyPosition.PREF_BODY_DEFAULT, body);
         launch.putExtra(ShareMyPosition.PREF_TRACK_CHECKED, track);
 

@@ -64,7 +64,7 @@ public class ShareByTracking extends IntentService {
 
     private static final int PRIORITY = LocationRequest.PRIORITY_HIGH_ACCURACY;
 
-    private static final String UPDATE_LOCATION = "http://sharemyposition.appspot.com/update.jsp";
+    private static final String UPDATE_LOCATION = ShareMyPosition.HOST + "update.jsp";
 
     static final String UUID = ".uuid";
 

@@ -85,11 +85,13 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class ShareMyPosition extends MapActivity implements GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener, LocationListener {
+
 
     private static final boolean IS_JELLY_BEAN_OR_GREATER = Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN;
 
@@ -97,11 +99,13 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
 
     public static final String LOG = "ShareMyPosition";
 
-    public static final String VERSION = "1.2.6";
+    public static final String VERSION = "1.2.7";
 
     private static final int ZOOM_LEVEL = 17;
 
-    private static final String HOST = "http://sharemyposition.appspot.com/";
+    private static final String GMAP_URI = "http://maps.google.com/maps?geocode=&q=";
+
+    public static final String HOST = "http://sharemyposition.appspot.com/";
 
     private static final String SHORTY_URI = HOST + "service/create?url=";
 
@@ -122,6 +126,8 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
     public static final String PREF_BODY_DEFAULT = "net.sylvek.sharemyposition.pref.body.default";
 
     public static final String PREF_TRACK_CHECKED = "net.sylvek.sharemyposition.pref.track.checked";
+
+    public static final String PREF_GMAP_CHECKED = "net.sylvek.sharemyposition.pref.gmap.checked";
 
     private ConnectivityManager connectivityManager;
 
@@ -277,13 +283,19 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
             map.addView(this.sharedMap);
             final CheckBox latlonAddress = (CheckBox) sharedMapView.findViewById(R.id.add_lat_lon_location);
             final CheckBox geocodeAddress = (CheckBox) sharedMapView.findViewById(R.id.add_address_location);
-            final CheckBox urlShortening = (CheckBox) sharedMapView.findViewById(R.id.add_url_location);
+            final RadioButton nourl = (RadioButton) sharedMapView.findViewById(R.id.add_no_url_location);
+            final RadioButton url = (RadioButton) sharedMapView.findViewById(R.id.add_url_location);
+            final RadioButton gmap = (RadioButton) sharedMapView.findViewById(R.id.add_gmap_location);
             final EditText body = (EditText) sharedMapView.findViewById(R.id.body);
             final ToggleButton track = (ToggleButton) sharedMapView.findViewById(R.id.add_track_location);
 
             latlonAddress.setChecked(pref.getBoolean(PREF_LAT_LON_CHECKED, true));
             geocodeAddress.setChecked(pref.getBoolean(PREF_ADDRESS_CHECKED, true));
-            urlShortening.setChecked(pref.getBoolean(PREF_URL_CHECKED, true));
+            final boolean isUrl = pref.getBoolean(PREF_URL_CHECKED, true);
+            final boolean isGmap = pref.getBoolean(PREF_GMAP_CHECKED, false);
+            url.setChecked(isUrl);
+            gmap.setChecked(isGmap);
+            nourl.setChecked(!isUrl && !isGmap);
             body.setText(pref.getString(PREF_BODY_DEFAULT, getString(R.string.body)));
             track.setChecked(pref.getBoolean(PREF_TRACK_CHECKED, false));
 
@@ -292,8 +304,12 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                 latlonAddress.setChecked(false);
                 geocodeAddress.setEnabled(false);
                 geocodeAddress.setChecked(false);
-                urlShortening.setEnabled(false);
-                urlShortening.setChecked(true);
+                url.setEnabled(false);
+                url.setChecked(true);
+                gmap.setEnabled(false);
+                gmap.setChecked(false);
+                nourl.setEnabled(false);
+                nourl.setChecked(false);
             }
 
             track.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -305,8 +321,12 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                     latlonAddress.setChecked(!isChecked);
                     geocodeAddress.setEnabled(!isChecked);
                     geocodeAddress.setChecked(!isChecked);
-                    urlShortening.setEnabled(!isChecked);
-                    urlShortening.setChecked(true);
+                    url.setEnabled(!isChecked);
+                    url.setChecked(true);
+                    gmap.setEnabled(!isChecked);
+                    gmap.setChecked(!isChecked);
+                    nourl.setEnabled(!isChecked);
+                    nourl.setChecked(!isChecked);
                 }
             });
 
@@ -335,7 +355,8 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                         {
                             final boolean isLatLong = ((CheckBox) sharedMapView.findViewById(R.id.add_lat_lon_location)).isChecked();
                             final boolean isGeocodeAddress = ((CheckBox) sharedMapView.findViewById(R.id.add_address_location)).isChecked();
-                            final boolean isUrlShortening = ((CheckBox) sharedMapView.findViewById(R.id.add_url_location)).isChecked();
+                            final boolean isUrl = ((RadioButton) sharedMapView.findViewById(R.id.add_url_location)).isChecked();
+                            final boolean isGmap = ((RadioButton) sharedMapView.findViewById(R.id.add_gmap_location)).isChecked();
                             final EditText body = (EditText) sharedMapView.findViewById(R.id.body);
                             final boolean isTracked = ((ToggleButton) sharedMapView.findViewById(R.id.add_track_location)).isChecked();
                             final String uuid = UUID.randomUUID().toString();
@@ -343,7 +364,8 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                             pref.edit()
                                     .putBoolean(PREF_LAT_LON_CHECKED, isLatLong)
                                     .putBoolean(PREF_ADDRESS_CHECKED, isGeocodeAddress)
-                                    .putBoolean(PREF_URL_CHECKED, isUrlShortening)
+                                    .putBoolean(PREF_URL_CHECKED, isUrl)
+                                    .putBoolean(PREF_GMAP_CHECKED, isGmap)
                                     .putString(PREF_BODY_DEFAULT, body.getText().toString())
                                     .putBoolean(PREF_TRACK_CHECKED, isTracked)
                                     .commit();
@@ -355,8 +377,8 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                             final GeoPoint p = sharedMap.getMapCenter();
 
                             final String text = body.getText().toString();
-                            share(p.getLatitude(), p.getLongitude(), t, share, text, isGeocodeAddress, isUrlShortening,
-                                    isLatLong, isTracked, uuid);
+                            share(p.getLatitude(), p.getLongitude(), t, share, text, isGeocodeAddress, isUrl, isGmap, isLatLong,
+                                    isTracked, uuid);
                         }
                     })
                     .create();
@@ -414,13 +436,14 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
             final Intent b = getIntent();
             boolean isGeocodeAddress = b.getBooleanExtra(ShareMyPosition.PREF_ADDRESS_CHECKED, true);
             boolean isLatLong = b.getBooleanExtra(ShareMyPosition.PREF_LAT_LON_CHECKED, true);
-            boolean isUrlShortening = b.getBooleanExtra(ShareMyPosition.PREF_URL_CHECKED, true);
+            boolean isUrl = b.getBooleanExtra(ShareMyPosition.PREF_URL_CHECKED, true);
+            boolean isGmap = b.getBooleanExtra(ShareMyPosition.PREF_GMAP_CHECKED, false);
             String body = b.getStringExtra(ShareMyPosition.PREF_BODY_DEFAULT);
             final boolean isTracked = b.getBooleanExtra(ShareMyPosition.PREF_TRACK_CHECKED, false);
             final String uuid = UUID.randomUUID().toString();
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
-            share(latitude, longitude, extra, null, body, isGeocodeAddress, isUrlShortening, isLatLong, isTracked, uuid);
+            share(latitude, longitude, extra, null, body, isGeocodeAddress, isUrl, isGmap, isLatLong, isTracked, uuid);
         } else {
             showDialog(MAP_DLG);
         }
@@ -433,15 +456,15 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
      * @param isTracked
      */
     private void share(final double latitude, final double longitude, final Intent extra, final Intent toLaunch,
-            final String body, final boolean isGeocodeAddress, final boolean isUrlShortening, final boolean isLatLong,
-            final boolean isTracked, final String uuid)
+            final String body, final boolean isGeocodeAddress, final boolean isUrl, final boolean isGmap,
+            final boolean isLatLong, final boolean isTracked, final String uuid)
     {
         Executors.newCachedThreadPool().execute(new Runnable() {
 
             @Override
             public void run()
             {
-                String msg = getMessage(latitude, longitude, body, isGeocodeAddress, isUrlShortening, isLatLong, isTracked, uuid);
+                String msg = getMessage(latitude, longitude, body, isGeocodeAddress, isUrl, isGmap, isLatLong, isTracked, uuid);
 
                 if (isTracked) {
                     startTracking(uuid, msg);
@@ -457,8 +480,8 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
         });
     }
 
-    private String getMessage(double latitude, double longitude, String body, boolean isGeocodeAddress, boolean isUrlShortening,
-            boolean isLatLong, boolean isTracked, String uuid)
+    private String getMessage(double latitude, double longitude, String body, boolean isGeocodeAddress, boolean isUrl,
+            boolean isGmap, boolean isLatLong, boolean isTracked, String uuid)
     {
         final boolean isConnected = isConnected();
         final StringBuilder msg = new StringBuilder(body);
@@ -471,11 +494,17 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                 msg.append(address);
             }
         }
-        if (isUrlShortening) {
+        if (isUrl) {
             if (msg.length() > 0) {
                 msg.append(", ");
             }
             msg.append(getLocationUrl(isConnected, latitude, longitude, isTracked, uuid));
+        }
+        if (isGmap) {
+            if (msg.length() > 0) {
+                msg.append(", ");
+            }
+            msg.append(GMAP_URI + latitude + "," + longitude);
         }
         if (isLatLong) {
             if (msg.length() > 0) {
