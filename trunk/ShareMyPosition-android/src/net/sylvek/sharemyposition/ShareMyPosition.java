@@ -70,6 +70,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -98,7 +99,7 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
 
     public static final String LOG = "ShareMyPosition";
 
-    public static final String VERSION = "1.2.8";
+    public static final String VERSION = "1.2.9";
 
     private static final int ZOOM_LEVEL = 17;
 
@@ -253,7 +254,7 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                     }
                 }
             });
-            if (location != null) {
+            if (location != null && sharedMap != null) {
                 sharedMap.getController().setZoom(ZOOM_LEVEL);
                 sharedMap.getController().setCenter(new GeoPoint(location.getLatitude(), location.getLongitude()));
             }
@@ -455,7 +456,7 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
      * @param isTracked
      */
     private void share(final double latitude, final double longitude, final Intent extra, final Intent toLaunch,
-            final String body, final boolean isGeocodeAddress, final boolean isUrl, final boolean isGmap,
+            final String body, final boolean isGeocodeAddress, final boolean isUrl, final boolean isNative,
             final boolean isLatLong, final boolean isTracked, final String uuid)
     {
         Executors.newCachedThreadPool().execute(new Runnable() {
@@ -463,10 +464,11 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
             @Override
             public void run()
             {
-                String msg = getMessage(latitude, longitude, body, isGeocodeAddress, isUrl, isGmap, isLatLong, isTracked, uuid);
+                String msg = getMessage(latitude, longitude, body, isGeocodeAddress, isUrl, isNative, isLatLong, isTracked, uuid);
 
                 if (isTracked) {
-                    startTracking(uuid, msg);
+                    String url = getCurrentStaticLocationUrl(latitude, longitude, isNative, isTracked, uuid);
+                    startTracking(uuid, url, msg);
                 }
 
                 extra.addCategory(Intent.CATEGORY_DEFAULT)
@@ -584,7 +586,7 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
     /**
      * @param uuid
      */
-    private void startTracking(final String uuid, final String msg)
+    private void startTracking(final String uuid, final String url, final String msg)
     {
         final Context context = getApplicationContext();
 
@@ -600,6 +602,10 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                 .putExtra("sms_body", msg);
         final PendingIntent delete = PendingIntent.getBroadcast(context, 0, deleteIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        // generate content action
+        final Intent contentIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        final PendingIntent intent = PendingIntent.getActivity(context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         // generate share action
         final Intent shareIntent = Intent.createChooser(t, getString(R.string.app_name)).addCategory(Intent.CATEGORY_DEFAULT);
         final PendingIntent share = PendingIntent.getActivity(context, 0, shareIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -611,7 +617,9 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
                 .setDeleteIntent(delete)
                 .addAction(android.R.drawable.ic_menu_share, getString(R.string.share_it), share)
                 .addAction(android.R.drawable.ic_menu_close_clear_cancel, getString(R.string.track_stop_it), delete)
-                .setContentText(getString(R.string.track_location_notification));
+                .setContentText(getString(R.string.track_location_notification))
+                .setContentIntent(intent)
+                .setUsesChronometer(true);
         final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(R.string.app_name, mBuilder.build());
     }
