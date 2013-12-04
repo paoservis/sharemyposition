@@ -35,7 +35,7 @@
 	}
 %>
 <% if (Boolean.parseBoolean(isTracked)) { %>
-	<meta http-equiv="refresh" content="10">
+	<meta http-equiv="refresh" content="10;URL=/static.jsp?pos=<%=pos%>&tracked=true&uuid=<%=uuid%>">
 <% } %>
 <script type="text/javascript">
 
