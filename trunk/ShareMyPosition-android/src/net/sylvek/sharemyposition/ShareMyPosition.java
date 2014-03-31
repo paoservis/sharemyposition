@@ -99,11 +99,11 @@ public class ShareMyPosition extends MapActivity implements GooglePlayServicesCl
 
     public static final String LOG = "ShareMyPosition";
 
-    public static final String VERSION = "1.2.9";
+    public static final String VERSION = "1.2.10";
 
-    private static final int ZOOM_LEVEL = 17;
+    private static final int ZOOM_LEVEL = 15;
 
-    public static final String HOST = "http://sharemyposition.appspot.com/";
+    public static final String HOST = "http://smp-next.appspot.com/";
 
     private static final String SHORTY_URI = HOST + "service/create?url=";
 

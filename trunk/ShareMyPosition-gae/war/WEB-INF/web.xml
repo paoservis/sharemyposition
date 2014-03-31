@@ -9,12 +9,20 @@
     <servlet-name>shortyUrlServlet</servlet-name>
     <servlet-class>net.sylvek.sharemyposition.server.ShortyUrlServletImpl</servlet-class>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>shortyUrlServlet</servlet-name>
     <url-pattern>/service/create</url-pattern>
   </servlet-mapping>
-    
+  
+  <servlet>
+    <servlet-name>updatePositionServlet</servlet-name>
+    <servlet-class>net.sylvek.sharemyposition.server.UpdatePositionServletImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updatePositionServlet</servlet-name>
+    <url-pattern>/service/update</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>

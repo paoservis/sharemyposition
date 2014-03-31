@@ -9,7 +9,7 @@
 <!-- http://code.google.com/googleapps/marketplace/manifest.html         -->
 <ApplicationManifest xmlns="http://schemas.google.com/ApplicationManifest/2009">
   <Name>Share My Position</Name>
-  <Description>Your Application description</Description>
+  <Description>Share your current position with friend</Description>
 
   <!-- Administrators and users will be sent to this URL for application support -->
   <Support>
@@ -20,12 +20,12 @@
   <Extension id="navLink" type="link">
     <Name>Share My Position</Name>
     <!-- Example URL. Replace it with your application url -->
-    <Url>http://sharemyposition.appspot.com/openid?hd=${DOMAIN_NAME}</Url>
+    <Url>http://smp-next.appspot.com/openid?hd=${DOMAIN_NAME}</Url>
   </Extension>
 
   <!-- Declare our OpenID realm so our app is white listed -->
   <Extension id="realm" type="openIdRealm">
-    <Url>http://sharemyposition.appspot.com/</Url>
+    <Url>http://smp-next.appspot.com/</Url>
   </Extension>
 
   <Edition id="free">
