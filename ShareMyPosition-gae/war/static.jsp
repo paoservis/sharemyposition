@@ -1,4 +1,9 @@
-<%@page import="java.util.Map"%>
+<%@page import="net.sylvek.sharemyposition.server.UpdatePositionServletImpl.Cache"%>
+<%@page import="com.google.appengine.api.memcache.MemcacheService"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="com.google.appengine.api.memcache.ErrorHandlers"%>
+<%@page import="com.google.appengine.api.memcache.MemcacheServiceFactory"%>
+<%@page import="net.sylvek.sharemyposition.server.UpdatePositionServletImpl"%>
 <%@page import="java.lang.Boolean"%>
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
@@ -13,20 +18,19 @@
 <link type="text/css" rel="stylesheet" href="client.css">
 <title>share my position</title>
 <%
-    String pos = request.getParameter("pos");
-	String isTracked = request.getParameter("tracked");
-	String uuid = request.getParameter("uuid");
+    String pos = request.getParameter(UpdatePositionServletImpl.PARAMETER_POSITION);
+	final String isTracked = request.getParameter(UpdatePositionServletImpl.PARAMETER_TRACKED);
+	final String uuid = request.getParameter(UpdatePositionServletImpl.PARAMETER_UUID);
 	long lastTime = -1L;
 	String unit = "seconds";
 	
 	if(Boolean.parseBoolean(isTracked)) {
-	    Map<String, String> map = (Map<String, String>)request.getSession().getServletContext().getAttribute("map");
-	    Map<String, Long> uptime = (Map<String, Long>) request.getSession().getServletContext().getAttribute("uptime");
-	    if(map != null && map.containsKey(uuid)) {
-	        pos = map.get(uuid);
-	    }
-	    if(uptime != null && uptime.containsKey(uuid)) {
-	        lastTime = (System.currentTimeMillis() - uptime.get(uuid)) / 1000L;
+	    final MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
+	    syncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
+	    final Cache cache = Cache.from(syncCache.get(uuid));
+	    if(cache != null) {
+	        pos = cache.position;
+	        lastTime = (System.currentTimeMillis() - cache.uptime) / 1000L;
 	        if (lastTime > 60) {
 	            lastTime = lastTime / 60;
 	            unit = "minutes";
@@ -66,10 +70,6 @@ google_ad_height = 50;
 <br />
 <img src="http://staticmap.openstreetmap.de/staticmap.php?center=<%=pos%>&zoom=15&size=320x240&markers=<%=pos%>,ol-marker-blue" alt="i am here" />
 <br />	
-<a href="http://maps.google.com/maps?geocode=&q=<%=pos%>">click here to open Google Maps</a>
-<br />	
-<a href="http://maps.apple.com/?ll=<%=pos%>">click here to open Apple Maps</a>
-<br />
 <a href="http://www.openstreetmap.org/?mlat=<%=pos.substring(0, pos.indexOf(",")) %>&mlon=<%=pos.substring(pos.indexOf(",") + 1) %>#map=15/<%=pos.replace(",", "/")%>">click here to open OpenStreetMap</a>
 <% if (Boolean.parseBoolean(isTracked) && lastTime > 0) { %>
 	<br />refresh every 10 seconds<br />(last update from <%=lastTime %> <%=unit %>)

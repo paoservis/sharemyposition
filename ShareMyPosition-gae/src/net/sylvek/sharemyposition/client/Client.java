@@ -38,7 +38,7 @@ public class Client implements EntryPoint {
 
     final Geolocation geo = Geolocation.getGeolocation();
 
-    final static String HOST = "http://sharemyposition.appspot.com/";
+    final static String HOST = "http://smp-next.appspot.com/";
 
     final static String URL_STATIC = HOST + "static.jsp";
 
