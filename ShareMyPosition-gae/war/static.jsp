@@ -28,7 +28,7 @@
 	    final MemcacheService syncCache = MemcacheServiceFactory.getMemcacheService();
 	    syncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
 	    final Cache cache = Cache.from(syncCache.get(uuid));
-	    if(cache != null) {
+	    if(cache.position != null) {
 	        pos = cache.position;
 	        lastTime = (System.currentTimeMillis() - cache.uptime) / 1000L;
 	        if (lastTime > 60) {
