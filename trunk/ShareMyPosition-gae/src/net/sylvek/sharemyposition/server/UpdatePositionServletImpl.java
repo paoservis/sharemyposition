@@ -83,5 +83,25 @@ public class UpdatePositionServletImpl extends HttpServlet {
             }
             return c;
         }
+
+        @Override
+        public String toString()
+        {
+            String[] coords = position.split(",", 2);
+            double latitude = Double.parseDouble(coords[0]);
+            double longitude = Double.parseDouble(coords[1]);
+            StringBuilder sb = new StringBuilder();
+            sb.append("{")
+                    .append("\"latitude\":")
+                    .append(latitude)
+                    .append(",")
+                    .append("\"longitude\":")
+                    .append(longitude)
+                    .append(",")
+                    .append("\"uptime\":")
+                    .append(uptime)
+                    .append("}");
+            return sb.toString();
+        }
     }
 }
