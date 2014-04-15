@@ -23,6 +23,15 @@
     <url-pattern>/service/update</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>retrievePositionServlet</servlet-name>
+    <servlet-class>net.sylvek.sharemyposition.server.RetrievePositionServletImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>retrievePositionServlet</servlet-name>
+    <url-pattern>/service/retrieve</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>

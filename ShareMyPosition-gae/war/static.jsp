@@ -38,7 +38,10 @@
 	    }
 	}
 %>
-<% if (Boolean.parseBoolean(isTracked)) { %>
+<% if (Boolean.parseBoolean(isTracked)) { 
+    // redirect to dynamic page
+	response.sendRedirect("dynamic.jsp?uuid=" + uuid + "&pos=" + pos);
+%>
 	<meta http-equiv="refresh" content="10;URL=/static.jsp?pos=<%=pos%>&tracked=true&uuid=<%=uuid%>">
 <% } %>
 <script type="text/javascript">
