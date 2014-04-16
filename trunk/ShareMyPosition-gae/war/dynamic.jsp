@@ -27,6 +27,17 @@
 		<link rel="stylesheet" href="leaflet-0.7.2.css" />
 		<script src="leaflet-0.7.2.js"></script>
 		<script src="angular-leaflet-directive.min.js"></script>
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-46087713-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		</script>
 		<style>
 			body {
 			    padding: 0;
@@ -50,6 +61,7 @@
 		 	app.controller("MapController", [ "$scope", "$interval", "$http", "leafletData", function($scope, $interval, $http, leafletData) {
 		 		
 		 		$scope.init = function() {
+		 			window.scrollTo(0, 1);
 		 			$scope.fetchPosition();
 			 		$interval(function() {$scope.fetchPosition()}, 5000);
 		 		}
@@ -59,6 +71,7 @@
 		 				var newPosition = { lat: response.latitude, lng: response.longitude };
 			 			$scope.paths["p1"].latlngs.push(newPosition);
 			 			leafletData.getMap().then(function(map) {
+			 				//map.fitWorld();
 		                    map.panTo(newPosition);
 			 			});
 				 	});
